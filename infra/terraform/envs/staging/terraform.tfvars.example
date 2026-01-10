@@ -1,0 +1,37 @@
+# Staging Environment Configuration
+# Copy this file to terraform.tfvars and fill in your actual values
+
+# AWS Configuration
+aws_region = "ap-northeast-1"
+
+# VPC Configuration
+vpc_cidr = "10.0.0.0/16"
+
+# Environment
+environment = "staging"
+project_name = "blog"
+
+# Database Configuration
+# db_instance_class = "db.t3.micro"
+# db_allocated_storage = 20
+# db_username = "admin"
+# db_password = "your-secure-password-here"
+
+# Application Configuration
+# app_port = 8000
+# frontend_port = 3000
+# container_cpu = 256
+# container_memory = 512
+
+# Domain Configuration (optional)
+# domain_name = "yourdomain.com"
+# subdomain = "staging"
+
+# Monitoring & Logging
+# enable_monitoring = true
+# log_retention_days = 7
+
+# Auto Scaling Configuration
+# min_capacity = 1
+# max_capacity = 2
+# desired_capacity = 1

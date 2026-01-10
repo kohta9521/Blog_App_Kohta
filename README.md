@@ -1,182 +1,592 @@
-# 🦀 Rust × Next.js Tech Blog Monorepo
-
 <div align="center">
+
+# 🦀⚡ Rust × Next.js × AWS × Terraform Tech Blog
+
+<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=22&duration=3000&pause=1000&color=F75C7E&center=true&vCenter=true&width=600&lines=Modern+Full-Stack+Tech+Blog;Rust+%2B+Next.js+%2B+AWS+%2B+Terraform;Learning+by+Building" alt="Typing SVG" />
 
 ![Rust](https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white)
 ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
-![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![Terraform](https://img.shields.io/badge/Terraform-623CE4?style=for-the-badge&logo=terraform&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
-**Rust をバックエンド、Next.js 16（TypeScript）をフロントエンドに使って構築するテックブログ用モノレポです。**
+![GitHub last commit](https://img.shields.io/github/last-commit/kohtakochi/blog?style=flat-square&color=green)
+![GitHub issues](https://img.shields.io/github/issues/kohtakochi/blog?style=flat-square&color=red)
+![GitHub stars](https://img.shields.io/github/stars/kohtakochi/blog?style=flat-square&color=yellow)
+![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)
+
+**🚀 Rust をバックエンド、Next.js 16（TypeScript）をフロントエンドに使い、AWS × Terraform でインフラも含めて作る個人テックブログ用モノレポです。**
+
+_Rust 公式ドキュメントを超初心者向けに噛み砕く記事を書きながら、アプリケーションとインフラの両方を学ぶことを目的としています。_
+
+---
+
+<table>
+<tr>
+<td>
+
+**🎯 目標**
+
+- フルスタック開発の習得
+- インフラ自動化の実践
+- 技術記事の執筆
+
+</td>
+<td>
+
+**📊 進捗**
+
+- [ ] フロントエンド構築
+- [ ] バックエンド API 開発
+- [ ] AWS インフラ構築
+
+</td>
+<td>
+
+**🛠️ 技術選定理由**
+
+- **Rust**: パフォーマンス & 安全性
+- **Next.js**: モダンな React 開発
+- **AWS**: スケーラブルなクラウド
+
+</td>
+</tr>
+</table>
 
 </div>
 
 ---
 
-## 🎯 プロジェクトの目的
+## 🛠️ 技術スタック
 
-このプロジェクトの目的は、**Rust 公式ドキュメントを「超初心者向けに自分の言葉で解説するテックブログ」** を作りながら、フルスタックな構成・設計も学ぶことです。
+<table>
+<tr>
+<th>🌐 Frontend</th>
+<th>⚡ Backend</th>
+<th>☁️ Infrastructure</th>
+</tr>
+<tr>
+<td>
 
-Supabase をデータベースとして利用し、Tailwind CSS / Jest / 基本的なセキュリティプラクティスを取り入れます。
+![Next.js](https://img.shields.io/badge/Next.js_16-000000?style=flat&logo=next.js&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
+![shadcn/ui](https://img.shields.io/badge/shadcn%2Fui-000000?style=flat&logo=shadcnui&logoColor=white)
+![Jest](https://img.shields.io/badge/Jest-C21325?style=flat&logo=jest&logoColor=white)
+![Husky](https://img.shields.io/badge/Husky-42b883?style=flat&logo=git&logoColor=white)
 
-## 🏗️ 全体構成
+- App Router 構成
+- コンポーネント駆動開発
+- 自動テスト & Lint
+
+</td>
+<td>
+
+![Rust](https://img.shields.io/badge/Rust-000000?style=flat&logo=rust&logoColor=white)
+![Tokio](https://img.shields.io/badge/Tokio-000000?style=flat&logo=rust&logoColor=white)
+![Axum](https://img.shields.io/badge/Axum-000000?style=flat&logo=rust&logoColor=white)
+![SQLx](https://img.shields.io/badge/SQLx-000000?style=flat&logo=rust&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=flat&logo=postgresql&logoColor=white)
+
+- 非同期処理
+- 型安全な DB アクセス
+- レイヤードアーキテクチャ
+
+</td>
+<td>
+
+![AWS](https://img.shields.io/badge/AWS-232F3E?style=flat&logo=amazon-aws&logoColor=white)
+![Terraform](https://img.shields.io/badge/Terraform-623CE4?style=flat&logo=terraform&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)
+![ECS](https://img.shields.io/badge/ECS-FF9900?style=flat&logo=amazon-ecs&logoColor=white)
+![RDS](https://img.shields.io/badge/RDS-527FFF?style=flat&logo=amazon-rds&logoColor=white)
+
+- Infrastructure as Code
+- コンテナオーケストレーション
+- マネージドサービス活用
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🏗️ アーキテクチャ概要
+
+<div align="center">
+
+```mermaid
+graph TB
+    subgraph "🌐 Frontend"
+        A[Next.js 16<br/>App Router]
+        B[Tailwind CSS<br/>shadcn/ui]
+        C[TypeScript<br/>React]
+    end
+
+    subgraph "⚡ Backend"
+        D[Rust<br/>Axum]
+        E[SQLx<br/>PostgreSQL]
+        F[Tokio<br/>Async Runtime]
+    end
+
+    subgraph "☁️ AWS Infrastructure"
+        G[ECS Fargate<br/>App Runner]
+        H[RDS/Aurora<br/>PostgreSQL]
+        I[ALB<br/>CloudFront]
+    end
+
+    A --> D
+    D --> E
+    G --> H
+    D --> G
+
+    style A fill:#61dafb
+    style D fill:#ce422b
+    style G fill:#ff9900
+```
+
+</div>
+
+## 📁 ディレクトリ構成
+
+<details>
+<summary>🔍 <strong>プロジェクト全体構造</strong></summary>
 
 ```
 blog/
-├── apps/
-│   ├── frontend/      # Next.js 16 + TypeScript + Tailwind CSS + Jest
-│   └── backend/       # Rust API（Axum or Actix など）+ Supabase 連携
-└── packages/
-    ├── ui/            # フロントエンド共通UIコンポーネント
-    ├── utils/         # フロント用ユーティリティ（TS）
-    └── schema/        # APIレスポンスなどの型・スキーマ（TS）
+├── 📱 apps/
+│   ├── 🌐 frontend/      # Next.js 16 + TS + Tailwind + shadcn + Jest + Husky
+│   └── ⚡ backend/       # Rust + Tokio + Axum + SQLx
+├── 📦 packages/
+│   ├── 🎨 ui/            # 共通 UI コンポーネント（TS/React）
+│   ├── 🛠️ utils/         # フロント用ユーティリティ（TS）
+│   └── 📋 schema/        # API レスポンスなどの型・スキーマ（TS）
+├── 🏗️ infra/
+│   └── terraform/
+│       ├── 🧪 staging/   # ステージング環境用の AWS リソース定義
+│       └── 🚀 prod/      # 本番環境用の AWS リソース定義
+├── 🐳 docker-compose.yml # ローカル開発用（frontend + backend + local Postgres）
+├── 📝 .env.example       # ルート共通の環境変数テンプレ
+├── 🚫 .gitignore
+└── 📖 README.md
 ```
 
-### 📱 apps
-
-実際に動くアプリケーションを配置します。
-
-- **frontend**: 読者と直接触れる Next.js アプリ
-- **backend**: ブログ記事やユーザーデータを扱う Rust 製 API サーバ
-
-### 📦 packages
-
-複数アプリから利用する共通モジュールを配置します。
-
-UI コンポーネント、ユーティリティ関数、Zod スキーマなどを想定しています。
-
-この構成により、フロントエンド・バックエンド・共通ライブラリの責務をはっきり分けつつ、1 リポジトリで一括管理できるモノレポ構成を目指します。
+</details>
 
 ---
 
-## 🌐 apps/frontend（Next.js 16 + TypeScript + Tailwind CSS + Jest）
+## 🌐 Frontend Architecture
+
+<div align="center">
+
+### Next.js 16 + TypeScript + Tailwind CSS
+
+</div>
+
+<details>
+<summary>📁 <strong>Frontend ディレクトリ構造</strong></summary>
 
 ```
 apps/frontend/
-├── app/
+├── 📱 app/
 │   └── (blog)/
-│       ├── layout.tsx        # ブログ用レイアウト
-│       ├── page.tsx          # 記事一覧
+│       ├── 🎨 layout.tsx
+│       ├── 📄 page.tsx          # 記事一覧
 │       └── [slug]/
-│           └── page.tsx      # 記事詳細
-├── components/
-│   ├── layout/
-│   └── blog/
-├── lib/
-│   ├── supabase/             # Supabase クライアント初期化
-│   ├── api-client/           # Rust バックエンド向け API クライアント
-│   └── auth/                 # 認証・セッション系（必要になったら）
-├── tests/
+│           └── 📖 page.tsx      # 記事詳細
+├── 🧩 components/
+│   ├── 🏗️ layout/
+│   └── 📝 blog/
+├── 📚 lib/
+│   ├── 🔌 api-client/           # Rust backend API 用の HTTP クライアント
+│   └── 🔐 auth/                 # 認証・セッションロジック（必要に応じて）
+├── 🧪 tests/
 │   ├── unit/
 │   └── e2e/
-├── public/
-├── styles/
-│   └── globals.css           # Tailwind のエントリ
-├── tailwind.config.ts
-├── postcss.config.mjs
-├── jest.config.ts
-├── next.config.mjs
-├── package.json
-└── tsconfig.json
+├── 🖼️ public/
+├── 🎨 styles/
+│   └── globals.css           # Tailwind エントリ
+├── ⚙️ tailwind.config.ts
+├── 📦 postcss.config.mjs
+├── 🧪 jest.config.ts
+├── ⚙️ next.config.mjs
+├── 📋 package.json
+└── 📄 tsconfig.json
 ```
 
-### 🎨 役割
+</details>
 
-- **App Router 構成**: `app/(blog)/` 以下にブログ機能をまとめることで、URL はシンプルに保ちつつ、機能単位でコードを整理
-- **Tailwind CSS**: `styles/globals.css` に Tailwind のエントリを置き、ユーティリティクラスベースでデザインを構築
-- **Supabase 連携**: `lib/supabase` にブラウザ用・サーバー用クライアント初期化をまとめ、認証情報や環境変数の扱いを一箇所に集約
-- **API クライアント**: `lib/api-client` に Rust バックエンド向けの fetch ラッパを用意し、「フロントは HTTP API を通してのみドメインにアクセスする」という境界を作成
-- **テスト（Jest）**: UI コンポーネントやユーティリティ関数用のユニットテストを `tests/unit` や `*.test.tsx` に配置
+<table>
+<tr>
+<td width="33%">
+
+**🎯 App Router 構成**
+
+- `app/(blog)/` でブログ機能を整理
+- URL とコードの両方を最適化
+- ファイルベースルーティング
+
+</td>
+<td width="33%">
+
+**🎨 UI/UX**
+
+- Tailwind CSS でユーティリティファースト
+- shadcn/ui で一貫性のあるデザイン
+- レスポンシブ対応
+
+</td>
+<td width="33%">
+
+**🧪 品質保証**
+
+- Jest + React Testing Library
+- Husky で pre-commit チェック
+- TypeScript による型安全性
+
+</td>
+</tr>
+</table>
 
 ---
 
-## ⚡ apps/backend（Rust API + Supabase + Security）
+## ⚡ Backend Architecture
+
+<div align="center">
+
+### Rust + Axum + SQLx + PostgreSQL
+
+</div>
+
+<details>
+<summary>🦀 <strong>Backend ディレクトリ構造</strong></summary>
 
 ```
 apps/backend/
-├── src/
-│   ├── main.rs
-│   ├── api/
+├── 📦 src/
+│   ├── 🚀 main.rs
+│   ├── 🌐 api/               # ルーティング & ハンドラ（REST / JSON）
 │   │   ├── mod.rs
-│   │   ├── posts.rs          # /posts, /posts/{id} など
-│   │   └── health.rs         # /health
-│   ├── domain/
+│   │   ├── 📝 posts.rs       # /posts, /posts/{id}
+│   │   └── 💚 health.rs      # /health
+│   ├── 🏛️ domain/            # ドメインロジック（HTTP/DB 非依存）
 │   │   ├── mod.rs
-│   │   └── post.rs           # Post エンティティ & ドメインロジック
-│   ├── infrastructure/
+│   │   └── 📄 post.rs        # Post エンティティ
+│   ├── 🏗️ infrastructure/    # DB・外部サービス
 │   │   ├── mod.rs
-│   │   └── supabase.rs       # Supabase(Postgres) とのやりとり
-│   └── security/
+│   │   └── 🗄️ db.rs          # SQLx + PostgreSQL
+│   └── 🔒 security/          # セキュリティ関連（ヘッダ・認証など）
 │       ├── mod.rs
-│       ├── headers.rs        # セキュリティヘッダ付与など
-│       └── auth.rs           # 認証/トークン検証（必要に応じて）
-└── Cargo.toml
+│       ├── 🛡️ headers.rs
+│       └── 🔐 auth.rs
+└── 📋 Cargo.toml
 ```
 
-### 🔧 役割
+</details>
 
-- **api レイヤ**: HTTP リクエスト/レスポンス、ルーティング、エラーハンドリングを担当。`/posts` や `/health` などのエンドポイントをここに定義
-- **domain レイヤ**: ブログ記事（Post）などのエンティティとビジネスロジックを定義。HTTP や DB には依存せず、「アプリケーションが解きたい問題」を表現する層
-- **infrastructure レイヤ**: Supabase（Postgres）や外部サービスとの実際の通信を担当。パラメータバインドされたクエリやエラー処理をまとめて実装し、SQL Injection 対策などもここで実行
-- **security レイヤ**: セキュリティ関連の共通処理を集約
-  - `headers.rs`: CSP, HSTS, X-Frame-Options などのセキュリティヘッダを付与
-  - `auth.rs`: 認証トークン検証、セッション cookie 処理など（必要に応じて追加）
+<table>
+<tr>
+<td width="25%">
 
-この分割により、HTTP・ドメイン・インフラ・セキュリティがそれぞれの責務に集中した構成を目指します。
+**🌐 API Layer**
+
+- Axum でルーティング
+- JSON レスポンス
+- エラーハンドリング
+- OpenAPI 対応
+
+</td>
+<td width="25%">
+
+**🏛️ Domain Layer**
+
+- ビジネスロジック
+- エンティティ定義
+- HTTP/DB 非依存
+- テスタブル設計
+
+</td>
+<td width="25%">
+
+**🏗️ Infrastructure**
+
+- SQLx で型安全な DB アクセス
+- PostgreSQL 連携
+- マイグレーション管理
+- コネクションプール
+
+</td>
+<td width="25%">
+
+**🔒 Security**
+
+- セキュリティヘッダ
+- 認証・認可
+- CORS 設定
+- レート制限
+
+</td>
+</tr>
+</table>
+
+> 🚀 **デプロイ先**: AWS ECS Fargate / App Runner でコンテナとして動作
 
 ---
 
-## 📚 packages（共通ライブラリ）
+## 📦 packages
 
 ```
 packages/
 ├── ui/
-│   ├── src/
-│   │   └── components/
-│   │       ├── Button.tsx
-│   │       ├── Badge.tsx
-│   │       ├── CodeBlock.tsx
-│   │       └── Layout.tsx
+│   ├── src/components/
+│   │   ├── Button.tsx
+│   │   ├── Badge.tsx
+│   │   ├── CodeBlock.tsx
+│   │   └── Layout.tsx
 │   ├── package.json
 │   └── tsconfig.json
 ├── utils/
 │   ├── src/
-│   │   ├── date.ts           # 日付整形（API からの文字列 → 表示用）
-│   │   ├── slug.ts           # slug 生成
-│   │   └── markdown.ts       # MD/MDX 関連処理
+│   │   ├── date.ts        # 日付整形など
+│   │   ├── slug.ts
+│   │   └── markdown.ts
 │   ├── package.json
 │   └── tsconfig.json
 └── schema/
     ├── src/
-    │   ├── post.ts           # Post 用の型/Zodスキーマ
+    │   ├── post.ts        # Post の型 / Zod スキーマ
     │   └── index.ts
     ├── package.json
     └── tsconfig.json
 ```
 
-### 🛠️ 役割
-
-- **ui**: ブログ全体で使う共通 UI を React コンポーネントとしてまとめます。Next.js 側から `@blog/ui` のようにインポートして利用する想定
-- **utils**: 日付フォーマット、slug 生成、Markdown/MDX ヘルパーなど、フロントエンドで使う純粋なユーティリティをまとめます
-- **schema**: API レスポンスなどの「データの形」を TypeScript 型や Zod スキーマとして定義します。Rust 側とは言語が違うためソースコードの共有はしませんが、共通の仕様（契約）としてここにまとめる方針
+フロントエンド間で共通利用する UI / ユーティリティ / スキーマをここにまとめる。
 
 ---
 
-## 🚀 今後やりたいこと（メモ）
+## 🏗️ infra/terraform
 
-- [ ] Next.js 16 + Tailwind CSS のセットアップ
-- [ ] Rust バックエンドの最小構成（/health だけ返す API）
-- [ ] /posts API と、それを叩くフロントの一覧ページ
-- [ ] Supabase スキーマ設計（posts テーブルなど）
-- [ ] 認証が必要になったら Supabase Auth or 独自トークン方式を検討
-- [ ] 各レイヤ構成（api / domain / infrastructure / security / packages/ui / packages/schema）について、「なぜこう分けたか」をブログ記事として残す
+```
+infra/terraform/
+├── staging/
+│   ├── main.tf
+│   ├── variables.tf
+│   └── outputs.tf
+└── prod/
+    ├── main.tf
+    ├── variables.tf
+    └── outputs.tf
+```
+
+Terraform を使って、VPC / ECS / ALB / RDS などの AWS リソースをコードとして管理。
+
+ステージングと本番でディレクトリを分けておき、ワークスペースや変数で環境差分を吸収する構成にする。
+
+---
+
+## 🚀 ローカル開発フロー
+
+<div align="center">
+
+### 🛠️ 開発環境セットアップ
+
+</div>
+
+<table>
+<tr>
+<th>1️⃣ 依存関係インストール</th>
+<th>2️⃣ 環境変数設定</th>
+<th>3️⃣ 開発サーバ起動</th>
+</tr>
+<tr>
+<td>
+
+```bash
+# フロントエンド
+cd apps/frontend
+npm install
+
+# バックエンド
+cd apps/backend
+cargo build
+```
+
+</td>
+<td>
+
+```bash
+# 環境変数テンプレをコピー
+cp .env.example .env
+
+# 各アプリ固有の設定
+cp apps/frontend/.env.example \
+   apps/frontend/.env.local
+cp apps/backend/.env.example \
+   apps/backend/.env.local
+```
+
+</td>
+<td>
+
+```bash
+# Docker でローカル DB 起動
+docker compose up -d
+
+# フロントエンド開発サーバ
+cd apps/frontend && npm run dev
+
+# バックエンド開発サーバ
+cd apps/backend && cargo run
+```
+
+</td>
+</tr>
+</table>
+
+<div align="center">
+
+**🌐 Frontend**: http://localhost:3000  
+**⚡ Backend**: http://localhost:8000  
+**🗄️ Database**: localhost:5432
+
+</div>
+
+---
+
+## ☁️ AWS インフラストラクチャ
+
+<div align="center">
+
+### 🏗️ Infrastructure as Code with Terraform
+
+</div>
+
+<table>
+<tr>
+<th>🧪 Staging Environment</th>
+<th>🚀 Production Environment</th>
+</tr>
+<tr>
+<td>
+
+```bash
+cd infra/terraform/staging
+terraform init
+terraform plan
+terraform apply
+```
+
+**リソース構成**
+
+- ECS Fargate (開発用)
+- RDS (小規模インスタンス)
+- ALB + CloudFront
+- S3 (静的アセット)
+
+</td>
+<td>
+
+```bash
+cd infra/terraform/prod
+terraform init
+terraform plan
+terraform apply
+```
+
+**リソース構成**
+
+- ECS Fargate (本番用)
+- Aurora Serverless v2
+- ALB + CloudFront + WAF
+- S3 + CloudFront
+
+</td>
+</tr>
+</table>
+
+<div align="center">
+
+```mermaid
+graph LR
+    subgraph "🌐 Frontend"
+        A[Next.js App]
+    end
+
+    subgraph "☁️ AWS"
+        B[CloudFront]
+        C[ALB]
+        D[ECS Fargate]
+        E[RDS/Aurora]
+        F[S3]
+    end
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    B --> F
+
+    style B fill:#ff9900
+    style D fill:#ff9900
+    style E fill:#527fff
+```
+
+</div>
+
+> 📝 **学習ログ**: 各インフラ構成の構築過程は技術ブログ記事として記録し、学習内容を共有予定
 
 ---
 
 <div align="center">
 
-**この README はプロジェクトの全体像とディレクトリ構成の意図を整理するためのものです。**  
-**実装を進めながら、必要に応じて随時アップデートしていきます。**
+## 🎉 プロジェクトの特徴
+
+<table>
+<tr>
+<td align="center">
+
+**🦀 Modern Rust**
+<br>
+最新の Rust エコシステムを活用した<br>
+高性能・安全なバックエンド開発
+
+</td>
+<td align="center">
+
+**⚡ Next.js 16**
+<br>
+App Router を使った<br>
+モダンなフロントエンド開発
+
+</td>
+<td align="center">
+
+**☁️ AWS Native**
+<br>
+クラウドネイティブな<br>
+スケーラブルなインフラ構築
+
+</td>
+<td align="center">
+
+**📚 Learning by Building**
+<br>
+実装しながら学ぶ<br>
+技術ブログとしての記録
+
+</td>
+</tr>
+</table>
+
+---
+
+### 📖 この README について
+
+**「Rust × Next.js × AWS × Terraform でテックブログを作るモノレポ」の全体像とアーキテクチャの意図をまとめたものです。**
+
+実装と学習の進捗に合わせて随時アップデートしていきます。
+
+[![Made with ❤️ by Kohta](https://img.shields.io/badge/Made%20with%20❤️%20by-Kohta-red?style=for-the-badge)](https://github.com/kohtakochi)
 
 </div>
