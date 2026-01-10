@@ -1,4 +1,4 @@
-# ⚡ Backend - Rust API Server
+# Backend - Rust API Server
 
 <div align="center">
 
@@ -13,9 +13,9 @@
 
 ---
 
-## 🏗️ アーキテクチャ概要
+## アーキテクチャ概要
 
-### 📁 ディレクトリ構造（予定）
+### ディレクトリ構造（予定）
 
 ```
 apps/backend/
@@ -61,7 +61,7 @@ apps/backend/
 
 ---
 
-## 🛠️ 技術スタック
+## 技術スタック
 
 <table>
 <tr>

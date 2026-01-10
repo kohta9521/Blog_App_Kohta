@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🦀⚡ Rust × Next.js × AWS × Terraform Tech Blog
+# 🦀 Rust × Next.js × AWS × Terraform Tech Blog
 
 <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=22&duration=3000&pause=1000&color=F75C7E&center=true&vCenter=true&width=600&lines=Modern+Full-Stack+Tech+Blog;Rust+%2B+Next.js+%2B+AWS+%2B+Terraform;Learning+by+Building" alt="Typing SVG" />
 
@@ -16,7 +16,7 @@
 ![GitHub stars](https://img.shields.io/github/stars/kohtakochi/blog?style=flat-square&color=yellow)
 ![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)
 
-**🚀 Rust をバックエンド、Next.js 16（TypeScript）をフロントエンドに使い、AWS × Terraform でインフラも含めて作る個人テックブログ用モノレポです。**
+**Rust をバックエンド、Next.js 16（TypeScript）をフロントエンドに使い、AWS × Terraform でインフラも含めて作る個人テックブログ用モノレポです。**
 
 _Rust 公式ドキュメントを超初心者向けに噛み砕く記事や普段の開発で得た知見や学習内容を書きながら、アプリケーションとインフラの両方を学ぶことを目的としています。_
 
@@ -26,7 +26,7 @@ _Rust 公式ドキュメントを超初心者向けに噛み砕く記事や普�
 <tr>
 <td>
 
-**🎯 目標**
+**目標**
 
 - フルスタック開発の習得
 - インフラ自動化の実践
@@ -35,7 +35,7 @@ _Rust 公式ドキュメントを超初心者向けに噛み砕く記事や普�
 </td>
 <td>
 
-**📊 進捗**
+**進捗**
 
 - [ ] フロントエンド構築
 - [ ] バックエンド API 開発
@@ -44,7 +44,7 @@ _Rust 公式ドキュメントを超初心者向けに噛み砕く記事や普�
 </td>
 <td>
 
-**🛠️ 技術選定理由**
+**技術選定理由**
 
 - **Rust**: パフォーマンス & 安全性
 - **Next.js**: モダンな React 開発
@@ -58,13 +58,119 @@ _Rust 公式ドキュメントを超初心者向けに噛み砕く記事や普�
 
 ---
 
-## 🛠️ 技術スタック
+## ドキュメント目次
+
+<div align="center">
+
+### 詳細ドキュメントは各ディレクトリのREADMEをご覧ください
+
+</div>
 
 <table>
 <tr>
-<th>🌐 Frontend</th>
-<th>⚡ Backend</th>
-<th>☁️ Infrastructure</th>
+<th>ディレクトリ</th>
+<th>内容</th>
+<th>ドキュメント</th>
+</tr>
+<tr>
+<td>
+
+**Frontend**
+<br>
+Next.js 16 + TypeScript
+
+</td>
+<td>
+
+- App Router 設計
+- Tailwind CSS 構成
+- API 連携方法
+- 開発環境構築
+
+</td>
+<td>
+
+**[Frontend README](./apps/frontend/README.md)**
+
+</td>
+</tr>
+<tr>
+<td>
+
+**Backend**
+<br>
+Rust + Axum + SQLx
+
+</td>
+<td>
+
+- レイヤードアーキテクチャ
+- データベース設計
+- セキュリティ設計
+- API 仕様
+
+</td>
+<td>
+
+**[Backend README](./apps/backend/README.md)**
+
+</td>
+</tr>
+<tr>
+<td>
+
+**Infrastructure**
+<br>
+AWS + Terraform
+
+</td>
+<td>
+
+- Terraform 構成
+- AWS リソース設計
+- 環境分離戦略
+- デプロイ手順
+
+</td>
+<td>
+
+**[Infrastructure README](./infra/README.md)**
+
+</td>
+</tr>
+<tr>
+<td>
+
+**Packages**
+<br>
+共通ライブラリ
+
+</td>
+<td>
+
+- UI コンポーネント
+- ユーティリティ関数
+- 型定義・スキーマ
+- 使用方法
+
+</td>
+<td>
+
+*各パッケージのREADME（予定）*
+
+</td>
+</tr>
+</table>
+
+---
+
+## 技術スタック
+
+<table>
+<tr>
+<th>Frontend</th>
+<th>Backend</th>
+<th>Infrastructure</th>
 </tr>
 <tr>
 <td>
@@ -112,7 +218,7 @@ _Rust 公式ドキュメントを超初心者向けに噛み砕く記事や普�
 
 ---
 
-## 🏗️ アーキテクチャ概要
+## アーキテクチャ概要
 
 <div align="center">
 
@@ -148,7 +254,7 @@ graph TB
 
 </div>
 
-## 📁 ディレクトリ構成
+## ディレクトリ構成
 
 <details>
 <summary>🔍 <strong>プロジェクト全体構造</strong></summary>
@@ -176,7 +282,7 @@ blog/
 
 ---
 
-## 🌐 Frontend Architecture
+## Frontend Architecture
 
 <div align="center">
 
@@ -251,7 +357,7 @@ apps/frontend/
 
 ---
 
-## ⚡ Backend Architecture
+## Backend Architecture
 
 <div align="center">
 
@@ -309,7 +415,7 @@ apps/backend/
 </td>
 <td width="25%">
 
-**🏗️ Infrastructure**
+**Infrastructure**
 
 - SQLx で型安全な DB アクセス
 - PostgreSQL 連携
@@ -334,7 +440,7 @@ apps/backend/
 
 ---
 
-## 📦 packages
+## packages
 
 ```
 packages/
@@ -365,7 +471,7 @@ packages/
 
 ---
 
-## 🏗️ infra/terraform
+## infra/terraform
 
 ```
 infra/terraform/
@@ -385,11 +491,11 @@ Terraform を使って、VPC / ECS / ALB / RDS などの AWS リソースをコ�
 
 ---
 
-## 🚀 ローカル開発フロー
+## ローカル開発フロー
 
 <div align="center">
 
-### 🛠️ 開発環境セットアップ
+### 開発環境セットアップ
 
 </div>
 
@@ -446,26 +552,26 @@ cd apps/backend && cargo run
 
 <div align="center">
 
-**🌐 Frontend**: http://localhost:3000  
-**⚡ Backend**: http://localhost:8000  
+**Frontend**: http://localhost:3000  
+**Backend**: http://localhost:8000  
 **🗄️ Database**: localhost:5432
 
 </div>
 
 ---
 
-## ☁️ AWS インフラストラクチャ
+## AWS インフラストラクチャ
 
 <div align="center">
 
-### 🏗️ Infrastructure as Code with Terraform
+### Infrastructure as Code with Terraform
 
 </div>
 
 <table>
 <tr>
-<th>🧪 Staging Environment</th>
-<th>🚀 Production Environment</th>
+<th>Staging Environment</th>
+<th>Production Environment</th>
 </tr>
 <tr>
 <td>
@@ -540,13 +646,13 @@ graph LR
 
 <div align="center">
 
-## 🎉 プロジェクトの特徴
+## プロジェクトの特徴
 
 <table>
 <tr>
 <td align="center">
 
-**🦀 Modern Rust**
+**Modern Rust**
 <br>
 最新の Rust エコシステムを活用した<br>
 高性能・安全なバックエンド開発
@@ -554,7 +660,7 @@ graph LR
 </td>
 <td align="center">
 
-**⚡ Next.js 16**
+**Next.js 16**
 <br>
 App Router を使った<br>
 モダンなフロントエンド開発
@@ -562,7 +668,7 @@ App Router を使った<br>
 </td>
 <td align="center">
 
-**☁️ AWS Native**
+**AWS Native**
 <br>
 クラウドネイティブな<br>
 スケーラブルなインフラ構築
@@ -570,7 +676,7 @@ App Router を使った<br>
 </td>
 <td align="center">
 
-**📚 Learning by Building**
+**Learning by Building**
 <br>
 実装しながら学ぶ<br>
 技術ブログとしての記録
@@ -581,7 +687,7 @@ App Router を使った<br>
 
 ---
 
-### 📖 この README について
+### この README について
 
 **「Rust × Next.js × AWS × Terraform でテックブログを作るモノレポ」の全体像とアーキテクチャの意図をまとめたものです。**
 
