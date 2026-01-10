@@ -1,4 +1,14 @@
-# 🏗️ Infrastructure
+# 🏗️ Infrastructure - AWS × Terraform
+
+<div align="center">
+
+![Terraform](https://img.shields.io/badge/Terraform-623CE4?style=for-the-badge&logo=terraform&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+
+**Infrastructure as Code でスケーラブルなクラウドインフラを構築**
+
+</div>
 
 このディレクトリには、AWS上でのインフラストラクチャをTerraformで管理するためのコードが含まれています。
 
@@ -58,10 +68,15 @@ terraform apply
 
 ## ⚠️ 重要な注意事項
 
-### セキュリティ
+### 🔒 セキュリティ
+
+⚠️ **重要**: このリポジトリはpublicです。機密情報の取り扱いに十分注意してください。
+
 - `terraform.tfvars` ファイルには機密情報が含まれるため、**絶対にGitにコミットしないでください**
 - `.gitignore` でこれらのファイルは除外されていますが、念のため確認してください
 - AWS認証情報は環境変数やAWS CLIプロファイルを使用してください
+- **パスワード・APIキー・シークレット**は`terraform.tfvars.example`をコピーして設定
+- 本番環境では**AWS Secrets Manager**や**Parameter Store**の使用を推奨
 
 ### 状態管理
 - 現在はローカルで状態ファイル（`terraform.tfstate`）を管理していますが、チーム開発の場合はS3バックエンドの使用を推奨します

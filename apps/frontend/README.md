@@ -1,4 +1,4 @@
-# 🌐 Frontend - Next.js 16 Tech Blog
+# Frontend - Next.js 16 Tech Blog
 
 <div align="center">
 
@@ -13,9 +13,9 @@
 
 ---
 
-## 🏗️ アーキテクチャ概要
+## アーキテクチャ概要
 
-### 📁 ディレクトリ構造
+### ディレクトリ構造
 
 ```
 apps/frontend/
@@ -40,7 +40,7 @@ apps/frontend/
 
 ---
 
-## 🛠️ 技術スタック
+## 技術スタック
 
 <table>
 <tr>
