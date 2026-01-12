@@ -17,3 +17,6 @@ dotenv = "0.15"
 chrono = { version = "0.4", features = ["serde"] }
 uuid = { version = "1.0", features = ["serde", "v4"] }
 async-trait = "0.1"
+# OpenAPI関連
+utoipa = { version = "5.1", features = ["axum_extras", "chrono"] }
+utoipa-swagger-ui = { version = "9.0.2", features = ["axum"] }
