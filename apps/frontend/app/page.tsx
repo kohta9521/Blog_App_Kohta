@@ -1,6 +1,15 @@
+import { Logo } from "@/components/ui/Logo/Logo";
 export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center h-screen">
+      <Logo
+        id="logo"
+        type="default"
+        linkBool={true}
+        linkHref="/"
+        size="md"
+        className="mb-4"
+      />
       <h1>Hello World!</h1>
       <p>This is a test</p>
       <p>
