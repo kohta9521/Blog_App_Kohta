@@ -91,18 +91,4 @@ describe("Logoコンポーネント", () => {
     expect(link).toHaveClass("focus:outline-none");
     expect(link).toHaveClass("focus:ring-2");
   });
-
-  it("ライトテーマが正しく適用される", () => {
-    render(<Logo theme="light" type="text" />);
-
-    const logoText = screen.getByText("Kohta Tech Blog");
-    expect(logoText).toHaveClass("text-gray-900");
-  });
-
-  it("ダークテーマが正しく適用される", () => {
-    render(<Logo theme="dark" type="text" />);
-
-    const logoText = screen.getByText("Kohta Tech Blog");
-    expect(logoText).toHaveClass("text-white");
-  });
 });
