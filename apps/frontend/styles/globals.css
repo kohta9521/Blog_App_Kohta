@@ -7,6 +7,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-ibm-plex-sans-jp);
   --font-mono: var(--font-ibm-plex-mono);
+  --font-serif: var(--font-newsreader);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -81,7 +82,7 @@
 }
 
 .dark {
-  --background: oklch(0.141 0.005 285.823);
+  --background: #000000;
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.21 0.006 285.885);
   --card-foreground: oklch(0.985 0 0);
@@ -118,7 +119,94 @@
   * {
     @apply border-border outline-ring/50;
   }
+
+  html {
+    /* ふわっとしたテーマ切り替えアニメーション */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
   body {
     @apply bg-background text-foreground;
+    /* 背景色とテキスト色のスムーズな切り替え */
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* グリッド背景のオーバーレイを防ぐ */
+    position: relative;
+    z-index: 1;
+  }
+
+  /* 全ての要素にスムーズな色変更を適用 */
+  * {
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* グリッド背景用のカスタムスタイル */
+  .grid-background {
+    background-image: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.05) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .dark .grid-background {
+    background-image: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.08) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  }
+
+  /* テキスト切り詰め */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* レインボーグラデーションアニメーション */
+  @keyframes rainbow-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .rainbow-animated {
+    background: linear-gradient(
+      90deg,
+      #ff0000,
+      #ff8000,
+      #ffff00,
+      #80ff00,
+      #00ff00,
+      #00ff80,
+      #00ffff,
+      #0080ff,
+      #0000ff,
+      #8000ff,
+      #ff00ff,
+      #ff0080,
+      #ff0000,
+      #ff8000,
+      #ffff00,
+      #80ff00,
+      #00ff00,
+      #00ff80
+    );
+    background-size: 400% 400%;
+    animation: rainbow-shift 8s ease-in-out infinite;
   }
 }

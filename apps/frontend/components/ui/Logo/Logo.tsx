@@ -11,7 +11,7 @@ export type LogoProps = {
   size?: "xs" | "sm" | "md" | "lg" | "xl";
   className?: string;
   animated?: boolean;
-  theme?: "light" | "dark" | "gradient";
+  theme?: "light" | "dark" | "gradient" | "auto";
 };
 
 const sizeVariants = {
@@ -43,9 +43,10 @@ const sizeVariants = {
 };
 
 const themeVariants = {
-  light: "text-gray-900 hover:text-gray-700",
-  dark: "text-white hover:text-gray-200",
-  gradient: "text-gray-900 hover:text-gray-700",
+  light: "text-foreground hover:text-foreground/80",
+  dark: "text-foreground hover:text-foreground/80",
+  gradient: "text-foreground hover:text-foreground/80",
+  auto: "text-foreground hover:text-foreground/80", // 自動テーマ対応
 };
 
 export const Logo = ({
@@ -56,7 +57,7 @@ export const Logo = ({
   size = "md",
   className = "",
   animated = true,
-  theme = "gradient",
+  theme = "auto",
 }: LogoProps) => {
   const sizeConfig = sizeVariants[size];
   const themeClass = themeVariants[theme];
@@ -91,7 +92,7 @@ export const Logo = ({
             <span className="relative">
               Kohta Tech Blog
               {animated && (
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full" />
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-linear-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full" />
               )}
             </span>
           </div>
@@ -102,7 +103,7 @@ export const Logo = ({
           <div className="flex items-center gap-2">
             <div
               className={cn(
-                "w-2 h-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500",
+                "w-2 h-2 rounded-full bg-linear-to-r from-blue-500 to-purple-500",
                 animated && "animate-pulse"
               )}
             />
@@ -129,7 +130,7 @@ export const Logo = ({
             />
             <span
               className={cn(
-                "font-bold leading-tight",
+                "font-semibold leading-tight ",
                 sizeConfig.text,
                 themeClass,
                 animated && "transition-all duration-300"
