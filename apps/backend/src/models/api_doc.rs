@@ -8,12 +8,17 @@ use utoipa::OpenApi;
     paths(
         crate::handlers::health::health_check,
         crate::handlers::greeting::hello_rust,
-        crate::handlers::greeting::custom_hello
+        crate::handlers::greeting::custom_hello,
+        crate::handlers::posts::list_posts
     ),
-    components(schemas()),
+    components(schemas(
+        crate::models::PostListItem,
+        crate::models::PostListResponse
+    )),
     tags(
         (name = "health", description = "ヘルスチェック関連API"),
-        (name = "greeting", description = "挨拶関連API")
+        (name = "greeting", description = "挨拶関連API"),
+        (name = "posts", description = "記事関連API")
     ),
     info(
         title = "Blog Backend API",
