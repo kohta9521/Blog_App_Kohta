@@ -1,0 +1,94 @@
+# ===========================================
+# 🔧 Production Environment Variables Example
+# ===========================================
+# ⚠️ 本番環境の設定 - セキュリティに十分注意してください
+# このファイルをコピーして terraform.tfvars を作成してください
+# cp terraform.tfvars.example terraform.tfvars
+# ⚠️ terraform.tfvars は絶対にGitにコミットしないこと！
+
+# 📍 Basic Configuration
+environment = "prod"
+aws_region  = "ap-northeast-1"
+
+# 🌐 Network Configuration
+vpc_cidr           = "10.1.0.0/16" # dev環境(10.0.0.0/16)と異なるCIDRを使用
+availability_zones = ["ap-northeast-1a", "ap-northeast-1c", "ap-northeast-1d"]
+
+# 🔐 Security Configuration
+# 本番環境では必ず管理者のIPアドレスのみに制限してください
+allowed_ips = ["123.456.789.0/32"] # あなたの会社/自宅のIPアドレス
+
+# 🗄️ Database Configuration
+db_name     = "blog_prod"
+db_username = "blog_admin"
+# ⚠️ 強力なパスワードを使用してください（最低16文字、大小英数字+記号）
+# 本番環境では必ず AWS Secrets Manager を使用すること！
+db_password = "CHANGE-THIS-TO-VERY-STRONG-PASSWORD-123!@#"
+
+# 🐳 Backend Configuration
+# ECRリポジトリURIを設定
+backend_container_image = "123456789012.dkr.ecr.ap-northeast-1.amazonaws.com/blog-backend-prod:latest"
+
+# JWT Secret（本番環境では最低64文字のランダム文字列を推奨）
+# openssl rand -base64 64 で生成できます
+jwt_secret = "CHANGE-THIS-TO-RANDOM-64-CHARS-JWT-SECRET-FOR-PRODUCTION-USE-ONLY"
+
+# CORS設定（本番ドメインのみ許可）
+cors_origins = "https://yourdomain.com,https://www.yourdomain.com"
+
+# 🎨 Frontend Configuration
+github_repository_url = "https://github.com/yourusername/blog"
+# GitHub Personal Access Token（repo権限）
+github_token = "ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# 🌍 DNS Configuration
+# 本番ドメイン（実際に取得したドメインを設定）
+domain_name = "yourdomain.com"
+
+# 📊 Monitoring Configuration
+# 本番環境のアラート通知先（複数指定可能な場合はカンマ区切り）
+alert_email = "admin@yourdomain.com"
+
+# ===========================================
+# 本番環境チェックリスト
+# ===========================================
+# デプロイ前に以下を確認してください：
+#
+# □ パスワードを強力なものに変更した
+# □ JWT Secretをランダムな長い文字列に変更した
+# □ allowed_ips を管理者のIPのみに制限した
+# □ CORS設定が本番ドメインのみになっている
+# □ alert_email が正しい
+# □ domain_name が実際に取得したドメインである
+# □ GitHub tokenが有効である
+# □ terraform.tfvars を .gitignore に追加した
+# □ AWS Secrets Manager の設定を検討した
+# □ バックアップ設定を確認した
+# □ コスト見積もりを確認した（約$150-200/月）
+# □ チーム全員が緊急連絡先を共有している
+#
+# ===========================================
+# セキュリティベストプラクティス
+# ===========================================
+#
+# 1. Secrets Manager の使用:
+#    本番環境では必ず AWS Secrets Manager を使用してください
+#    パスワードやトークンをこのファイルに直接書かない
+#
+# 2. IAM ポリシーの最小権限:
+#    Terraformユーザーに必要最小限の権限のみ付与
+#
+# 3. MFA (多要素認証) の有効化:
+#    AWSコンソールとGitHubで必ずMFAを有効化
+#
+# 4. 定期的なパスワードローテーション:
+#    90日ごとにパスワードを変更
+#
+# 5. アクセスログの監視:
+#    CloudTrailでAPI呼び出しを監視
+#
+# 6. 定期的なセキュリティ監査:
+#    AWS Security Hub を活用
+#
+# ===========================================
+

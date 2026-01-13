@@ -1,3 +1,3 @@
-pub mod health;
+pub mod post;
 
-pub use health::*;
+pub use post::*;

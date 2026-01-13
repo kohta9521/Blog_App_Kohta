@@ -3,8 +3,11 @@ use tower_http::{cors::CorsLayer, trace::TraceLayer};
 use tracing::info;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
+mod database;
+mod domain;
 mod handlers;
 mod models;
+mod repositories;
 mod routes;
 
 use routes::create_router;
@@ -12,16 +15,26 @@ use routes::create_router;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
+    // 環境変数の読み込み（.envファイルがある場合）
+    dotenv::dotenv().ok();
+
     // ログ設定の初期化
     tracing_subscriber::registry()
         .with(
             tracing_subscriber::EnvFilter::try_from_default_env()
-                .unwrap_or_else(|_| "backend=info,tower_http=info".into()),
+                .unwrap_or_else(|_| "backend=info,tower_http=info,sqlx=warn".into()),
         )
         .with(tracing_subscriber::fmt::layer())
         .init();
 
     info!("🦀 Starting Rust Blog Backend Server...");
+
+    // データベース接続プールの作成
+    info!("📊 Connecting to database...");
+    let pool = database::create_pool().await?;
+    
+    // データベース接続テスト
+    database::test_connection(&pool).await?;
 
     // CORS設定
     let cors = CorsLayer::new()
@@ -31,10 +44,11 @@ async fn main() -> anyhow::Result<()> {
         .allow_credentials(true)
         .allow_headers([AUTHORIZATION, ACCEPT, CONTENT_TYPE]);
 
-    // ルーター設定
+    // ルーター設定（データベースプールを渡す）
     let app = create_router()
         .layer(TraceLayer::new_for_http())
-        .layer(cors);
+        .layer(cors)
+        .with_state(pool);
 
     // サーバー設定
     let port = std::env::var("PORT")
