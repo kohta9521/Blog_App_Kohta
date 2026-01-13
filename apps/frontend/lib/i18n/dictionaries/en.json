@@ -1,0 +1,26 @@
+{
+  "common": {
+    "home": "Home",
+    "about": "About",
+    "blog": "Blog",
+    "contact": "Contact",
+    "search": "Search",
+    "language": "Language"
+  },
+  "hero": {
+    "title": "Blog",
+    "subtitle": "Kohta's Daily Study Content and Memo Storage Location"
+  },
+  "blog": {
+    "category": "Category",
+    "author": "Author",
+    "date": "Date",
+    "readMore": "Read More"
+  },
+  "meta": {
+    "title": "Kohta's Blog",
+    "description": "Tech Blog - Articles about Next.js, Rust, Frontend & Backend Development",
+    "keywords": "blog, Next.js, Rust, frontend, backend, technology"
+  }
+}
+

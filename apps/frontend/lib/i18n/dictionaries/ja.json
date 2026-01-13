@@ -1,0 +1,26 @@
+{
+  "common": {
+    "home": "ホーム",
+    "about": "About",
+    "blog": "ブログ",
+    "contact": "お問い合わせ",
+    "search": "検索",
+    "language": "言語"
+  },
+  "hero": {
+    "title": "Blog",
+    "subtitle": "Kohtaの日々の学習内容とメモの保管場所"
+  },
+  "blog": {
+    "category": "カテゴリー",
+    "author": "著者",
+    "date": "日付",
+    "readMore": "続きを読む"
+  },
+  "meta": {
+    "title": "Kohta's Blog",
+    "description": "技術ブログ - Next.js、Rust、フロントエンド・バックエンド開発に関する記事",
+    "keywords": "ブログ, Next.js, Rust, フロントエンド, バックエンド, 技術"
+  }
+}
+
