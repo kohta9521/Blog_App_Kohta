@@ -1,0 +1,47 @@
+# ===========================================
+# 🔧 Development Environment Variables Example
+# ===========================================
+# このファイルをコピーして terraform.tfvars を作成してください
+# cp terraform.tfvars.example terraform.tfvars
+
+# 📍 Basic Configuration
+environment = "dev"
+aws_region  = "ap-northeast-1"
+
+# 🌐 Network Configuration
+vpc_cidr           = "10.0.0.0/16"
+availability_zones = ["ap-northeast-1a", "ap-northeast-1c"]
+
+# 🔐 Security Configuration
+# 開発環境では自分のIPアドレスのみ許可することを推奨
+# allowed_ips = ["123.456.789.0/32"] # あなたのIPアドレス
+allowed_ips = ["0.0.0.0/0"] # 全て許可（セキュリティリスクあり）
+
+# 🗄️ Database Configuration
+db_name     = "blog_dev"
+db_username = "blog_user"
+db_password = "change-this-password-dev-123" # 本番では必ず変更！
+
+# 🐳 Backend Configuration
+# ECRリポジトリを先に作成してから、ここにURIを設定
+backend_container_image = "123456789012.dkr.ecr.ap-northeast-1.amazonaws.com/blog-backend:latest"
+
+# JWT Secret（最低32文字）
+jwt_secret = "your-super-secret-jwt-key-for-dev-environment-minimum-32-chars"
+
+# CORS設定
+cors_origins = "https://dev.yourdomain.com,http://localhost:3000"
+
+# 🎨 Frontend Configuration
+github_repository_url = "https://github.com/yourusername/blog"
+# GitHub Personal Access Token（repo権限が必要）
+# https://github.com/settings/tokens で作成
+github_token = "ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# 🌍 DNS Configuration
+# Route53でホストゾーンを作成するドメイン
+domain_name = "yourdomain.com"
+
+# 📊 Monitoring Configuration
+alert_email = "your-email@example.com"
+
