@@ -352,3 +352,4 @@ resource "aws_appautoscaling_policy" "ecs_memory" {
 # ===========================================
 data "aws_region" "current" {}
 
+
