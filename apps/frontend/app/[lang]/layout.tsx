@@ -1,4 +1,3 @@
-// next
 import type { Metadata } from "next";
 import { IBM_Plex_Sans_JP, IBM_Plex_Mono, Literata } from "next/font/google";
 
@@ -34,13 +33,16 @@ export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ lang: Locale }>;
-}): Promise<Metadata> {
+// 修正ポイント1: params の lang を string 型にする
+type Props = {
+  params: Promise<{ lang: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { lang } = await params;
-  const dict = await getDictionary(lang);
+  // ここで安全に Locale 型として扱う（generateStaticParamsがあるため安全）
+  const locale = lang as Locale; 
+  const dict = await getDictionary(locale);
 
   return {
     title: dict.meta.title,
@@ -49,7 +51,7 @@ export async function generateMetadata({
     openGraph: {
       title: dict.meta.title,
       description: dict.meta.description,
-      locale: lang === "ja" ? "ja_JP" : "en_US",
+      locale: locale === "ja" ? "ja_JP" : "en_US",
     },
   };
 }
@@ -59,12 +61,13 @@ export default async function LangLayout({
   params,
 }: Readonly<{
   children: React.ReactNode;
-  params: Promise<{ lang: Locale }>;
+  params: Promise<{ lang: string }>; // 修正ポイント2: ここも string にする
 }>) {
   const { lang } = await params;
+  const locale = lang as Locale; // 内部で使用するためにキャスト
 
   return (
-    <html lang={lang} className="dark">
+    <html lang={locale} className="dark">
       <body
         className={`${ibmPlexSansJP.variable} ${ibmPlexMono.variable} ${literata.variable} antialiased bg-background text-foreground`}
       >
