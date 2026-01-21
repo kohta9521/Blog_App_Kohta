@@ -391,3 +391,4 @@ cat modules/database/outputs.tf
 
 **このコードベースで学べば、実務で通用するTerraform/AWSスキルが身につきます！**
 
+

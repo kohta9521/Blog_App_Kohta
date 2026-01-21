@@ -45,3 +45,4 @@ domain_name = "yourdomain.com"
 # 📊 Monitoring Configuration
 alert_email = "your-email@example.com"
 
+
