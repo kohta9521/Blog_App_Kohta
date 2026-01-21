@@ -32,3 +32,4 @@ output "backend_api_url" {
   value       = var.subdomain != "" ? "https://api-${var.subdomain}.${var.domain_name}" : "https://api.${var.domain_name}"
 }
 
+

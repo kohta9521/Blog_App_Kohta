@@ -16,15 +16,15 @@ type HeroProps = {
 
 const Hero = ({ dict }: HeroProps) => {
   return (
-    <div id="blog-top-hero" className="relative min-h-screen mt-0">
-      <div className="w-11/12 mx-auto max-w-7xl h-auto pt-20 pb-6 border-x relative">
+    <div id="blog-top-hero" className="relative h-auto mt-0">
+      <div className="w-11/12 mx-auto max-w-[1500px] h-auto pt-20 pb-6 border-x relative">
         {/* title area */}
         <div className="w-[97%] mx-auto flex items-center justify-between">
           <div className="w-auto">
-            <h1 className="text-5xl md:text-6xl font-light font-serif mb-2 md:mb-3">
+            <h1 className="text-5xl md:text-7xl font-light font-serif mb-2 md:mb-4">
               {dict.hero.title}
             </h1>
-            <p className="text-xs md:text-base font-serif">
+            <p className="text-xs md:text-base font-serif font-light">
               {dict.hero.subtitle}
             </p>
           </div>
@@ -43,7 +43,7 @@ const Hero = ({ dict }: HeroProps) => {
       </div>
 
       {/* blog list area */}
-      <div className="w-11/12 mx-auto max-w-7xl h-auto border-x relative">
+      <div className="w-11/12 mx-auto max-w-[1500px] h-auto border-x relative">
         <div className="w-full h-[600px] blok md:flex">
           <div className="group cursor-pointer w-full md:w-1/2 h-full border-r border-dashed p-6 hover:bg-card/50 transition-all duration-300 flex flex-col">
             <div className="w-full h-full max-h-[300px] border rounded-md overflow-hidden mb-4">
@@ -181,7 +181,7 @@ const Hero = ({ dict }: HeroProps) => {
         <div className="absolute bottom-0 right-0 w-[6px] h-[6px] border border-white/50 bg-black translate-x-[3.5px] translate-y-[3px]"></div>
       </div>
 
-      <div className="w-[97%] mx-auto relative">
+      <div className="w-full mx-auto relative">
         <span className="block w-full h-px border-t"></span>
       </div>
     </div>

@@ -379,3 +379,4 @@ resource "aws_wafv2_web_acl" "main" {
 data "aws_region" "current" {}
 data "aws_caller_identity" "current" {}
 
+

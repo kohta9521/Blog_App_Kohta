@@ -1,6 +1,6 @@
 // next
 import type { Metadata } from "next";
-import { IBM_Plex_Sans_JP, IBM_Plex_Mono, Newsreader } from "next/font/google";
+import { IBM_Plex_Sans_JP, IBM_Plex_Mono, Literata } from "next/font/google";
 
 // styles
 import "@/styles/globals.css";
@@ -23,10 +23,10 @@ const ibmPlexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
-const newsreader = Newsreader({
+const literata = Literata({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-newsreader",
+  weight: ["300", "400"],
+  variable: "--font-literata",
   display: "swap",
 });
 
@@ -66,11 +66,10 @@ export default async function LangLayout({
   return (
     <html lang={lang} className="dark">
       <body
-        className={`${ibmPlexSansJP.variable} ${ibmPlexMono.variable} ${newsreader.variable} antialiased bg-background text-foreground`}
+        className={`${ibmPlexSansJP.variable} ${ibmPlexMono.variable} ${literata.variable} antialiased bg-background text-foreground`}
       >
         {children}
       </body>
     </html>
   );
 }
-

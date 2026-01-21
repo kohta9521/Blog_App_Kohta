@@ -150,3 +150,4 @@ variable "enable_container_insights" {
   default     = false
 }
 
+

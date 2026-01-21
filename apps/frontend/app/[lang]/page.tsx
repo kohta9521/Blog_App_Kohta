@@ -6,6 +6,7 @@ import Hero from "@/components/layout/Hero/Hero";
 // i18n
 import type { Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import Category from "@/components/layout/Category/Category";
 
 export default async function Home({
   params,
@@ -20,7 +21,7 @@ export default async function Home({
       <GradationLine />
       <Header id="header" lang={lang} dict={dict} />
       <Hero lang={lang} dict={dict} />
+      <Category />
     </>
   );
 }
-
