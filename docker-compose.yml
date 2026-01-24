@@ -46,6 +46,50 @@ services:
     depends_on:
       - postgres
 
+  # バックエンド (Rust/Axum)
+  backend:
+    build:
+      context: ./apps/backend
+      dockerfile: Dockerfile
+    container_name: blog-backend
+    restart: unless-stopped
+    environment:
+      SERVER_HOST: 0.0.0.0
+      SERVER_PORT: 8000
+      DATABASE_URL: postgresql://blog_user:blog_password@postgres:5432/blog_dev
+      RUST_LOG: info
+      CORS_ORIGINS: http://localhost:3000
+    ports:
+      - "8000:8000"  # localhost:8000 でアクセス
+    networks:
+      - blog-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/health || exit 1"]
+      interval: 30s
+      timeout: 3s
+      start_period: 10s
+      retries: 3
+
+  # フロントエンド (Next.js)
+  frontend:
+    build:
+      context: ./apps/frontend
+      dockerfile: Dockerfile
+    container_name: blog-frontend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_API_URL: http://localhost:8000
+    ports:
+      - "3000:3000"  # localhost:3000 でアクセス
+    networks:
+      - blog-network
+    depends_on:
+      - backend
+
 volumes:
   postgres_data:
     driver: local

@@ -1,0 +1,27 @@
+# 開発環境用Dockerfile
+FROM rust:latest
+
+WORKDIR /app
+
+# システム依存関係をインストール
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    pkg-config \
+    libssl-dev \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# cargo-watchをインストール（ホットリロード用）
+RUN cargo install cargo-watch
+
+# 依存関係をインストール（キャッシュを効かせるため）
+COPY Cargo.toml Cargo.lock* ./
+RUN mkdir src && echo "fn main() {}" > src/main.rs && \
+    cargo build --release || true && \
+    rm -rf src
+
+# ソースコードをコピー
+COPY . .
+
+# 開発サーバーを起動（ホットリロード付き）
+CMD ["cargo", "watch", "-x", "run"]

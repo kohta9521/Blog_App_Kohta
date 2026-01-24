@@ -41,7 +41,7 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { lang } = await params;
   // ここで安全に Locale 型として扱う（generateStaticParamsがあるため安全）
-  const locale = lang as Locale; 
+  const locale = lang as Locale;
   const dict = await getDictionary(locale);
 
   return {
