@@ -499,6 +499,105 @@ Terraform を使って、VPC / ECS / ALB / RDS などの AWS リソースをコ�
 
 </div>
 
+### 🚀 Docker での統合起動（推奨）
+
+**前提条件**: Docker Desktop をインストールして起動してください
+
+<table>
+<tr>
+<th>🚀 初回起動・ビルド</th>
+<th>🔄 通常起動</th>
+<th>🛑 停止</th>
+</tr>
+<tr>
+<td>
+
+```bash
+# 開発環境（ホットリロード対応）
+docker-compose -f docker-compose.dev.yml up --build
+
+# または本番環境構成
+docker-compose up --build
+```
+
+</td>
+<td>
+
+```bash
+# 開発環境
+docker-compose -f docker-compose.dev.yml up
+
+# 本番環境構成
+docker-compose up
+
+# バックグラウンド起動
+docker-compose up -d
+```
+
+</td>
+<td>
+
+```bash
+# フォアグラウンドの場合: Ctrl+C
+
+# バックグラウンドの場合
+docker-compose down
+
+# ボリュームも削除
+docker-compose down -v
+```
+
+</td>
+</tr>
+</table>
+
+### 📂 Docker構成の違い
+
+<table>
+<tr>
+<th>🧪 開発環境 (`docker-compose.dev.yml`)</th>
+<th>🚀 本番環境 (`docker-compose.yml`)</th>
+</tr>
+<tr>
+<td>
+
+**特徴**
+- ホットリロード対応
+- ファイル変更が即座に反映
+- デバッグログ出力
+
+**使用場面**
+- 日常の開発作業
+- フロントエンド・バックエンドの修正
+
+**起動コマンド**
+```bash
+docker-compose -f docker-compose.dev.yml up
+```
+
+</td>
+<td>
+
+**特徴**
+- 本番環境に近い構成
+- 最適化されたビルド
+- 軽量なイメージ
+
+**使用場面**
+- 本番環境テスト
+- パフォーマンス確認
+
+**起動コマンド**
+```bash
+docker-compose up
+```
+
+</td>
+</tr>
+</table>
+
+### 🔧 個別起動（従来方式）
+
 <table>
 <tr>
 <th>1️⃣ 依存関係インストール</th>
@@ -536,8 +635,8 @@ cp apps/backend/.env.example \
 <td>
 
 ```bash
-# Docker でローカル DB 起動
-docker compose up -d
+# PostgreSQL のみ Docker で起動
+docker-compose up postgres -d
 
 # フロントエンド開発サーバ
 cd apps/frontend && npm run dev
@@ -550,13 +649,71 @@ cd apps/backend && cargo run
 </tr>
 </table>
 
+### 🌐 アクセス URL
+
 <div align="center">
 
-**Frontend**: http://localhost:3000  
-**Backend**: http://localhost:8000  
-**🗄️ Database**: localhost:5432
+**🖥️ Frontend**: http://localhost:3000  
+**⚡ Backend API**: http://localhost:8000  
+**📊 Backend Swagger UI**: http://localhost:8000/swagger-ui  
+**🗄️ Database**: localhost:5432  
+**🔧 pgAdmin**: http://localhost:5050 (admin@example.com / admin)
 
 </div>
+
+### ⚠️ トラブルシューティング
+
+<details>
+<summary>🐳 Docker関連の問題</summary>
+
+**Docker Daemonが起動していない**
+```bash
+# Docker Desktop を起動してから再実行
+docker-compose up
+```
+
+**ポートが既に使用されている**
+```bash
+# 使用中のポートを確認
+lsof -i :3000
+lsof -i :8000
+
+# 既存のコンテナを停止
+docker-compose down
+```
+
+**ビルドエラーが発生**
+```bash
+# キャッシュを無視して再ビルド
+docker-compose build --no-cache
+docker-compose up --build
+```
+
+</details>
+
+<details>
+<summary>🦀 Rustバックエンドの問題</summary>
+
+**依存関係のエラー**
+```bash
+# 最新のRustに更新
+rustup update
+
+# 依存関係の再インストール
+cargo clean
+cargo build
+```
+
+**データベース接続エラー**
+```bash
+# PostgreSQLが起動しているか確認
+docker-compose ps postgres
+
+# 環境変数を確認
+echo $DATABASE_URL
+```
+
+</details>
 
 ---
 

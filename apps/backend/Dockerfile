@@ -1,5 +1,5 @@
 # 1. ビルドステージ
-FROM rust:1.87-slim-bookworm AS builder
+FROM rust:latest AS builder
 
 WORKDIR /app
 
@@ -38,6 +38,7 @@ RUN apt-get update && \
     ca-certificates \
     libssl3 \
     libpq5 \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
 # 非rootユーザーを作成

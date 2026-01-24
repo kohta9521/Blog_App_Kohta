@@ -1,0 +1,10 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+# 依存関係をインストール
+COPY package*.json ./
+RUN npm ci
+
+# 開発サーバーを起動
+CMD ["npm", "run", "dev"]
