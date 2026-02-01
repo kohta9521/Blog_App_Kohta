@@ -96,8 +96,8 @@ const ArticleRow = memo(function ArticleRow({
           isExpanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
         )}
       >
-        <div className="min-h-0 pt-6">
-          <div className="w-full h-auto flex flex-col gap-4 lg:flex-row lg:justify-between mb-6 lg:mb-8">
+        <div className="min-h-0 pt-2">
+          <div className="w-full h-auto pt-3 flex flex-col gap-4 lg:flex-row lg:justify-between mb-6 lg:mb-8">
             <div className="w-full lg:w-3/6 h-auto">
               <div className="flex flex-col sm:flex-row sm:items-start">
                 <span className="text-muted-foreground text-xs font-mono shrink-0 sm:mr-12">
