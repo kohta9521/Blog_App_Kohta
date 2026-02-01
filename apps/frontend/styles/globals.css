@@ -8,6 +8,7 @@
   --font-sans: var(--font-ibm-plex-sans-jp);
   --font-mono: var(--font-ibm-plex-mono);
   --font-serif: var(--font-literata);
+  --font-doto: var(--font-doto);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);

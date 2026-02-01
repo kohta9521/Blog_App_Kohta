@@ -1,5 +1,6 @@
+// next
 import type { Metadata } from "next";
-import { IBM_Plex_Sans_JP, IBM_Plex_Mono, Literata } from "next/font/google";
+import { IBM_Plex_Sans_JP, IBM_Plex_Mono, Literata, Doto } from "next/font/google";
 
 // styles
 import "@/styles/globals.css";
@@ -7,6 +8,11 @@ import "@/styles/globals.css";
 // i18n
 import { i18n, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+
+// components
+import GradationLine from "@/components/ui/Line/GradationLine";
+import Header from "@/components/layout/Header/Header";
+
 
 const ibmPlexSansJP = IBM_Plex_Sans_JP({
   subsets: ["latin"],
@@ -26,6 +32,12 @@ const literata = Literata({
   subsets: ["latin"],
   weight: ["300", "400"],
   variable: "--font-literata",
+  display: "swap",
+});
+
+const doto = Doto({
+  subsets: ["latin"],
+  variable: "--font-doto",
   display: "swap",
 });
 
@@ -64,13 +76,16 @@ export default async function LangLayout({
   params: Promise<{ lang: string }>; // 修正ポイント2: ここも string にする
 }>) {
   const { lang } = await params;
-  const locale = lang as Locale; // 内部で使用するためにキャスト
+  const locale = lang as Locale;
+  const dict = await getDictionary(locale); // 辞書データを取得
 
   return (
     <html lang={locale} className="dark">
       <body
-        className={`${ibmPlexSansJP.variable} ${ibmPlexMono.variable} ${literata.variable} antialiased bg-background text-foreground`}
+        className={`${ibmPlexSansJP.variable} ${ibmPlexMono.variable} ${literata.variable} ${doto.variable} antialiased bg-background text-foreground`}
       >
+        <GradationLine />
+        <Header id="header" lang={locale} dict={dict} />
         {children}
       </body>
     </html>
