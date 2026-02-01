@@ -1,10 +1,12 @@
 {
   "common": {
-    "home": "ホーム",
-    "about": "About",
-    "blog": "ブログ",
-    "contact": "お問い合わせ",
+    "home": "HOME",
+    "about": "ABOUT",
+    "aboutLetter": "ABOUT",
+    "blog": "BLOGS",
+    "contact": "CONTACT",
     "search": "検索",
+    "console": "CONSOLE",
     "language": "言語"
   },
   "hero": {
@@ -16,6 +18,20 @@
     "author": "著者",
     "date": "日付",
     "readMore": "続きを読む"
+  },
+  "filters": {
+    "title": "FILTERS",
+    "topic": "Topic"
+  },
+  "footer": {
+    "docs": "DOCS",
+    "docsDesc": "ガイドとサンプルでStripeの統合を探索",
+    "learnMore": "Learn more",
+    "social": "SOCIAL",
+    "resources": "RESOURCES",
+    "copyright": "© 2025 KOHTA, INC.",
+    "privacy": "PRIVACY",
+    "legal": "LEGAL"
   },
   "meta": {
     "title": "Kohta's Blog",

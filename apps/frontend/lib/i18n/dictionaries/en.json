@@ -1,10 +1,11 @@
 {
   "common": {
-    "home": "Home",
-    "about": "About",
-    "blog": "Blog",
-    "contact": "Contact",
+    "home": "HOME",
+    "about": "ABOUT",
+    "blog": "BLOGS",
+    "contact": "CONTACT",
     "search": "Search",
+    "console": "Console",
     "language": "Language"
   },
   "hero": {
@@ -16,6 +17,20 @@
     "author": "Author",
     "date": "Date",
     "readMore": "Read More"
+  },
+  "filters": {
+    "title": "FILTERS",
+    "topic": "Topic"
+  },
+  "footer": {
+    "docs": "DOCS",
+    "docsDesc": "Explore our guides and examples to integrate Stripe.",
+    "learnMore": "Learn more",
+    "social": "SOCIAL",
+    "resources": "RESOURCES",
+    "copyright": "© 2025 KOHTA, INC.",
+    "privacy": "PRIVACY",
+    "legal": "LEGAL"
   },
   "meta": {
     "title": "Kohta's Blog",

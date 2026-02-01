@@ -50,13 +50,17 @@ function DialogContent({
   className,
   children,
   showCloseButton = true,
+  transparentOverlay = false,
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Content> & {
   showCloseButton?: boolean;
+  transparentOverlay?: boolean;
 }) {
   return (
     <DialogPortal data-slot="dialog-portal">
-      <DialogOverlay />
+      <DialogOverlay
+        className={transparentOverlay ? "bg-transparent pointer-events-none" : undefined}
+      />
       <DialogPrimitive.Content
         data-slot="dialog-content"
         className={cn(
