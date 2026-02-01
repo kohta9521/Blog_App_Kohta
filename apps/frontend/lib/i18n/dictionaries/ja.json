@@ -17,7 +17,44 @@
     "category": "カテゴリー",
     "author": "著者",
     "date": "日付",
-    "readMore": "続きを読む"
+    "readMore": "続きを読む",
+    "articles": [
+      {
+        "id": "rust-ownership",
+        "date": "2026.1.27",
+        "title": "Rustの所有権と借用を理解する",
+        "summary": "Rustの所有権システムの核心を学ぶ。所有権、借用、ライフタイムの理解は、安全で効率的なRustコードを書くために不可欠です。",
+        "topics": ["Rust", "Basics"]
+      },
+      {
+        "id": "nextjs-app-router",
+        "date": "2025.12.10",
+        "title": "Next.js App RouterとServer Components入門",
+        "summary": "Next.js 14の新しいApp Routerを探索。Server Components、レイアウト、ストリーミングでReactアプリの開発がより速く、効率的になります。",
+        "topics": ["Next.js", "React"]
+      },
+      {
+        "id": "rust-axum-api",
+        "date": "2025.12.04",
+        "title": "RustとAxumでREST APIを構築する",
+        "summary": "RustのAxumフレームワークで本番運用可能なREST APIを構築するステップバイステップガイド。高速で型安全、非同期ネイティブ。",
+        "topics": ["Rust", "API"]
+      },
+      {
+        "id": "nextjs-typescript",
+        "date": "2025.11.25",
+        "title": "Next.jsとTypeScriptのベストプラクティス",
+        "summary": "TypeScriptで保守しやすいNext.jsアプリを書くコツ。型安全なAPIルート、適切なコンポーネントの型付け、プロジェクト構造について。",
+        "topics": ["Next.js", "TypeScript"]
+      },
+      {
+        "id": "async-rust-tokio",
+        "date": "2025.10.23",
+        "title": "Tokioで学ぶAsync Rust入門",
+        "summary": "Tokioを使ってRustの非同期プログラミングに挑戦。Futures、タスク、非同期ランタイムを理解し、高性能アプリを構築する基礎を学びます。",
+        "topics": ["Rust", "Async"]
+      }
+    ]
   },
   "filters": {
     "title": "FILTERS",
