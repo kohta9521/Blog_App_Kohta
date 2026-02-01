@@ -3,6 +3,7 @@
     "home": "HOME",
     "about": "ABOUT",
     "blog": "BLOGS",
+    "profile": "PROFILE",
     "contact": "CONTACT",
     "search": "Search",
     "console": "Console",
@@ -75,4 +76,3 @@
     "keywords": "blog, Next.js, Rust, frontend, backend, technology"
   }
 }
-

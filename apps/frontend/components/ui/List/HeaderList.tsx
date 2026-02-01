@@ -33,13 +33,13 @@ export const HeaderList = ({
     >
       <p
         className={cn(
-          "text-xs font-mono font-normal uppercase tracking-wider transition-colors duration-300",
+          "text-[10px] font-mono font-normal uppercase tracking-wider transition-colors duration-300",
           isActive
             ? "text-black font-semibold"
             : "text-white group-hover:text-foreground"
         )}
       >
-        <span className="mr-1 text-sm">[{firstLetter}]</span>
+        <span className="mr-1 text-[9px]">[{firstLetter}]</span>
         {text}
       </p>
     </Link>

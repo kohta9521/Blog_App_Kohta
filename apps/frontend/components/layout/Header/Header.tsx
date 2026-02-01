@@ -56,10 +56,10 @@ const Header = ({ id, lang, dict }: HeaderProps) => {
               isActive={pathname === `/${lang}/about` || pathname === "/"}
             />
             <HeaderList
-              id="header-list-blog"
-              href={`/${lang}/blog`}
-              text={dict.common.blog}
-              isActive={pathname === `/${lang}/blog` || pathname === "/"}
+              id="header-list-profile"
+              href={`/${lang}/profile`}
+              text={dict.common.profile}
+              isActive={pathname === `/${lang}/profile` || pathname === "/"}
             />
             <HeaderList
               id="header-list-contact"

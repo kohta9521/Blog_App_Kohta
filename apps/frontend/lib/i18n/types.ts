@@ -3,6 +3,7 @@ export type Dictionary = {
     home: string;
     about: string;
     blog: string;
+    profile: string;
     contact: string;
     search: string;
     console?: string;
