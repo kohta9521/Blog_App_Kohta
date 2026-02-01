@@ -17,6 +17,14 @@ export type Dictionary = {
     author: string;
     date: string;
     readMore: string;
+    /** モック記事一覧。バックエンド連携時に削除 */
+    articles?: Array<{
+      id: string;
+      date: string;
+      title: string;
+      summary: string;
+      topics: string[];
+    }>;
   };
   filters?: {
     title: string;

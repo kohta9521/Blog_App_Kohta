@@ -16,7 +16,44 @@
     "category": "Category",
     "author": "Author",
     "date": "Date",
-    "readMore": "Read More"
+    "readMore": "Read More",
+    "articles": [
+      {
+        "id": "rust-ownership",
+        "date": "2026.1.27",
+        "title": "Understanding Rust Ownership and Borrowing",
+        "summary": "Learn the core concepts of Rust's ownership system. Understanding ownership, borrowing, and lifetimes is essential for writing safe and efficient Rust code.",
+        "topics": ["Rust", "Basics"]
+      },
+      {
+        "id": "nextjs-app-router",
+        "date": "2025.12.10",
+        "title": "Next.js App Router and Server Components Introduction",
+        "summary": "Explore the new App Router in Next.js 14. Server Components, layouts, and streaming make building React apps faster and more efficient.",
+        "topics": ["Next.js", "React"]
+      },
+      {
+        "id": "rust-axum-api",
+        "date": "2025.12.04",
+        "title": "Building REST APIs with Rust and Axum",
+        "summary": "Step-by-step guide to building a production-ready REST API using Rust's Axum framework. Fast, type-safe, and async-native.",
+        "topics": ["Rust", "API"]
+      },
+      {
+        "id": "nextjs-typescript",
+        "date": "2025.11.25",
+        "title": "Next.js and TypeScript Best Practices",
+        "summary": "Tips for writing maintainable Next.js apps with TypeScript. Type-safe API routes, proper component typing, and project structure.",
+        "topics": ["Next.js", "TypeScript"]
+      },
+      {
+        "id": "async-rust-tokio",
+        "date": "2025.10.23",
+        "title": "Async Rust with Tokio: Foundations",
+        "summary": "Dive into async programming in Rust using Tokio. Understand futures, tasks, and the async runtime for high-performance applications.",
+        "topics": ["Rust", "Async"]
+      }
+    ]
   },
   "filters": {
     "title": "FILTERS",

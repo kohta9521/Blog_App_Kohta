@@ -42,7 +42,7 @@ const Header = ({ id, lang, dict }: HeaderProps) => {
             size="sm"
             className=""
           />
-          <div className="w-auto flex items-center gap-2">
+          <div className="hidden md:flex w-auto items-center gap-2">
             <HeaderList
               id="header-list-home"
               href={`/${lang}`}
