@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback, memo } from "react";
+import React, { useState, useCallback, memo, useMemo } from "react";
 import Link from "next/link";
 import {
   ChevronDownIcon,
@@ -12,49 +12,27 @@ import {
 import { cn } from "@/lib/utils";
 import type { Dictionary } from "@/lib/i18n/types";
 import type { Locale } from "@/lib/i18n/config";
+import type { Blog } from "@/schema/blog";
+import type { Topic } from "@/schema/topic";
 
 type BlogPageProps = {
   lang: Locale;
   dict: Dictionary;
+  /** microCMS APIから取得したブログ記事 */
+  blogs: Blog[];
+  /** microCMS APIから取得したトピック */
+  topics: Topic[];
 };
 
-const FILTER_TOPICS = [
-  { id: "agentic", label: "Agentic", count: 5 },
-  { id: "ai", label: "AI", count: 7 },
-  { id: "aws", label: "AWS", count: 16 },
-  { id: "best-practices", label: "Best Practices", count: 8 },
-  { id: "billings", label: "Billings", count: 5 },
-  { id: "connect", label: "Connect", count: 6 },
-  { id: "crypto", label: "Crypto", count: 1 },
-  { id: "dev-digest", label: "Dev Digest", count: 2 },
-  { id: "enterprise", label: "Enterprise", count: 2 },
-  { id: "event-destinations", label: "Event Destinations", count: 7 },
-  { id: "getting-started", label: "Getting Started", count: 4 },
-  { id: "invoicing", label: "Invoicing", count: 2 },
-  { id: "partners", label: "Partners", count: 7 },
-  { id: "payment-methods", label: "Payment Methods", count: 7 },
-  { id: "sandboxes", label: "Sandboxes", count: 10 },
-  { id: "sessions", label: "Sessions", count: 2 },
-  { id: "terminal", label: "Terminal", count: 2 },
-  { id: "workbench", label: "Workbench", count: 17 },
-  { id: "workflows", label: "Workflows", count: 5 },
-];
-
-const FILTER_ARCHIVE = [
-  { id: "2025-12", label: "2025/12", count: 24 },
-  { id: "2026-01", label: "2026/1", count: 28 },
-  { id: "2026-02", label: "2026/2", count: 24 },
-];
-
-const AUTHOR = "Kohta Kochi";
-
-/** dict.blog.articles から記事を取得。バックエンド連携時に差し替え */
-function getArticlesFromDict(dict: Dictionary) {
-  const raw = dict.blog?.articles ?? [];
-  return raw.map((a) => ({ ...a, author: AUTHOR }));
-}
-
-type Article = ReturnType<typeof getArticlesFromDict>[number];
+type Article = {
+  id: string;
+  date: string;
+  title: string;
+  summary: string;
+  topics: string[];
+  author: string;
+  readTime: number;
+};
 
 const ArticleRow = memo(function ArticleRow({
   article,
@@ -156,13 +134,62 @@ const ArticleRow = memo(function ArticleRow({
   );
 });
 
-export const BlogPage = ({ lang, dict }: BlogPageProps) => {
-  const articles = React.useMemo(() => getArticlesFromDict(dict), [dict]);
+export const BlogPage = ({ lang, dict, blogs, topics }: BlogPageProps) => {
+  // microCMS APIデータをアプリケーション形式に変換
+  const articles = useMemo(
+    () =>
+      blogs.map((blog) => ({
+        id: blog.id,
+        date: new Date(blog.publishedAt).toISOString().split("T")[0],
+        title: blog.title,
+        summary: blog.summary,
+        topics: blog.topics.map((t) => t.topic),
+        author: "Kohta Kochi",
+        readTime: blog.read_time,
+      })),
+    [blogs]
+  );
+
+  // トピックフィルター情報を生成（各トピックの記事数をカウント）
+  const FILTER_TOPICS = useMemo(() => {
+    const topicCounts = new Map<string, number>();
+    blogs.forEach((blog) => {
+      blog.topics.forEach((topic) => {
+        topicCounts.set(topic.topic, (topicCounts.get(topic.topic) || 0) + 1);
+      });
+    });
+    return topics.map((topic) => ({
+      id: topic.topic,
+      label: topic.topic,
+      count: topicCounts.get(topic.topic) || 0,
+    }));
+  }, [blogs, topics]);
+
+  // アーカイブフィルター情報を生成（月別の記事数をカウント）
+  const FILTER_ARCHIVE = useMemo(() => {
+    const archiveCounts = new Map<string, number>();
+    blogs.forEach((blog) => {
+      const date = new Date(blog.publishedAt);
+      const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(
+        2,
+        "0"
+      )}`;
+      archiveCounts.set(key, (archiveCounts.get(key) || 0) + 1);
+    });
+    return Array.from(archiveCounts.entries())
+      .sort((a, b) => b[0].localeCompare(a[0]))
+      .map(([key, count]) => ({
+        id: key,
+        label: key.replace("-", "/"),
+        count,
+      }));
+  }, [blogs]);
+
   const [topicOpen, setTopicOpen] = useState(true);
   const [archiveOpen, setArchiveOpen] = useState(true);
-  const [selectedTopic, setSelectedTopic] = useState<string | null>("ai");
+  const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
   const [selectedArchive, setSelectedArchive] = useState<string | null>(null);
-  const [expandedArticle, setExpandedArticle] = useState<number | null>(0);
+  const [expandedArticle, setExpandedArticle] = useState<number | null>(null);
   const articleCount = articles.length;
   const filters = dict.filters ?? { title: "FILTERS", topic: "Topic" };
 
@@ -172,13 +199,24 @@ export const BlogPage = ({ lang, dict }: BlogPageProps) => {
     []
   );
 
-  // アーカイブでフィルタリング（YYYY.M形式で比較）
-  const filteredArticles = React.useMemo(() => {
-    if (!selectedArchive) return articles;
-    const [year, month] = selectedArchive.split("-").map(Number);
-    const prefix = `${year}.${month}`;
-    return articles.filter((a) => a.date.startsWith(prefix));
-  }, [selectedArchive, articles]);
+  // トピックとアーカイブでフィルタリング
+  const filteredArticles = useMemo(() => {
+    let filtered = articles;
+
+    // トピックフィルタ
+    if (selectedTopic) {
+      filtered = filtered.filter((a) => a.topics.includes(selectedTopic));
+    }
+
+    // アーカイブフィルタ（YYYY-MM形式）
+    if (selectedArchive) {
+      const [year, month] = selectedArchive.split("-");
+      const targetDate = `${year}-${month.padStart(2, "0")}`;
+      filtered = filtered.filter((a) => a.date.startsWith(targetDate));
+    }
+
+    return filtered;
+  }, [articles, selectedTopic, selectedArchive]);
 
   // フィルター変更時、展開中の記事がリストに無ければ閉じる
   React.useEffect(() => {
@@ -195,7 +233,7 @@ export const BlogPage = ({ lang, dict }: BlogPageProps) => {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       {/* Main Content */}
-      <div className="w-full px-4 max-w-7xl mx-auto py-4 sm:py-6 lg:w-11/12 lg:px-0 lg:py-8">
+      <div className="w-full px-4 max-w-screen-3xl mx-auto py-4 sm:py-6 lg:w-11/12 lg:px-0 lg:py-8">
         {/* Blog Title */}
         <div className="mb-6 lg:mb-8 flex flex-wrap items-top gap-x-2">
           <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[80px] font-doto font-normal tracking-tight">

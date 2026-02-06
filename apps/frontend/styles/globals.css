@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* スムーススクロール（目次クリック用） */
+html {
+  scroll-behavior: smooth;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
