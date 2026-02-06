@@ -27,10 +27,10 @@ export function handleApiError(error: unknown, endpoint?: string): never {
   // Zodバリデーションエラーの詳細処理
   if (error instanceof ZodError) {
     console.error(`Validation Error (${endpoint}):`, error.format());
-    const firstError = error.errors[0];
-    const fieldPath = firstError.path.join(".");
+    const firstIssue = error.issues[0];
+    const fieldPath = firstIssue.path.join(".");
     throw new ApiError(
-      `データ形式が不正です: ${fieldPath} - ${firstError.message}`,
+      `データ形式が不正です: ${fieldPath} - ${firstIssue.message}`,
       422,
       endpoint,
       error.format()

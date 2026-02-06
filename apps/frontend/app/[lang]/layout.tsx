@@ -1,6 +1,11 @@
 // next
 import type { Metadata } from "next";
-import { IBM_Plex_Sans_JP, IBM_Plex_Mono, Literata, Doto } from "next/font/google";
+import {
+  IBM_Plex_Sans_JP,
+  IBM_Plex_Mono,
+  Literata,
+  Doto,
+} from "next/font/google";
 
 // styles
 import "@/styles/globals.css";
@@ -12,7 +17,6 @@ import { getDictionary } from "@/lib/i18n/dictionaries";
 // components
 import GradationLine from "@/components/ui/Line/GradationLine";
 import Header from "@/components/layout/Header/Header";
-
 
 const ibmPlexSansJP = IBM_Plex_Sans_JP({
   subsets: ["latin"],
@@ -52,7 +56,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { lang } = await params;
-  
+
   // 型安全性向上: Localeの検証
   if (!i18n.locales.includes(lang as Locale)) {
     // デフォルトロケールにフォールバック
@@ -69,7 +73,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
     };
   }
-  
+
   const locale: Locale = lang as Locale;
   const dict = await getDictionary(locale);
 
@@ -93,12 +97,12 @@ export default async function LangLayout({
   params: Promise<{ lang: string }>;
 }>) {
   const { lang } = await params;
-  
+
   // 型安全性向上: Localeの検証とフォールバック
-  const locale: Locale = i18n.locales.includes(lang as Locale) 
-    ? (lang as Locale) 
+  const locale: Locale = i18n.locales.includes(lang as Locale)
+    ? (lang as Locale)
     : i18n.defaultLocale;
-  
+
   const dict = await getDictionary(locale);
 
   return (

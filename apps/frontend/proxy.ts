@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { i18n } from "./lib/i18n/config";
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   // 静的ファイルやAPIルートはスキップ
@@ -30,4 +30,3 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: ["/((?!_next|api|.*\\..*).*)"],
 };
-
