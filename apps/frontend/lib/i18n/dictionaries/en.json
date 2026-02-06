@@ -65,7 +65,8 @@
     "categories": "CATEGORIES",
     "share": "SHARE",
     "article": "ARTICLE",
-    "minRead": "MIN READ"
+    "minRead": "MIN READ",
+    "tableOfContents": "TABLE OF CONTENTS"
   },
   "filters": {
     "title": "FILTERS",

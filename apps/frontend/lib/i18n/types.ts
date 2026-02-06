@@ -37,6 +37,7 @@ export type Dictionary = {
     share: string;
     article: string;
     minRead: string;
+    tableOfContents: string;
   };
   filters?: {
     title: string;

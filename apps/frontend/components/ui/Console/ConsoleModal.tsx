@@ -16,25 +16,20 @@ type ConsoleModalProps = {
 };
 
 const ASCII_ART = [
-  "  _  __  __  ____ _____    ____  __    ____  ______",
-  " | |/ / / / / __ )_  _|   | __ )| |   / __ \\|  _ \\ ",
-  " | ' < / / / __  \\| |     |  _ \\| |  / / _\\ | |_) |",
-  " | . \\/ / / /_/ /| |      | |_) | |__| (_| |  _ < ",
-  " |_|\\_/_/  \\____/ |_|      |____/|_____\\__,_|_| \\_\\",
+  " _   _______ _   _ _____ ___   ______ _     _____ _____ ",
+  "| | / /  _  | | | |_   _/ _ \\  | ___ \\ |   |  _  |  __ \\",
+  "| |/ /| | | | |_| | | |/ /_\\ \\ | |_/ / |   | | | | |  \\/",
+  "|    \\| | | |  _  | | ||  _  | | ___ \\ |   | | | | | __ ",
+  "| |\\  \\ \\_/ / | | | | || | | | | |_/ / |___\\ \\_/ / |_\\ \\",
+  "\\_| \\_/\\___/\\_| |_/ \\_/\\_| |_/ \\____/\\_____/\\___/ \\____/",
 ].join("\n");
 
 const DEFAULT_MESSAGE = "New console features are currently under development.";
 
 const HELP_ENTRIES = [
   { cmd: "help", desc: "Lists available commands" },
-  { cmd: "theme", desc: "Changes the theme of the site" },
-  { cmd: "art", desc: "Configure the artwork across the site" },
-  { cmd: "footer", desc: "Sets the text rendered in the footer" },
-  { cmd: "music", desc: "Play some tunes" },
-  { cmd: "snake", desc: "Play snake" },
   { cmd: "close", desc: "Closes the terminal" },
   { cmd: "clear", desc: "Clears the terminal" },
-  { cmd: "history", desc: "List the commands in this terminal's history file" },
 ];
 
 export const ConsoleModal = ({

@@ -1,0 +1,316 @@
+/**
+ * ブログ詳細ページ用スタイル
+ * microCMSから取得したHTMLコンテンツに適用
+ */
+
+.articleContent {
+  color: rgb(212 212 212); /* text-neutral-300 */
+  scroll-margin-top: 6rem; /* 目次クリック時のスクロール位置調整 */
+}
+
+/* 見出し */
+.articleContent h1 {
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: rgb(255 255 255); /* text-white */
+  scroll-margin-top: 6rem; /* 目次からのスクロール位置調整 */
+}
+
+@media (min-width: 768px) {
+  .articleContent h1 {
+    font-size: 2.25rem; /* text-4xl */
+  }
+}
+
+.articleContent h2 {
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: rgb(255 255 255); /* text-white */
+  border-bottom: 1px solid rgb(82 82 82); /* border-neutral-700 */
+  padding-bottom: 0.5rem;
+  scroll-margin-top: 6rem; /* 目次からのスクロール位置調整 */
+}
+
+@media (min-width: 768px) {
+  .articleContent h2 {
+    font-size: 1.875rem; /* text-3xl */
+  }
+}
+
+.articleContent h3 {
+  font-size: 1.25rem; /* text-xl */
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: rgb(255 255 255); /* text-white */
+  scroll-margin-top: 6rem; /* 目次からのスクロール位置調整 */
+}
+
+@media (min-width: 768px) {
+  .articleContent h3 {
+    font-size: 1.5rem; /* text-2xl */
+  }
+}
+
+.articleContent h4 {
+  font-size: 1.125rem; /* text-lg */
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: rgb(255 255 255); /* text-white */
+}
+
+@media (min-width: 768px) {
+  .articleContent h4 {
+    font-size: 1.25rem; /* text-xl */
+  }
+}
+
+/* 段落 */
+.articleContent p {
+  font-size: 0.9375rem; /* text-[15px] */
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+  color: rgb(212 212 212); /* text-neutral-300 */
+}
+
+/* リンク */
+.articleContent a {
+  color: rgb(96 165 250); /* text-blue-400 */
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.2s;
+}
+
+.articleContent a:hover {
+  color: rgb(147 197 253); /* text-blue-300 */
+}
+
+/* リスト */
+.articleContent ul {
+  list-style-type: disc;
+  list-style-position: inside;
+  margin-bottom: 1rem;
+  color: rgb(212 212 212); /* text-neutral-300 */
+}
+
+.articleContent ul li {
+  margin-bottom: 0.5rem;
+}
+
+.articleContent ol {
+  list-style-type: decimal;
+  list-style-position: inside;
+  margin-bottom: 1rem;
+  color: rgb(212 212 212); /* text-neutral-300 */
+}
+
+.articleContent ol li {
+  margin-bottom: 0.5rem;
+}
+
+.articleContent li {
+  line-height: 1.7;
+}
+
+/* ネストされたリスト */
+.articleContent ul ul,
+.articleContent ol ol,
+.articleContent ul ol,
+.articleContent ol ul {
+  margin-left: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+/* コードブロック */
+.articleContent pre {
+  background-color: rgb(23 23 23); /* より濃い黒背景 */
+  border-radius: 0.5rem;
+  padding: 0;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  border: 1px solid rgb(82 82 82); /* border-neutral-700 */
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.3);
+}
+
+.articleContent pre code {
+  display: block;
+  padding: 1.25rem;
+  font-size: 0.8125rem; /* text-[13px] */
+  font-family: "Menlo", "Monaco", "Courier New", monospace;
+  color: rgb(212 212 212); /* text-neutral-300 */
+  background: transparent;
+  border: none;
+  overflow-x: auto;
+  line-height: 1.6;
+}
+
+/* ファイル名ヘッダー */
+.articleContent :global(.code-header) {
+  background: linear-gradient(to right, rgb(82 82 82 / 0.3), rgb(64 64 64 / 0.2));
+  border-bottom: 1px solid rgb(82 82 82);
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  font-family: ui-monospace, monospace;
+  color: rgb(163 163 163); /* text-neutral-400 */
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.articleContent :global(.code-header)::before {
+  content: "📄";
+  font-size: 0.875rem;
+}
+
+/* Syntax Highlighting Colors (VS Code Dark+ inspired) */
+.articleContent pre code :global(.hljs-comment),
+.articleContent pre code :global(.hljs-quote) {
+  color: rgb(106 153 85); /* 緑系コメント */
+  font-style: italic;
+}
+
+.articleContent pre code :global(.hljs-keyword),
+.articleContent pre code :global(.hljs-selector-tag),
+.articleContent pre code :global(.hljs-built_in) {
+  color: rgb(197 134 192); /* 紫系キーワード */
+  font-weight: 600;
+}
+
+.articleContent pre code :global(.hljs-string),
+.articleContent pre code :global(.hljs-regexp) {
+  color: rgb(206 145 120); /* オレンジ系文字列 */
+}
+
+.articleContent pre code :global(.hljs-number),
+.articleContent pre code :global(.hljs-literal) {
+  color: rgb(181 206 168); /* 緑黄色系数値 */
+}
+
+.articleContent pre code :global(.hljs-function),
+.articleContent pre code :global(.hljs-title) {
+  color: rgb(220 220 170); /* 黄色系関数名 */
+}
+
+.articleContent pre code :global(.hljs-params) {
+  color: rgb(156 220 254); /* 水色系パラメータ */
+}
+
+.articleContent pre code :global(.hljs-variable),
+.articleContent pre code :global(.hljs-attr) {
+  color: rgb(156 220 254); /* 水色系変数 */
+}
+
+.articleContent pre code :global(.hljs-type),
+.articleContent pre code :global(.hljs-class) {
+  color: rgb(78 201 176); /* ティール系型 */
+  font-weight: 600;
+}
+
+.articleContent pre code :global(.hljs-tag) {
+  color: rgb(86 156 214); /* 青系タグ */
+}
+
+.articleContent pre code :global(.hljs-name) {
+  color: rgb(78 201 176); /* ティール系 */
+}
+
+.articleContent pre code :global(.hljs-attribute) {
+  color: rgb(156 220 254); /* 水色系属性 */
+}
+
+.articleContent pre code :global(.hljs-meta) {
+  color: rgb(197 134 192); /* 紫系メタ */
+}
+
+.articleContent pre code :global(.hljs-punctuation) {
+  color: rgb(212 212 212); /* デフォルトカラー */
+}
+
+.articleContent pre code :global(.hljs-operator) {
+  color: rgb(212 212 212);
+}
+
+.articleContent pre code :global(.hljs-symbol) {
+  color: rgb(78 201 176);
+}
+
+/* インラインコード */
+.articleContent code {
+  background-color: rgb(38 38 38 / 0.6); /* bg-neutral-800/60 */
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-size: 0.8125rem; /* text-[13px] */
+  font-family: ui-monospace, monospace;
+  color: rgb(96 165 250); /* text-blue-400 */
+  border: 1px solid rgb(82 82 82); /* border-neutral-700 */
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: rgb(115 115 115); /* decoration-neutral-500 */
+}
+
+/* 引用 */
+.articleContent blockquote {
+  border-left: 4px solid rgb(115 115 115); /* border-neutral-500 */
+  padding-left: 1rem;
+  font-style: italic;
+  margin: 1rem 0;
+  color: rgb(163 163 163); /* text-neutral-400 */
+}
+
+/* 画像 */
+.articleContent img {
+  border-radius: 0.375rem;
+  margin: 1.5rem 0;
+  max-width: 100%;
+  height: auto;
+}
+
+/* テーブル */
+.articleContent table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.articleContent th {
+  border: 1px solid rgb(82 82 82); /* border-neutral-700 */
+  background-color: rgb(38 38 38); /* bg-neutral-800 */
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: rgb(255 255 255); /* text-white */
+}
+
+.articleContent td {
+  border: 1px solid rgb(82 82 82); /* border-neutral-700 */
+  padding: 0.75rem 1rem;
+  color: rgb(212 212 212); /* text-neutral-300 */
+}
+
+/* 水平線 */
+.articleContent hr {
+  border-top: 1px solid rgb(82 82 82); /* border-neutral-700 */
+  margin: 2rem 0;
+}
+
+/* Strong/Bold */
+.articleContent strong {
+  font-weight: 700;
+  color: rgb(255 255 255); /* text-white */
+}
+
+/* Italic */
+.articleContent em {
+  font-style: italic;
+}
+
+/* 削除線 */
+.articleContent del {
+  text-decoration: line-through;
+}
