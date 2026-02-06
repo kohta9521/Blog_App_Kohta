@@ -24,8 +24,8 @@ export const BlogSchema = z.object({
   meta_title_en: z.string(),
   meta_desc: z.string(),
   meta_desc_en: z.string(),
-  read_time: z.number(),
-  main_contents: z.string(),
+  read_time: z.number().optional().default(5), // オプショナル + デフォルト値
+  main_contents: z.string().optional().default(""), // オプショナル + デフォルト値
 });
 
 /**
