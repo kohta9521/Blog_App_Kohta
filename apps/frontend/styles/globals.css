@@ -185,6 +185,18 @@
     }
   }
 
+  /* コンソールモーダル用カーソル点滅 */
+  @keyframes cursor-blink {
+    0%,
+    50% {
+      opacity: 1;
+    }
+    51%,
+    100% {
+      opacity: 0;
+    }
+  }
+
   .rainbow-animated {
     background: linear-gradient(
       90deg,

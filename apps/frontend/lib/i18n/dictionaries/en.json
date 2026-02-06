@@ -7,6 +7,7 @@
     "contact": "CONTACT",
     "search": "Search",
     "console": "Console",
+    "consoleUnderDevelopment": "New console features are currently under development.",
     "language": "Language"
   },
   "hero": {
@@ -55,6 +56,16 @@
         "topics": ["Rust", "Async"]
       }
     ]
+  },
+  "blogDetail": {
+    "metadata": "METADATA",
+    "date": "DATE",
+    "author": "AUTHOR",
+    "readingTime": "READING TIME",
+    "categories": "CATEGORIES",
+    "share": "SHARE",
+    "article": "ARTICLE",
+    "minRead": "MIN READ"
   },
   "filters": {
     "title": "FILTERS",

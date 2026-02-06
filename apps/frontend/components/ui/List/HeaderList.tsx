@@ -27,7 +27,7 @@ export const HeaderList = ({
       key={id}
       href={href}
       className={cn(
-        "block group border border-border px-2 py-0.5 transition-all duration-300",
+        "block group border border-border px-2 py-1 transition-all duration-300",
         isActive ? "bg-white" : "bg-white/10 hover:bg-pink-500"
       )}
     >

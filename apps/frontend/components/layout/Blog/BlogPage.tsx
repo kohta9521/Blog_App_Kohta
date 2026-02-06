@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useCallback, memo } from "react";
+import Link from "next/link";
 import {
   ChevronDownIcon,
   PlusIcon,
@@ -60,11 +61,13 @@ const ArticleRow = memo(function ArticleRow({
   index,
   isExpanded,
   onToggle,
+  lang,
 }: {
   article: Article;
   index: number;
   isExpanded: boolean;
   onToggle: (index: number) => void;
+  lang: string;
 }) {
   return (
     <div>
@@ -138,12 +141,13 @@ const ArticleRow = memo(function ArticleRow({
             <div className="flex flex-wrap gap-x-8 gap-y-2 text-sm"></div>
 
             <div className="flex justify-center pt-4">
-              <button
+              <Link
+                href={`/${lang}/blog/${article.id}`}
                 onClick={(e) => e.stopPropagation()}
-                className="rounded-none cursor-pointer border border-border w-full py-2 text-sm bg-muted/45 hover:bg-pink-600 hover:font-semibold duration-400 transition-colors"
+                className="block rounded-none cursor-pointer border border-border w-full py-2 text-sm bg-muted/45 hover:bg-pink-600 hover:font-semibold duration-400 transition-colors text-center"
               >
                 Read
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -152,7 +156,7 @@ const ArticleRow = memo(function ArticleRow({
   );
 });
 
-export const BlogPage = ({ dict }: BlogPageProps) => {
+export const BlogPage = ({ lang, dict }: BlogPageProps) => {
   const articles = React.useMemo(() => getArticlesFromDict(dict), [dict]);
   const [topicOpen, setTopicOpen] = useState(true);
   const [archiveOpen, setArchiveOpen] = useState(true);
@@ -382,6 +386,7 @@ export const BlogPage = ({ dict }: BlogPageProps) => {
                     index={originalIndex}
                     isExpanded={expandedArticle === originalIndex}
                     onToggle={handleToggleArticle}
+                    lang={lang}
                   />
                 );
               })}

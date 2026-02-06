@@ -83,7 +83,11 @@ const Header = ({ id, lang, dict }: HeaderProps) => {
               {consoleText}
             </p>
           </button>
-          <ConsoleModal open={consoleOpen} onOpenChange={setConsoleOpen} />
+          <ConsoleModal
+            open={consoleOpen}
+            onOpenChange={setConsoleOpen}
+            message={dict.common.consoleUnderDevelopment ?? undefined}
+          />
           <LanguageSwitcher currentLocale={lang} />
         </div>
         <div className="w-auto block md:hidden lg:hidden xl:hidden">三</div>

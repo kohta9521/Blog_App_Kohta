@@ -8,6 +8,7 @@
     "contact": "CONTACT",
     "search": "検索",
     "console": "CONSOLE",
+    "consoleUnderDevelopment": "現在コンソールでの新規機能を開発中です",
     "language": "言語"
   },
   "hero": {
@@ -57,6 +58,16 @@
       }
     ]
   },
+  "blogDetail": {
+    "metadata": "METADATA",
+    "date": "DATE",
+    "author": "AUTHOR",
+    "readingTime": "READING TIME",
+    "categories": "CATEGORIES",
+    "share": "SHARE",
+    "article": "ARTICLE",
+    "minRead": "分で読めます"
+  },
   "filters": {
     "title": "FILTERS",
     "topic": "Topic"
@@ -77,4 +88,3 @@
     "keywords": "ブログ, Next.js, Rust, フロントエンド, バックエンド, 技術"
   }
 }
-
