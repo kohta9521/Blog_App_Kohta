@@ -3,9 +3,11 @@ export type Dictionary = {
     home: string;
     about: string;
     blog: string;
+    profile: string;
     contact: string;
     search: string;
     console?: string;
+    consoleUnderDevelopment?: string;
     language: string;
   };
   hero: {
@@ -25,6 +27,16 @@ export type Dictionary = {
       summary: string;
       topics: string[];
     }>;
+  };
+  blogDetail?: {
+    metadata: string;
+    date: string;
+    author: string;
+    readingTime: string;
+    categories: string;
+    share: string;
+    article: string;
+    minRead: string;
   };
   filters?: {
     title: string;
@@ -46,4 +58,3 @@ export type Dictionary = {
     keywords: string;
   };
 };
-

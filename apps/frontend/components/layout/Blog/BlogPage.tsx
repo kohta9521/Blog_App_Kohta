@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useCallback, memo } from "react";
+import Link from "next/link";
 import {
   ChevronDownIcon,
   PlusIcon,
@@ -60,11 +61,13 @@ const ArticleRow = memo(function ArticleRow({
   index,
   isExpanded,
   onToggle,
+  lang,
 }: {
   article: Article;
   index: number;
   isExpanded: boolean;
   onToggle: (index: number) => void;
+  lang: string;
 }) {
   return (
     <div>
@@ -77,7 +80,7 @@ const ArticleRow = memo(function ArticleRow({
           <div className="h-1.5 w-1.5 shrink-0 rounded-none bg-foreground transition-colors group-hover:bg-white" />
           {article.date}
         </div>
-        <p className="min-w-0 flex-1 truncate text-xl leading-tight text-foreground transition-colors group-hover:text-white sm:text-2xl">
+        <p className="min-w-0 flex-1 truncate font-mono text-xl leading-tight text-foreground transition-colors group-hover:text-white sm:text-2xl">
           {article.title}
         </p>
         <div className="shrink-0 text-muted-foreground transition-colors group-hover:text-white">
@@ -96,14 +99,14 @@ const ArticleRow = memo(function ArticleRow({
           isExpanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
         )}
       >
-        <div className="min-h-0 pt-2">
-          <div className="w-full h-auto pt-3 flex flex-col gap-4 lg:flex-row lg:justify-between mb-6 lg:mb-8">
+        <div className="min-h-0 pb-1">
+          <div className="w-full h-auto pt-5 flex flex-col gap-4 lg:flex-row lg:justify-between mb-6 lg:mb-8">
             <div className="w-full lg:w-3/6 h-auto">
               <div className="flex flex-col sm:flex-row sm:items-start">
                 <span className="text-muted-foreground text-xs font-mono shrink-0 sm:mr-12">
                   SUMMARY:{" "}
                 </span>
-                <span className="text-foreground text-sm">
+                <span className="text-foreground text-sm font-mono">
                   {article.summary}
                 </span>
               </div>
@@ -113,7 +116,7 @@ const ArticleRow = memo(function ArticleRow({
                 <span className="text-muted-foreground text-xs font-mono shrink-0 sm:mr-12">
                   AUTHOR:{" "}
                 </span>
-                <span className="text-foreground text-sm">
+                <span className="text-foreground text-sm font-mono">
                   {article.author}
                 </span>
               </div>
@@ -134,16 +137,17 @@ const ArticleRow = memo(function ArticleRow({
               ))}
             </div>
           </div>
-          <div className="space-y-3 pt-0 opacity-100 transition-opacity duration-200">
+          <div className="space-y-3 pt-0 pb-3 opacity-100 transition-opacity duration-200">
             <div className="flex flex-wrap gap-x-8 gap-y-2 text-sm"></div>
 
             <div className="flex justify-center pt-4">
-              <button
+              <Link
+                href={`/${lang}/blog/${article.id}`}
                 onClick={(e) => e.stopPropagation()}
-                className="rounded-none cursor-pointer border border-border w-full py-2 text-sm bg-muted/45 hover:bg-pink-600 hover:font-semibold duration-400 transition-colors"
+                className="block rounded-none cursor-pointer border border-border w-full py-2 text-sm bg-muted/45 hover:bg-pink-600 hover:font-semibold duration-400 transition-colors text-center"
               >
                 Read
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -152,7 +156,7 @@ const ArticleRow = memo(function ArticleRow({
   );
 });
 
-export const BlogPage = ({ dict }: BlogPageProps) => {
+export const BlogPage = ({ lang, dict }: BlogPageProps) => {
   const articles = React.useMemo(() => getArticlesFromDict(dict), [dict]);
   const [topicOpen, setTopicOpen] = useState(true);
   const [archiveOpen, setArchiveOpen] = useState(true);
@@ -382,6 +386,7 @@ export const BlogPage = ({ dict }: BlogPageProps) => {
                     index={originalIndex}
                     isExpanded={expandedArticle === originalIndex}
                     onToggle={handleToggleArticle}
+                    lang={lang}
                   />
                 );
               })}

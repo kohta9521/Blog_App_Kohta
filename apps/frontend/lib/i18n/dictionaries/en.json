@@ -3,9 +3,11 @@
     "home": "HOME",
     "about": "ABOUT",
     "blog": "BLOGS",
+    "profile": "PROFILE",
     "contact": "CONTACT",
     "search": "Search",
     "console": "Console",
+    "consoleUnderDevelopment": "New console features are currently under development.",
     "language": "Language"
   },
   "hero": {
@@ -55,6 +57,16 @@
       }
     ]
   },
+  "blogDetail": {
+    "metadata": "METADATA",
+    "date": "DATE",
+    "author": "AUTHOR",
+    "readingTime": "READING TIME",
+    "categories": "CATEGORIES",
+    "share": "SHARE",
+    "article": "ARTICLE",
+    "minRead": "MIN READ"
+  },
   "filters": {
     "title": "FILTERS",
     "topic": "Topic"
@@ -75,4 +87,3 @@
     "keywords": "blog, Next.js, Rust, frontend, backend, technology"
   }
 }
-

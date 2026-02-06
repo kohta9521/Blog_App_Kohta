@@ -5,7 +5,6 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
-  DialogTitle,
 } from "@/components/ui/shadcn/dialog";
 import { cn } from "@/lib/utils";
 import { XIcon } from "lucide-react";
@@ -13,68 +12,100 @@ import { XIcon } from "lucide-react";
 type ConsoleModalProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  message?: string;
 };
 
-// 画像風のASCIIアート "Kohta Tech Blog"
-const ASCII_ART = `
-   _  __       _   _    _____       ____  _     
-  | |/ / ___  | | | |  |_   _|__   | __ )| |    
-  | ' < / _ \\ | |_| |    | |/ _ \\  |  _ \| |    
-  | . \\ (_) ||  _  |    | | (_) | | |_) | |___ 
-  |_|\\_\\\\___/ |_| |_|    |_|\\___/  |____/|_____|
-  
-  _____ _     _    ____            _     
- |_   _| |__ | |__| __ )  ___   __| | ___ 
-   | | | '_ \\| '__|  _ \\ / _ \\ / _\` |/ _ \\
-   | | | | | | |  | |_) | (_) | (_| |  __/
-   |_| |_| |_|_|  |____/ \\___/ \\__,_|\\___|
-`;
+const ASCII_ART = [
+  "  _  __  __  ____ _____    ____  __    ____  ______",
+  " | |/ / / / / __ )_  _|   | __ )| |   / __ \\|  _ \\ ",
+  " | ' < / / / __  \\| |     |  _ \\| |  / / _\\ | |_) |",
+  " | . \\/ / / /_/ /| |      | |_) | |__| (_| |  _ < ",
+  " |_|\\_/_/  \\____/ |_|      |____/|_____\\__,_|_| \\_\\",
+].join("\n");
 
-export const ConsoleModal = ({ open, onOpenChange }: ConsoleModalProps) => {
-  const [dragOffset, setDragOffset] = React.useState({ x: 0, y: 0 });
-  const [isDragging, setIsDragging] = React.useState(false);
-  const dragStartRef = React.useRef({ x: 0, y: 0, offsetX: 0, offsetY: 0 });
+const DEFAULT_MESSAGE = "New console features are currently under development.";
+
+const HELP_ENTRIES = [
+  { cmd: "help", desc: "Lists available commands" },
+  { cmd: "theme", desc: "Changes the theme of the site" },
+  { cmd: "art", desc: "Configure the artwork across the site" },
+  { cmd: "footer", desc: "Sets the text rendered in the footer" },
+  { cmd: "music", desc: "Play some tunes" },
+  { cmd: "snake", desc: "Play snake" },
+  { cmd: "close", desc: "Closes the terminal" },
+  { cmd: "clear", desc: "Clears the terminal" },
+  { cmd: "history", desc: "List the commands in this terminal's history file" },
+];
+
+export const ConsoleModal = ({
+  open,
+  onOpenChange,
+  message = DEFAULT_MESSAGE,
+}: ConsoleModalProps) => {
+  const inputRef = React.useRef<HTMLInputElement>(null);
+  const [terminalLines, setTerminalLines] = React.useState<string[]>([]);
+  const [buffer, setBuffer] = React.useState("");
 
   React.useEffect(() => {
-    if (open) setDragOffset({ x: 0, y: 0 });
+    if (!open) return;
+    setTerminalLines([]);
+    setBuffer("");
+    requestAnimationFrame(() => {
+      if (inputRef.current) {
+        inputRef.current.value = "";
+        inputRef.current.focus({ preventScroll: true });
+      }
+    });
   }, [open]);
 
-  React.useEffect(() => {
-    if (!isDragging) return;
-    const onMove = (e: MouseEvent) => {
-      setDragOffset({
-        x: dragStartRef.current.offsetX + e.clientX - dragStartRef.current.x,
-        y: dragStartRef.current.offsetY + e.clientY - dragStartRef.current.y,
-      });
-    };
-    const onUp = () => {
-      setIsDragging(false);
-      document.body.style.cursor = "";
-      document.body.style.userSelect = "";
-    };
-    document.body.style.cursor = "grabbing";
-    document.body.style.userSelect = "none";
-    document.addEventListener("mousemove", onMove);
-    document.addEventListener("mouseup", onUp);
-    return () => {
-      document.removeEventListener("mousemove", onMove);
-      document.removeEventListener("mouseup", onUp);
-      document.body.style.cursor = "";
-      document.body.style.userSelect = "";
-    };
-  }, [isDragging]);
+  const appendLines = React.useCallback((lines: string[]) => {
+    setTerminalLines((prev) => [...prev, ...lines]);
+  }, []);
 
-  const handleDragStart = (e: React.MouseEvent) => {
-    const target = e.target as HTMLElement;
-    if (target.closest("button") || target.closest("[data-slot='dialog-close']"))
-      return;
-    setIsDragging(true);
-    dragStartRef.current = {
-      x: e.clientX,
-      y: e.clientY,
-      offsetX: dragOffset.x,
-      offsetY: dragOffset.y,
-    };
+  const handleEnter = React.useCallback(
+    (rawInput: string) => {
+      const trimmed = rawInput.trim();
+      if (!trimmed) return;
+
+      const collected: string[] = [`$ ${trimmed}`];
+      const lowered = trimmed.toLowerCase();
+
+      if (lowered === "help") {
+        HELP_ENTRIES.forEach(({ cmd, desc }) => {
+          const padded = cmd.padEnd(7, " ");
+          collected.push(`${padded} : ${desc}`);
+        });
+      } else if (lowered === "clear") {
+        setTerminalLines([]);
+        setBuffer("");
+        return;
+      } else if (lowered === "close") {
+        onOpenChange(false);
+        return;
+      } else if (lowered === "history") {
+        if (terminalLines.length === 0) {
+          collected.push("history : no commands run yet");
+        } else {
+          collected.push(...terminalLines);
+        }
+      } else {
+        collected.push("このサービスは開発中です");
+      }
+
+      appendLines(collected);
+    },
+    [appendLines, onOpenChange, terminalLines]
+  );
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key !== "Enter") return;
+    handleEnter(event.currentTarget.value);
+    event.currentTarget.value = "";
+    setBuffer("");
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setBuffer(event.target.value);
   };
 
   return (
@@ -83,59 +114,33 @@ export const ConsoleModal = ({ open, onOpenChange }: ConsoleModalProps) => {
         showCloseButton={false}
         transparentOverlay
         style={{
-          left: `calc(50% + ${dragOffset.x}px)`,
-          top: `calc(50% + ${dragOffset.y}px)`,
-          transform: "translate(-50%, -50%)",
+          left: "calc(100% - 22rem)",
+          right: "auto",
+          bottom: "auto",
+          top: "calc(100% - 15rem)",
+          transform: "none",
           margin: 0,
           maxWidth: "42rem",
         }}
         className={cn(
-          "max-w-2xl overflow-hidden rounded-lg border border-gray-300 bg-[#0d0d0d] p-0 shadow-xl",
+          "max-w-2xl grid gap-0 overflow-hidden rounded-none border border-[#8f8f8f] bg-black p-0 shadow-xl",
           "animate-none"
         )}
       >
-        {/* ヘッダー - 2アイコン (solid square + dashed square) */}
+        {/* ヘッダー */}
         <div
-          role="button"
-          tabIndex={0}
-          onMouseDown={handleDragStart}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") e.currentTarget.click();
-          }}
-          title="ドラッグしてウィンドウを移動"
           className={cn(
-            "flex cursor-grab items-center justify-between border-b border-gray-200 bg-[#ececec] px-3 py-2.5 select-none",
-            "hover:bg-[#e8e8e8] active:cursor-grabbing",
-            isDragging && "cursor-grabbing"
+            "flex h-8 cursor-default items-center justify-end border-b border-gray-200 bg-[#1c1c1c] px-3 select-none"
           )}
         >
-          <div className="flex items-center gap-2">
-            {/* 2つのアイコン: solid square + dashed square */}
-            <div className="flex items-center gap-1">
-              {/* 塗りつぶしの四角（最小化風） */}
-              <div className="h-3.5 w-3.5 rounded-sm border border-gray-500 bg-gray-500" />
-              {/* 点線の四角（最大化風） */}
-              <svg
-                className="h-3.5 w-3.5 text-gray-600"
-                viewBox="0 0 14 14"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeDasharray="1.5 1.5"
-              >
-                <rect x="1" y="1" width="12" height="12" rx="0.5" />
-              </svg>
-            </div>
-            <DialogTitle className="text-sm font-medium tracking-wide text-gray-900">
-              CONSOLE
-            </DialogTitle>
-          </div>
-          {/* Close X button */}
           <DialogClose
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => {
+              e.stopPropagation();
+              onOpenChange(false);
+            }}
             className={cn(
-              "flex h-6 w-6 items-center justify-center rounded",
-              "text-gray-600 transition-colors hover:bg-gray-300 hover:text-gray-900"
+              "flex h-3 w-3 items-center justify-center rounded cursor-pointer",
+              "text-white transition-colors hover:text-gray-300"
             )}
           >
             <XIcon className="h-3.5 w-3.5" strokeWidth={2.5} />
@@ -143,23 +148,57 @@ export const ConsoleModal = ({ open, onOpenChange }: ConsoleModalProps) => {
           </DialogClose>
         </div>
 
-        {/* コンテンツ - ASCIIアート + プロンプト */}
-        <div className="max-h-[65vh] overflow-auto p-4 font-mono text-sm">
-          <pre className="whitespace-pre-wrap text-white">{ASCII_ART}</pre>
-          <p className="mb-3 text-white">
+        {/* コンテンツ */}
+        <div
+          className="relative min-h-[40vh] shrink-0 overflow-auto pb-10 pt-3 px-4 font-mono text-sm leading-none text-[#00FF00]"
+          onClick={() => inputRef.current?.focus({ preventScroll: true })}
+        >
+          <input
+            ref={inputRef}
+            type="text"
+            aria-hidden
+            className="absolute h-0 w-0 opacity-0 pointer-events-none"
+            value={buffer}
+            onChange={handleChange}
+            onKeyDown={handleKeyDown}
+            onBlur={() => inputRef.current?.focus({ preventScroll: true })}
+          />
+          <pre
+            className="mt-0 mb-3 w-max whitespace-pre font-mono text-[10px] sm:text-xs tracking-[0.02em] leading-[1.15]"
+            style={{
+              background:
+                "linear-gradient(90deg, #00FF88 0%, #00FFCC 25%, #FF00E5 65%, #FF1493 100%)",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              color: "transparent",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
+            {ASCII_ART}
+          </pre>
+          <p className="font-mono text-[#00FF00]">
+            -------------------------------------------------------------------------
+          </p>
+          <p className="mt-2">{message}</p>
+          <p className="mb-2">
             Type &apos;help&apos; to see available commands.
           </p>
-          <p className="mb-3 font-mono text-gray-500">
-            -------------------------------------
+          <p className="font-mono text-[#00FF00]">
+            --------------------------------------------------------------------------
           </p>
-          <p className="mb-3 font-mono text-gray-500">
-            -------------------------------------
-          </p>
-          <p className="pt-2">
-            <span className="text-amber-300">$</span>
+          {terminalLines.length > 0 && (
+            <div className="mt-2 space-y-1">
+              {terminalLines.map((line, index) => (
+                <p key={`${line}-${index}`}>{line}</p>
+              ))}
+            </div>
+          )}
+          <p className="flex items-center gap-2 pt-2">
+            <span>$</span>
+            <span className="min-h-4 whitespace-pre">{buffer}</span>
             <span
-              className="ml-1 inline-block h-4 w-2 animate-pulse bg-emerald-400"
-              style={{ animationDuration: "1s" }}
+              className="inline-block h-4 w-2 bg-[#00FF00] animate-[cursor-blink_1s_step-end_infinite]"
+              aria-hidden
             />
           </p>
         </div>
