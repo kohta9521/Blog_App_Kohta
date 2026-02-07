@@ -50,6 +50,12 @@ const Header = ({ id, lang, dict }: HeaderProps) => {
               isActive={pathname === `/${lang}` || pathname === "/"}
             />
             <HeaderList
+              id="header-list-book"
+              href={`/${lang}/book`}
+              text="BOOKS"
+              isActive={pathname.startsWith(`/${lang}/book`)}
+            />
+            <HeaderList
               id="header-list-about"
               href={`/${lang}/about`}
               text={dict.common.about}
