@@ -7,6 +7,7 @@ import {
   Doto,
 } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 // styles
 import "@/styles/globals.css";
@@ -115,6 +116,7 @@ export default async function LangLayout({
         <Header id="header" lang={locale} dict={dict} />
         {children}
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
