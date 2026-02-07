@@ -6,6 +6,7 @@ import {
   Literata,
   Doto,
 } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 
 // styles
 import "@/styles/globals.css";
@@ -113,6 +114,7 @@ export default async function LangLayout({
         <GradationLine />
         <Header id="header" lang={locale} dict={dict} />
         {children}
+        <Analytics />
       </body>
     </html>
   );
