@@ -2,6 +2,7 @@ import type { Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { getBlogs, detectLocaleFromBlogId } from "@/lib/api-client/blog";
 import { getTopics } from "@/lib/api-client/topic";
+import { getBooks } from "@/lib/api-client/book";
 import { BlogPage as BlogPageComponent } from "@/components/layout/Blog/BlogPage";
 
 /**
@@ -17,9 +18,10 @@ export default async function BlogPage({
   const dict = await getDictionary(lang);
 
   // 並列でデータ取得（limitは最大100）
-  const [blogsData, topicsData] = await Promise.all([
+  const [blogsData, topicsData, booksData] = await Promise.all([
     getBlogs({ limit: 100, orders: "-publishedAt" }),
     getTopics({ limit: 100 }),
+    getBooks({ limit: 100 }),
   ]);
 
   // 言語に応じてフィルタリング
@@ -33,6 +35,7 @@ export default async function BlogPage({
       dict={dict}
       blogs={filteredBlogs}
       topics={topicsData.contents}
+      books={booksData.contents}
     />
   );
 }

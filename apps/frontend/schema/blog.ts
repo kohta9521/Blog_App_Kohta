@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { TopicSchema } from "./topic";
+import { BookSchema } from "./book";
 
 /**
  * ブログ記事スキーマ
@@ -20,6 +21,7 @@ export const BlogSchema = z.object({
   summary: z.string(),
   sammary_en: z.string(), // 注: APIのtypo
   topics: z.array(TopicSchema),
+  book: BookSchema.optional(), // 書籍への所属（オプショナル）
   meta_title: z.string(),
   meta_title_en: z.string(),
   meta_desc: z.string(),

@@ -27,6 +27,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     },
     {
+      url: `${SITE_URL}/${locale}/book`,
+      lastModified: new Date(),
+      changeFrequency: "daily" as const,
+      priority: 0.9,
+    },
+    {
       url: `${SITE_URL}/${locale}/about`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
@@ -40,12 +46,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ]);
 
-  // ランタイムでブログ記事を取得する場合は、ここで動的にインポート
+  // ランタイムでブログ記事・Bookを取得する場合は、ここで動的にインポート
   try {
     // 環境変数が設定されている場合のみAPIを呼び出す
     if (process.env.MICROCMS_SERVICE_DOMAIN && process.env.MICROCMS_API_KEY) {
       const { getBlogs } = await import("@/lib/api-client/blog");
-      const { contents: blogs } = await getBlogs({ limit: 1000 });
+      const { getBooks } = await import("@/lib/api-client/book");
+
+      const [{ contents: blogs }, { contents: books }] = await Promise.all([
+        getBlogs({ limit: 100 }),
+        getBooks({ limit: 100 }),
+      ]);
 
       // ブログ記事の動的ページ
       const blogPages: MetadataRoute.Sitemap = LOCALES.flatMap((locale) =>
@@ -57,11 +68,40 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         }))
       );
 
-      return [...staticPages, ...blogPages];
+      // Book一覧ページ
+      const bookPages: MetadataRoute.Sitemap = LOCALES.flatMap((locale) =>
+        books.map((book) => ({
+          url: `${SITE_URL}/${locale}/book/${book.id}`,
+          lastModified: new Date(book.updatedAt),
+          changeFrequency: "weekly" as const,
+          priority: 0.8,
+        }))
+      );
+
+      // Book記事ページ（book_blogsから生成）
+      const bookArticlePages: MetadataRoute.Sitemap = [];
+      LOCALES.forEach((locale) => {
+        books.forEach((book) => {
+          if (book.book_blogs && book.book_blogs.length > 0) {
+            book.book_blogs.forEach((bookBlog) => {
+              bookArticlePages.push({
+                url: `${SITE_URL}/${locale}/book/${
+                  book.id
+                }/${bookBlog.id.replace(/-en$/, "")}`,
+                lastModified: new Date(bookBlog.updatedAt),
+                changeFrequency: "weekly" as const,
+                priority: 0.8,
+              });
+            });
+          }
+        });
+      });
+
+      return [...staticPages, ...blogPages, ...bookPages, ...bookArticlePages];
     }
   } catch (error) {
     console.warn(
-      "Sitemap: ブログ記事の取得をスキップ（環境変数未設定）",
+      "Sitemap: ブログ記事・Bookの取得をスキップ（環境変数未設定）",
       error
     );
   }

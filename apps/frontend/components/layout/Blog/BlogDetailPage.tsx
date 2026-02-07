@@ -48,13 +48,36 @@ type ArticleMeta = {
   main_contents?: string;
 };
 
+type BookNavigation = {
+  bookId: string;
+  bookTitle: string;
+  currentChapter: number;
+  totalChapters: number;
+  prevChapter?: {
+    id: string;
+    title: string;
+    number: number;
+  };
+  nextChapter?: {
+    id: string;
+    title: string;
+    number: number;
+  };
+};
+
 type BlogDetailPageProps = {
   article: ArticleMeta;
   dict: Dictionary;
   lang: Locale;
+  bookNavigation?: BookNavigation;
 };
 
-export function BlogDetailPage({ article, dict, lang }: BlogDetailPageProps) {
+export function BlogDetailPage({
+  article,
+  dict,
+  lang,
+  bookNavigation,
+}: BlogDetailPageProps) {
   const labels = dict.blogDetail ?? {
     metadata: "METADATA",
     date: "DATE",
@@ -144,7 +167,10 @@ export function BlogDetailPage({ article, dict, lang }: BlogDetailPageProps) {
         const filename = match[2];
 
         // ファイル名がある場合、ヘッダーを追加
-        if (filename && !preElement.previousElementSibling?.classList.contains("code-header")) {
+        if (
+          filename &&
+          !preElement.previousElementSibling?.classList.contains("code-header")
+        ) {
           const header = document.createElement("div");
           header.className = "code-header";
           header.textContent = filename;
@@ -184,6 +210,24 @@ export function BlogDetailPage({ article, dict, lang }: BlogDetailPageProps) {
   return (
     <article className="min-h-screen bg-black text-neutral-100">
       <div className="w-full px-4 max-w-screen-2xl mx-auto py-6 sm:py-10 lg:px-6 lg:py-16 xl:px-8 xl:py-20">
+        {/* Book Navigation (if applicable) */}
+        {bookNavigation && (
+          <div className="mb-6 sm:mb-8">
+            <Link
+              href={`/${lang}/book/${bookNavigation.bookId}`}
+              className="inline-flex items-center gap-2 text-xs sm:text-sm font-mono text-neutral-400 hover:text-white transition-colors"
+            >
+              <span>←</span>
+              <span>{bookNavigation.bookTitle}</span>
+              <span className="text-neutral-600">|</span>
+              <span>
+                Chapter {String(bookNavigation.currentChapter).padStart(2, "0")}{" "}
+                / {String(bookNavigation.totalChapters).padStart(2, "0")}
+              </span>
+            </Link>
+          </div>
+        )}
+
         {/* Title + Decorative + */}
         <div ref={titleRef} className="relative mb-10 sm:mb-14 lg:mb-20">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between sm:gap-6 pr-14 sm:pr-0">
@@ -338,6 +382,88 @@ export function BlogDetailPage({ article, dict, lang }: BlogDetailPageProps) {
             </aside>
           )}
         </div>
+
+        {/* Book Chapter Navigation (if applicable) */}
+        {bookNavigation && (
+          <div className="mt-12 sm:mt-16 lg:mt-20 border-t border-neutral-800 pt-8 sm:pt-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              {/* Previous Chapter */}
+              {bookNavigation.prevChapter ? (
+                <Link
+                  href={`/${lang}/book/${bookNavigation.bookId}/${bookNavigation.prevChapter.id}`}
+                  className="group border border-neutral-800 bg-neutral-900/30 hover:bg-pink-600 hover:border-pink-600 p-4 sm:p-6 transition-colors duration-300"
+                >
+                  <div className="flex items-center gap-2 mb-2 sm:mb-3 text-xs sm:text-sm font-mono text-neutral-400 group-hover:text-white/80">
+                    <span>←</span>
+                    <span>Previous Chapter</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="h-10 w-10 border border-neutral-700 bg-neutral-800/50 flex items-center justify-center shrink-0 group-hover:border-white group-hover:bg-white/10">
+                      <span className="text-sm font-mono font-bold text-white">
+                        {String(bookNavigation.prevChapter.number).padStart(
+                          2,
+                          "0"
+                        )}
+                      </span>
+                    </div>
+                    <p className="text-sm sm:text-base font-mono text-white line-clamp-2">
+                      {bookNavigation.prevChapter.title}
+                    </p>
+                  </div>
+                </Link>
+              ) : (
+                <div className="border border-dashed border-neutral-800/50 bg-neutral-900/10 p-4 sm:p-6 opacity-50">
+                  <p className="text-xs font-mono text-neutral-600">
+                    最初の章です
+                  </p>
+                </div>
+              )}
+
+              {/* Next Chapter */}
+              {bookNavigation.nextChapter ? (
+                <Link
+                  href={`/${lang}/book/${bookNavigation.bookId}/${bookNavigation.nextChapter.id}`}
+                  className="group border border-neutral-800 bg-neutral-900/30 hover:bg-pink-600 hover:border-pink-600 p-4 sm:p-6 transition-colors duration-300"
+                >
+                  <div className="flex items-center justify-end gap-2 mb-2 sm:mb-3 text-xs sm:text-sm font-mono text-neutral-400 group-hover:text-white/80">
+                    <span>Next Chapter</span>
+                    <span>→</span>
+                  </div>
+                  <div className="flex items-start gap-3 justify-end text-right">
+                    <p className="text-sm sm:text-base font-mono text-white line-clamp-2">
+                      {bookNavigation.nextChapter.title}
+                    </p>
+                    <div className="h-10 w-10 border border-neutral-700 bg-neutral-800/50 flex items-center justify-center shrink-0 group-hover:border-white group-hover:bg-white/10">
+                      <span className="text-sm font-mono font-bold text-white">
+                        {String(bookNavigation.nextChapter.number).padStart(
+                          2,
+                          "0"
+                        )}
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              ) : (
+                <div className="border border-dashed border-neutral-800/50 bg-neutral-900/10 p-4 sm:p-6 opacity-50">
+                  <p className="text-xs font-mono text-neutral-600 text-right">
+                    最後の章です
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {/* Back to Book Button */}
+            <div className="mt-6 sm:mt-8 text-center">
+              <Link
+                href={`/${lang}/book/${bookNavigation.bookId}`}
+                className="inline-flex items-center gap-2 border border-neutral-800 bg-neutral-900/30 hover:bg-pink-600 hover:border-pink-600 px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-mono uppercase tracking-wider transition-colors"
+              >
+                <span>📖</span>
+                <span>目次に戻る</span>
+              </Link>
+            </div>
+          </div>
+        )}
       </div>
     </article>
   );
