@@ -45,7 +45,9 @@ export const BookDetailPage = ({
         <div className="mb-8 lg:mb-12">
           <div className="flex items-start gap-4 mb-6">
             <div className="h-16 w-16 lg:h-20 lg:w-20 border border-border bg-muted/30 flex items-center justify-center shrink-0">
-              <span className="text-3xl lg:text-4xl">📖</span>
+              <span className="text-3xl lg:text-4xl">
+                {book.book_emoji || "📖"}
+              </span>
             </div>
             <div className="flex-1 min-w-0">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-doto font-normal tracking-tight mb-3">

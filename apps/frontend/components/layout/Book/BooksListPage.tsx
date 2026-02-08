@@ -1,6 +1,5 @@
 "use client";
-
-import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import type { Locale } from "@/lib/i18n/config";
 import type { Book } from "@/schema/book";
@@ -18,15 +17,16 @@ export const BooksListPage = ({
 }: BooksListPageProps) => {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <div className="w-full px-4 max-w-screen-3xl mx-auto py-4 sm:py-6 lg:w-11/12 lg:px-0 lg:py-8">
+      <div className="w-full px-4 max-w-screen-3xl mx-auto py-4 sm:py-6 lg:w-11/12 lg:px-0 lg:py-6">
         {/* Title */}
         <div className="mb-8 lg:mb-12">
           <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[80px] font-doto font-normal tracking-tight mb-4">
             BOOKS
           </h1>
-          <p className="text-sm lg:text-base text-muted-foreground font-mono">
-            / 書籍風ブログコレクション
+          <p className="text-sm lg:text-base text-muted-foreground font-mono mb-2">
+            / Books Collection
           </p>
+          <span className="block w-full h-1 border-b"></span>
         </div>
 
         {/* Books Grid */}
@@ -39,18 +39,47 @@ export const BooksListPage = ({
                 href={`/${lang}/book/${book.id}`}
                 className="group block border border-border bg-card hover:bg-pink-600 transition-colors duration-300"
               >
-                <div className="p-6 lg:p-8">
-                  {/* Book Icon/Number */}
-                  <div className="mb-4 flex items-center justify-between">
-                    <div className="h-12 w-12 border border-border bg-muted/30 flex items-center justify-center group-hover:border-white group-hover:bg-white/10 transition-colors">
-                      <span className="text-lg font-mono font-bold text-foreground group-hover:text-white">
-                        📖
-                      </span>
-                    </div>
-                    <span className="text-xs font-mono text-muted-foreground group-hover:text-white/80 transition-colors">
-                      {articleCount}{" "}
-                      {articleCount === 1 ? "CHAPTER" : "CHAPTERS"}
-                    </span>
+                <div className="p-6 lg:p-6">
+                  {/* Book Image/Placeholder */}
+                  <div className="w-full h-52 relative mb-4">
+                    {book.book_image ? (
+                      // 画像がある場合
+                      <>
+                        <Image
+                          src={book.book_image.url}
+                          alt={book.book_title}
+                          width={book.book_image.width}
+                          height={book.book_image.height}
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute top-3 left-0 right-0 w-11/12 mx-auto flex items-center justify-between">
+                          <div className="h-12 w-12 border border-border bg-muted/30 flex items-center justify-center group-hover:border-white group-hover:bg-white/10 transition-colors">
+                            <span className="text-lg font-mono font-bold text-foreground group-hover:text-white">
+                              {book.book_emoji || "📖"}
+                            </span>
+                          </div>
+                          <span className="text-xs font-mono text-muted-foreground group-hover:text-white/80 transition-colors">
+                            {articleCount}{" "}
+                            {articleCount === 1 ? "CHAPTER" : "CHAPTERS"}
+                          </span>
+                        </div>
+                      </>
+                    ) : (
+                      // 画像がない場合：黒いボックス
+                      <div className="w-full h-full bg-black flex items-center justify-center">
+                        <div className="absolute top-3 left-0 right-0 w-11/12 mx-auto flex items-center justify-between">
+                          <div className="h-12 w-12 border border-white/20 bg-white/5 flex items-center justify-center group-hover:border-white group-hover:bg-white/10 transition-colors">
+                            <span className="text-lg font-mono font-bold text-white">
+                              {book.book_emoji || "📖"}
+                            </span>
+                          </div>
+                          <span className="text-xs font-mono text-white/60 group-hover:text-white/80 transition-colors">
+                            {articleCount}{" "}
+                            {articleCount === 1 ? "CHAPTER" : "CHAPTERS"}
+                          </span>
+                        </div>
+                      </div>
+                    )}
                   </div>
 
                   {/* Book Title */}
@@ -58,8 +87,13 @@ export const BooksListPage = ({
                     {book.book_title}
                   </h2>
 
+                  {/* Book Description */}
+                  <p className="text-foreground-muted text-sm mb-6">
+                    {book.book_description_en}
+                  </p>
+
                   {/* Metadata */}
-                  <div className="space-y-2 text-xs font-mono text-muted-foreground group-hover:text-white/70 transition-colors">
+                  <div className="text-xs font-mono flex gap-5 items-center text-muted-foreground group-hover:text-white/70 transition-colors">
                     <div className="flex items-center gap-2">
                       <span className="shrink-0">PUBLISHED:</span>
                       <span>

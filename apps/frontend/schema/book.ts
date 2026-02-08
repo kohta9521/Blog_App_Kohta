@@ -24,6 +24,15 @@ export const BookBlogSchema = z.object({
 });
 
 /**
+ * Book画像スキーマ
+ */
+export const BookImageSchema = z.object({
+  url: z.string(),
+  height: z.number(),
+  width: z.number(),
+});
+
+/**
  * Bookスキーマ
  */
 export const BookSchema = z.object({
@@ -33,6 +42,11 @@ export const BookSchema = z.object({
   publishedAt: z.string(),
   revisedAt: z.string(),
   book_title: z.string(),
+  book_title_en: z.string(),
+  book_emoji: z.string().optional(),
+  book_image: BookImageSchema.optional(),
+  book_description: z.string().optional(),
+  book_description_en: z.string(),
   book_blogs: z.array(BookBlogSchema).optional().default([]),
 });
 
@@ -43,6 +57,7 @@ export const BooksResponseSchema = z.object({
   limit: z.number(),
 });
 
+export type BookImage = z.infer<typeof BookImageSchema>;
 export type BookBlog = z.infer<typeof BookBlogSchema>;
 export type Book = z.infer<typeof BookSchema>;
 export type BooksResponse = z.infer<typeof BooksResponseSchema>;

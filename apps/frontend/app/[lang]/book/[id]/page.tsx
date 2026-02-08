@@ -90,15 +90,29 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       };
     }
 
+    const description =
+      book.book_description || `${book.book_title}の全チャプター一覧`;
+    const ogImage = book.book_image?.url;
+
     return {
       title: `${book.book_title} | Books`,
-      description: `${book.book_title}の全チャプター一覧`,
+      description: description,
       openGraph: {
         title: book.book_title,
-        description: `${book.book_title}の全チャプター一覧`,
+        description: description,
         type: "website",
         url: `${SITE_URL}/${lang}/book/${id}`,
         locale: lang,
+        ...(ogImage && {
+          images: [
+            {
+              url: ogImage,
+              width: book.book_image?.width,
+              height: book.book_image?.height,
+              alt: book.book_title,
+            },
+          ],
+        }),
       },
     };
   } catch {
