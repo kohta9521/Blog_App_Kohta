@@ -9,6 +9,9 @@ import {
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
+// analytics
+import { GoogleAnalytics } from "@next/third-parties/google";
+
 // styles
 import "@/styles/globals.css";
 
@@ -112,6 +115,9 @@ export default async function LangLayout({
       <body
         className={`${ibmPlexSansJP.variable} ${ibmPlexMono.variable} ${literata.variable} ${doto.variable} antialiased bg-background text-foreground`}
       >
+        {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID} />
+        )}
         <GradationLine />
         <Header id="header" lang={locale} dict={dict} />
         {children}
@@ -121,4 +127,3 @@ export default async function LangLayout({
     </html>
   );
 }
-
