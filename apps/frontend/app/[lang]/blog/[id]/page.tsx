@@ -9,6 +9,7 @@ import {
   getLocalizedBlogId,
   detectLocaleFromBlogId,
 } from "@/lib/api-client/blog";
+import { TechArticleStructuredData, BreadcrumbStructuredData } from "@/components/seo/StructuredData";
 
 const AUTHOR = "Kohta Kochi";
 const SITE_URL =
@@ -43,7 +44,41 @@ export default async function BlogDetailRoute({ params }: Props) {
     topics: article.topics.map((t) => t.topic),
   };
 
-  return <BlogDetailPage article={articleWithAuthor} dict={dict} lang={lang} />;
+  const articleUrl = `${SITE_URL}/${lang}/blog/${id}`;
+
+  return (
+    <>
+      {/* 構造化データ */}
+      <TechArticleStructuredData
+        data={{
+          headline: article.title,
+          description: article.summary,
+          datePublished: article.publishedAt,
+          dateModified: article.updatedAt,
+          author: {
+            name: AUTHOR,
+            url: `${SITE_URL}/${lang}/profile`,
+          },
+          publisher: {
+            name: dict.meta.title,
+            logo: `${SITE_URL}/logo_icon.png`,
+          },
+          url: articleUrl,
+          keywords: article.topics.map((t) => t.topic),
+          inLanguage: lang,
+          proficiencyLevel: "Beginner/Intermediate/Advanced", // 記事の難易度に応じて変更
+        }}
+      />
+      <BreadcrumbStructuredData
+        items={[
+          { name: dict.common.home, item: `${SITE_URL}/${lang}` },
+          { name: "Blog", item: `${SITE_URL}/${lang}/blog` },
+          { name: article.title, item: articleUrl },
+        ]}
+      />
+      <BlogDetailPage article={articleWithAuthor} dict={dict} lang={lang} />
+    </>
+  );
 }
 
 /**

@@ -8,6 +8,8 @@ import { HeaderList } from "@/components/ui/List/HeaderList";
 import { Logo } from "@/components/ui/Logo/Logo";
 import { LanguageSwitcher } from "@/components/ui/Switcher/LanguageSwitcher";
 import { ConsoleModal } from "@/components/ui/Console/ConsoleModal";
+import { HamburgerMenu } from "@/components/ui/Hamburger/HamburgerMenu";
+import { MobileMenu } from "@/components/ui/Hamburger/MobileMenu";
 
 // i18n
 import type { Locale } from "@/lib/i18n/config";
@@ -23,6 +25,7 @@ export type HeaderProps = {
 const Header = ({ id, lang, dict }: HeaderProps) => {
   const pathname = usePathname();
   const [consoleOpen, setConsoleOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const consoleText = dict.common.console ?? "CONSOLE";
   const consoleFirstLetter = consoleText[0]?.toUpperCase() ?? "C";
 
@@ -96,8 +99,33 @@ const Header = ({ id, lang, dict }: HeaderProps) => {
           />
           <LanguageSwitcher currentLocale={lang} />
         </div>
-        <div className="w-auto block md:hidden lg:hidden xl:hidden">三</div>
+
+        {/* ハンバーガーメニュー（モバイル） */}
+        <div className="w-auto block md:hidden lg:hidden xl:hidden">
+          <HamburgerMenu
+            isOpen={mobileMenuOpen}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            ariaLabel="メニュー"
+          />
+        </div>
       </div>
+
+      {/* モバイルメニュー */}
+      <MobileMenu
+        isOpen={mobileMenuOpen}
+        lang={lang}
+        pathname={pathname}
+        dict={dict}
+        onClose={() => setMobileMenuOpen(false)}
+        onOpenConsole={() => setConsoleOpen(true)}
+      />
+
+      {/* コンソールモーダル */}
+      <ConsoleModal
+        open={consoleOpen}
+        onOpenChange={setConsoleOpen}
+        message={dict.common.consoleUnderDevelopment ?? undefined}
+      />
     </header>
   );
 };
