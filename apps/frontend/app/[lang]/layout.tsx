@@ -22,6 +22,7 @@ import { getDictionary } from "@/lib/i18n/dictionaries";
 // components
 import GradationLine from "@/components/ui/Line/GradationLine";
 import Header from "@/components/layout/Header/Header";
+import { OrganizationStructuredData, WebSiteStructuredData } from "@/components/seo/StructuredData";
 
 const ibmPlexSansJP = IBM_Plex_Sans_JP({
   subsets: ["latin"],
@@ -81,16 +82,71 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const locale: Locale = lang as Locale;
   const dict = await getDictionary(locale);
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kohta-tech-blog.com";
 
   return {
-    title: dict.meta.title,
+    title: {
+      default: dict.meta.title,
+      template: `%s | ${dict.meta.title}`,
+    },
     description: dict.meta.description,
     keywords: dict.meta.keywords,
+    authors: [{ name: "Kohta Kochi", url: `${siteUrl}/${locale}/profile` }],
+    creator: "Kohta Kochi",
+    publisher: "Kohta Kochi",
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+    alternates: {
+      canonical: `${siteUrl}/${locale}`,
+      languages: {
+        'ja': `${siteUrl}/ja`,
+        'en': `${siteUrl}/en`,
+      },
+    },
     openGraph: {
+      type: "website",
+      locale: locale === "ja" ? "ja_JP" : "en_US",
+      url: `${siteUrl}/${locale}`,
       title: dict.meta.title,
       description: dict.meta.description,
-      locale: locale === "ja" ? "ja_JP" : "en_US",
+      siteName: dict.meta.title,
+      images: [
+        {
+          url: `${siteUrl}/logo_icon.png`,
+          width: 1200,
+          height: 630,
+          alt: dict.meta.title,
+        },
+      ],
     },
+    twitter: {
+      card: "summary_large_image",
+      title: dict.meta.title,
+      description: dict.meta.description,
+      images: [`${siteUrl}/logo_icon.png`],
+      creator: "@kohtakochi", // 実際のTwitterハンドルに変更
+    },
+    viewport: {
+      width: "device-width",
+      initialScale: 1,
+      maximumScale: 5,
+    },
+    verification: {
+      // Google Search Console認証（必要に応じて追加）
+      // google: 'your-google-verification-code',
+      // Bing Webmaster Tools認証
+      // other: { 'msvalidate.01': 'your-bing-verification-code' },
+    },
+    category: "technology",
   };
 }
 
@@ -109,9 +165,34 @@ export default async function LangLayout({
     : i18n.defaultLocale;
 
   const dict = await getDictionary(locale);
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kohta-tech-blog.com";
 
   return (
     <html lang={locale} className="dark">
+      <head>
+        {/* 構造化データ */}
+        <OrganizationStructuredData
+          data={{
+            name: dict.meta.title,
+            url: siteUrl,
+            logo: `${siteUrl}/logo_icon.png`,
+            description: dict.meta.description,
+            sameAs: [
+              // SNSリンクがあれば追加
+              // "https://twitter.com/kohtakochi",
+              // "https://github.com/kohtakochi",
+            ],
+          }}
+        />
+        <WebSiteStructuredData
+          data={{
+            name: dict.meta.title,
+            url: siteUrl,
+            description: dict.meta.description,
+            inLanguage: locale,
+          }}
+        />
+      </head>
       <body
         className={`${ibmPlexSansJP.variable} ${ibmPlexMono.variable} ${literata.variable} ${doto.variable} antialiased bg-background text-foreground`}
       >

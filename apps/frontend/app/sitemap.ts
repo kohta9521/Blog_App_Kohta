@@ -1,8 +1,10 @@
 import type { MetadataRoute } from "next";
 import type { Locale } from "@/lib/i18n/config";
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://kohta-tech-blog.com";
+// URLの末尾のスラッシュを削除して正規化
+const SITE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL || "https://kohta-tech-blog.com"
+).replace(/\/$/, "");
 const LOCALES: Locale[] = ["ja", "en"];
 
 /**
