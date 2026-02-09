@@ -144,6 +144,16 @@ resource "aws_lambda_function" "api" {
   timeout       = var.timeout
   memory_size   = var.memory_size
 
+  # Dockerイメージの設定
+  # Apple Silicon (M1/M2/M3) の場合はarm64、それ以外はx86_64
+  architectures = ["arm64"]
+  
+  # イメージの設定（オプション）
+  image_config {
+    command     = []
+    entry_point = []
+  }
+
   environment {
     variables = {
       ENVIRONMENT    = var.environment
