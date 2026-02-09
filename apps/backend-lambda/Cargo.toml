@@ -1,0 +1,24 @@
+[package]
+name = "backend-lambda"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# AWS Lambda用のランタイム
+lambda_http = "0.13"
+lambda_runtime = "0.13"
+# 非同期ランタイム（Lambda Runtimeに含まれるが、明示的に追加）
+tokio = { version = "1", features = ["macros"] }
+# JSON処理
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+# ログ
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["fmt", "env-filter"] }
+
+# リリースビルドの最適化
+[profile.release]
+opt-level = "z"     # サイズ最適化
+lto = true          # Link Time Optimization
+codegen-units = 1   # コード生成の最適化
+strip = true        # デバッグシンボル削除

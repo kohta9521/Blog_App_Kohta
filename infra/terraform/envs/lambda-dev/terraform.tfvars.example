@@ -1,0 +1,29 @@
+# ===========================================
+# 📝 Terraform Variables - Development Environment
+# ===========================================
+# このファイルをコピーして terraform.tfvars を作成してください
+# cp terraform.tfvars.example terraform.tfvars
+
+# AWSリージョン
+aws_region = "ap-northeast-1"
+
+# 環境名
+environment = "dev"
+
+# Lambda関数のDockerイメージURI
+# 初回デプロイ前に、ECRリポジトリを手動で作成してイメージをプッシュする必要があります
+# 手順:
+# 1. terraform apply -target=module.lambda_api.aws_ecr_repository.lambda
+# 2. DockerイメージをビルドしてECRにプッシュ
+# 3. このURIを設定
+lambda_image_uri = "123456789012.dkr.ecr.ap-northeast-1.amazonaws.com/blog-dev-lambda-api:latest"
+
+# CORS許可するオリジン（開発環境）
+# ローカル開発時
+# allowed_origin = "http://localhost:3000"
+# Vercelプレビュー環境
+allowed_origin = "https://your-app-git-develop-your-team.vercel.app"
+
+# Lambda設定
+lambda_timeout     = 30
+lambda_memory_size = 128

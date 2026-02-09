@@ -1,0 +1,19 @@
+# Rust
+target/
+**/*.rs.bk
+Cargo.lock
+
+# 環境変数
+.env
+.env.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
