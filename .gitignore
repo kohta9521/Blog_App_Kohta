@@ -1,10 +1,15 @@
 # ===========================================
 # 🔒 Security - Environment Variables
 # ===========================================
+# すべての.envファイルを除外（example以外）
 .env
 .env.*
 !.env.example
 !env.example
+**/.env
+**/.env.*
+!**/.env.example
+!**/env.example
 
 # ===========================================
 # 🌐 Frontend (Next.js)

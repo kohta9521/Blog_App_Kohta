@@ -80,7 +80,10 @@ echo ""
 
 # Dockerイメージをビルド
 echo -e "${YELLOW}🏗️  Dockerイメージをビルド中...${NC}"
-docker build -t ${ECR_REPO_NAME}:${TAG} .
+
+# Docker manifest v2形式でビルド（OCI形式を無効化）
+# Apple Silicon対応: プラットフォーム指定なしでネイティブビルド
+DOCKER_BUILDKIT=0 docker build -t ${ECR_REPO_NAME}:${TAG} .
 
 if [ $? -ne 0 ]; then
     echo -e "${RED}❌ Dockerビルドに失敗しました${NC}"
@@ -95,9 +98,9 @@ docker tag ${ECR_REPO_NAME}:${TAG} ${ECR_URI}:${TAG}
 echo -e "${GREEN}✅ タグ付け完了${NC}"
 echo ""
 
-# ECRにプッシュ
+# ECRにプッシュ（manifest v2形式を強制）
 echo -e "${YELLOW}📤 ECRにプッシュ中...${NC}"
-docker push ${ECR_URI}:${TAG}
+DOCKER_BUILDKIT=0 docker push ${ECR_URI}:${TAG}
 
 if [ $? -ne 0 ]; then
     echo -e "${RED}❌ ECRプッシュに失敗しました${NC}"

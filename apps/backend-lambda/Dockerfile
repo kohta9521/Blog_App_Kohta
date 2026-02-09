@@ -1,8 +1,8 @@
 # AWS Lambda用のRust関数をビルドするDockerfile
-# AWS Lambda用の公式Rustベースイメージを使用
+# マルチステージビルドで最適化
 
-# ビルドステージ
-FROM rust:1.83-slim as builder
+# ビルドステージ: 通常のRustイメージを使用
+FROM rust:1.83-slim AS builder
 
 WORKDIR /app
 
@@ -13,22 +13,26 @@ RUN apt-get update && \
     libssl-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# 依存関係のキャッシュのため、先にCargo.tomlをコピー
+# 依存関係をコピー
 COPY Cargo.toml ./
+
+# ダミーのmain.rsでビルド（依存関係のキャッシュ用）
 RUN mkdir src && \
     echo "fn main() {}" > src/main.rs && \
     cargo build --release && \
-    rm -rf src
+    rm -rf src target/release/deps/backend_lambda*
 
-# 実際のソースコードをコピーしてビルド
+# 実際のソースをコピーしてビルド
 COPY src ./src
 RUN cargo build --release
 
-# ランタイムステージ - AWS Lambda用の軽量イメージ
+# ランタイムステージ: Lambda公式イメージ
 FROM public.ecr.aws/lambda/provided:al2023
 
-# ビルドしたバイナリをLambdaが期待する場所にコピー
+# ビルドしたバイナリをコピー
 COPY --from=builder /app/target/release/backend-lambda ${LAMBDA_RUNTIME_DIR}/bootstrap
 
-# Lambda関数のハンドラーを設定
-CMD [ "function.handler" ]
+# 実行権限を付与
+RUN chmod +x ${LAMBDA_RUNTIME_DIR}/bootstrap
+
+CMD [ "bootstrap" ]
