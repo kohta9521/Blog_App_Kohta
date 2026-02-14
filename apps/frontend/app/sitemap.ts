@@ -1,115 +1,42 @@
-import type { MetadataRoute } from "next";
-import type { Locale } from "@/lib/i18n/config";
+import { MetadataRoute } from 'next'
 
-// URLの末尾のスラッシュを削除して正規化
-const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL || "https://kohta-tech-blog.com"
-).replace(/\/$/, "");
-const LOCALES: Locale[] = ["ja", "en"];
-
-/**
- * サイトマップ生成
- *
- * 注意: ビルド時に環境変数が利用できない場合があるため、
- * 動的なブログ記事の取得はランタイムで行う
- */
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  // 静的ページのみを含むサイトマップ
-  const staticPages: MetadataRoute.Sitemap = LOCALES.flatMap((locale) => [
-    {
-      url: `${SITE_URL}/${locale}`,
-      lastModified: new Date(),
-      changeFrequency: "daily" as const,
-      priority: 1.0,
-    },
-    {
-      url: `${SITE_URL}/${locale}/blog`,
-      lastModified: new Date(),
-      changeFrequency: "daily" as const,
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/${locale}/book`,
-      lastModified: new Date(),
-      changeFrequency: "daily" as const,
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/${locale}/about`,
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    },
-    {
-      url: `${SITE_URL}/${locale}/contact`,
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    },
-  ]);
-
-  // ランタイムでブログ記事・Bookを取得する場合は、ここで動的にインポート
-  try {
-    // 環境変数が設定されている場合のみAPIを呼び出す
-    if (process.env.MICROCMS_SERVICE_DOMAIN && process.env.MICROCMS_API_KEY) {
-      const { getBlogs } = await import("@/lib/api-client/blog");
-      const { getBooks } = await import("@/lib/api-client/book");
-
-      const [{ contents: blogs }, { contents: books }] = await Promise.all([
-        getBlogs({ limit: 100 }),
-        getBooks({ limit: 100 }),
-      ]);
-
-      // ブログ記事の動的ページ
-      const blogPages: MetadataRoute.Sitemap = LOCALES.flatMap((locale) =>
-        blogs.map((blog) => ({
-          url: `${SITE_URL}/${locale}/blog/${blog.id}`,
-          lastModified: new Date(blog.updatedAt),
-          changeFrequency: "weekly" as const,
-          priority: 0.8,
-        }))
-      );
-
-      // Book一覧ページ
-      const bookPages: MetadataRoute.Sitemap = LOCALES.flatMap((locale) =>
-        books.map((book) => ({
-          url: `${SITE_URL}/${locale}/book/${book.id}`,
-          lastModified: new Date(book.updatedAt),
-          changeFrequency: "weekly" as const,
-          priority: 0.8,
-        }))
-      );
-
-      // Book記事ページ（book_blogsから生成）
-      const bookArticlePages: MetadataRoute.Sitemap = [];
-      LOCALES.forEach((locale) => {
-        books.forEach((book) => {
-          if (book.book_blogs && book.book_blogs.length > 0) {
-            book.book_blogs.forEach((bookBlog) => {
-              bookArticlePages.push({
-                url: `${SITE_URL}/${locale}/book/${
-                  book.id
-                }/${bookBlog.id.replace(/-en$/, "")}`,
-                lastModified: new Date(bookBlog.updatedAt),
-                changeFrequency: "weekly" as const,
-                priority: 0.8,
-              });
-            });
-          }
-        });
-      });
-
-      return [...staticPages, ...blogPages, ...bookPages, ...bookArticlePages];
+export default function sitemap(): MetadataRoute.Sitemap {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://kohta-tech-blog.com'
+  const currentDate = new Date()
+  
+  // 静的ページ
+  const staticPages = [
+    '',
+    '/about',
+    '/profile',
+    '/contact',
+    '/blog',
+    '/legal/terms',
+    '/legal/privacy',
+  ]
+  
+  // 各言語のURLを生成
+  const locales = ['ja', 'en']
+  
+  const urls: MetadataRoute.Sitemap = []
+  
+  // 静的ページを各言語で生成
+  for (const locale of locales) {
+    for (const page of staticPages) {
+      urls.push({
+        url: `${siteUrl}/${locale}${page}`,
+        lastModified: currentDate,
+        changeFrequency: page === '/blog' ? 'daily' : 'weekly',
+        priority: page === '' ? 1.0 : page === '/blog' ? 0.9 : 0.8,
+        alternates: {
+          languages: {
+            ja: `${siteUrl}/ja${page}`,
+            en: `${siteUrl}/en${page}`,
+          },
+        },
+      })
     }
-  } catch (error) {
-    console.warn(
-      "Sitemap: ブログ記事・Bookの取得をスキップ（環境変数未設定）",
-      error
-    );
   }
-
-  // デフォルトは静的ページのみ
-  return staticPages;
+  
+  return urls
 }
-
-export const revalidate = 3600;

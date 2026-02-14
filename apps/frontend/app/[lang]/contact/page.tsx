@@ -1,6 +1,51 @@
+import type { Metadata } from "next";
 import type { Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { ContactForm } from "@/components/forms/ContactForm";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: Locale }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kohta-tech-blog.com";
+  
+  const title = lang === "ja" 
+    ? "お問い合わせ | 河内光太のテックブログ"
+    : "Contact | Kohta Kochi's Tech Blog";
+  
+  const description = lang === "ja"
+    ? "Web開発・制作、技術相談、イベント企画、業務委託のご相談はこちらから。学生エンジニアとして、フロントエンド・バックエンド・インフラまで幅広く対応します。"
+    : "Contact for web development, technical consulting, event planning, and freelance work. Available for frontend, backend, and infrastructure development.";
+
+  return {
+    title,
+    description,
+    keywords: lang === "ja"
+      ? "お問い合わせ, Web開発, 技術相談, イベント企画, 業務委託, フリーランス, エンジニア"
+      : "Contact, Web Development, Technical Consulting, Event Planning, Freelance, Engineer",
+    authors: [{ name: "Kohta Kochi", url: `${siteUrl}/${lang}/profile` }],
+    robots: {
+      index: true,
+      follow: true,
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${siteUrl}/${lang}/contact`,
+      type: "website",
+      locale: lang === "ja" ? "ja_JP" : "en_US",
+    },
+    alternates: {
+      canonical: `${siteUrl}/${lang}/contact`,
+      languages: {
+        'ja': `${siteUrl}/ja/contact`,
+        'en': `${siteUrl}/en/contact`,
+      },
+    },
+  };
+}
 
 export default async function ContactPage({
   params,

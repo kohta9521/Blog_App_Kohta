@@ -85,7 +85,7 @@
   "meta": {
     "title": "Kohta's Blog",
     "description": "Tech Blog - Articles about Next.js, Rust, Frontend & Backend Development",
-    "keywords": "blog, Next.js, Rust, frontend, backend, technology"
+    "keywords": "河内光太, Kohta Kochi, Kohta, Tech, Rust, Engineer, Next.js, TypeScript, Full-Stack, Web Development, Frontend, Backend, AWS, Tech Blog, Software Engineer, Full-Stack Development"
   },
   "about": {
     "title": "ABOUT",
@@ -115,20 +115,11 @@
       },
       "backend": {
         "title": "Backend",
-        "stack": [
-          "Rust",
-          "Axum",
-          "SQLx",
-          "PostgreSQL"
-        ]
+        "stack": ["Rust", "Axum", "SQLx", "PostgreSQL"]
       },
       "infrastructure": {
         "title": "Infrastructure",
-        "stack": [
-          "AWS (ECS, RDS)",
-          "Terraform",
-          "Docker"
-        ]
+        "stack": ["AWS (ECS, RDS)", "Terraform", "Docker"]
       },
       "description": "This blog is built from scratch using modern full-stack technologies. The tech choices prioritize performance, safety, and scalability."
     },
@@ -250,7 +241,13 @@
     },
     "interests": {
       "title": "Interests",
-      "items": ["AI/Machine Learning", "FinTech", "Web3", "Copyright & IP Law", "Payment Law"]
+      "items": [
+        "AI/Machine Learning",
+        "FinTech",
+        "Web3",
+        "Copyright & IP Law",
+        "Payment Law"
+      ]
     },
     "projects": {
       "title": "Personal Projects & Portfolio",
@@ -343,7 +340,7 @@
       },
       "submit": "Send Message",
       "submitting": "Sending...",
-      "success": "Thank you for your inquiry!",
+      "success": "Please wait a moment... It's almost done!",
       "error": "Failed to send. Please try again.",
       "agreement": {
         "label": "I agree to the Terms of Service and Privacy Policy",

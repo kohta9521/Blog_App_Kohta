@@ -86,7 +86,7 @@
   "meta": {
     "title": "Kohta's Blog",
     "description": "技術ブログ - Next.js、Rust、フロントエンド・バックエンド開発に関する記事",
-    "keywords": "ブログ, Next.js, Rust, フロントエンド, バックエンド, 技術"
+    "keywords": "河内光太, Kohta Kochi, Kohta, Tech, Rust, Engineer, Next.js, TypeScript, Full-Stack, Web Development, Frontend, Backend, AWS, テックブログ, エンジニア, フルスタック開発"
   },
   "about": {
     "title": "ABOUT",
@@ -344,7 +344,7 @@
       },
       "submit": "送信する",
       "submitting": "送信中...",
-      "success": "お問い合わせありがとうございます！",
+      "success": "少々お待ちください！もう少しです...",
       "error": "送信に失敗しました。もう一度お試しください。",
       "agreement": {
         "label": "利用規約とプライバシーポリシーに同意する",
