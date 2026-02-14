@@ -11,8 +11,9 @@ RUN apt-get update && \
     libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# cargo-watchをインストール（ホットリロード用）
-RUN cargo install cargo-watch
+# 開発ツールをインストール
+RUN cargo install cargo-watch  # ホットリロード用
+RUN cargo install sqlx-cli --no-default-features --features postgres  # SQLx CLI
 
 # 依存関係をインストール（キャッシュを効かせるため）
 COPY Cargo.toml Cargo.lock* ./

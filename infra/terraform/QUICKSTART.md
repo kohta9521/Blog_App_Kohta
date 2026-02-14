@@ -1,20 +1,20 @@
 # 🚀 クイックスタートガイド
 
-AWS初心者でTerraform初心者の方向けの、実践的なデプロイ手順です。
+AWS 初心者で Terraform 初心者の方向けの、実践的なデプロイ手順です。
 
 ## 📋 前提条件チェックリスト
 
-- [ ] AWSアカウントを作成済み
+- [ ] AWS アカウントを作成済み
 - [ ] クレジットカードを登録済み
 - [ ] AWS CLI をインストール済み
 - [ ] Terraform をインストール済み
 - [ ] Docker をインストール済み
-- [ ] GitHubアカウントあり
+- [ ] GitHub アカウントあり
 - [ ] ドメインを取得済み（オプション）
 
-## ステップ1: AWS認証情報の設定
+## ステップ 1: AWS 認証情報の設定
 
-### 1-1. IAMユーザーを作成
+### 1-1. IAM ユーザーを作成
 
 ```bash
 # ブラウザでAWSコンソールにログイン
@@ -26,7 +26,7 @@ AWS初心者でTerraform初心者の方向けの、実践的なデプロイ手�
 # 許可: AdministratorAccess（学習用）
 ```
 
-### 1-2. AWS CLIを設定
+### 1-2. AWS CLI を設定
 
 ```bash
 # 認証情報を設定
@@ -42,9 +42,9 @@ Default output format: json
 aws sts get-caller-identity
 ```
 
-## ステップ2: GitHubの準備
+## ステップ 2: GitHub の準備
 
-### 2-1. Personal Access Token作成
+### 2-1. Personal Access Token 作成
 
 ```bash
 # GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic)
@@ -58,7 +58,7 @@ aws sts get-caller-identity
 ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
-### 2-2. リポジトリをpush
+### 2-2. リポジトリを push
 
 ```bash
 # まだpushしていない場合
@@ -67,9 +67,9 @@ git branch -M main
 git push -u origin main
 ```
 
-## ステップ3: 開発環境のデプロイ
+## ステップ 3: 開発環境のデプロイ
 
-### 3-1. Terraform設定ファイルを作成
+### 3-1. Terraform 設定ファイルを作成
 
 ```bash
 cd infra/terraform/envs/dev
@@ -118,7 +118,7 @@ domain_name = "yourdomain.com" # 持っていない場合は後回し
 alert_email = "your-email@example.com"
 ```
 
-### 3-2. Terraform実行（ネットワーク＋データベースのみ）
+### 3-2. Terraform 実行（ネットワーク＋データベースのみ）
 
 ```bash
 # 初期化
@@ -134,8 +134,9 @@ terraform apply
 ```
 
 **⏳ 待ち時間にできること:**
-- AWSコンソールで作成中のリソースを確認
-- CloudFormationスタックの進行状況を見る
+
+- AWS コンソールで作成中のリソースを確認
+- CloudFormation スタックの進行状況を見る
 - コーヒーを淹れる ☕
 
 ### 3-3. 出力を確認
@@ -149,9 +150,9 @@ terraform output database_url
 terraform output ecr_repository_url
 ```
 
-## ステップ4: バックエンドのデプロイ
+## ステップ 4: バックエンドのデプロイ
 
-### 4-1. ECRリポジトリURLを取得
+### 4-1. ECR リポジトリ URL を取得
 
 ```bash
 # Terraform outputから取得
@@ -160,7 +161,7 @@ echo $ECR_URI
 # 出力例: 123456789012.dkr.ecr.ap-northeast-1.amazonaws.com/blog-backend-dev
 ```
 
-### 4-2. Dockerイメージをビルド＆プッシュ
+### 4-2. Docker イメージをビルド＆プッシュ
 
 ```bash
 # ECRにログイン
@@ -213,9 +214,9 @@ DATABASE_URL="$DATABASE_URL" sqlx migrate run
 # Applied migration: 002_insert_initial_data
 ```
 
-## ステップ5: 動作確認
+## ステップ 5: 動作確認
 
-### 5-1. バックエンドAPIの確認
+### 5-1. バックエンド API の確認
 
 ```bash
 # ALBのDNS名を取得
@@ -240,7 +241,7 @@ echo "フロントエンド: $FRONTEND_URL"
 open $FRONTEND_URL
 ```
 
-## ステップ6: カスタムドメインの設定（オプション）
+## ステップ 6: カスタムドメインの設定（オプション）
 
 ### 6-1. ネームサーバーを確認
 
@@ -261,10 +262,10 @@ terraform output nameservers
 
 1. お名前.com、ムームードメイン等の管理画面にログイン
 2. ネームサーバー設定を変更
-3. 上記の4つのネームサーバーを設定
+3. 上記の 4 つのネームサーバーを設定
 4. 保存
 
-### 6-3. DNS反映を待つ
+### 6-3. DNS 反映を待つ
 
 ```bash
 # DNS反映確認（数時間〜48時間かかる場合あり）
@@ -318,7 +319,7 @@ terraform destroy
 
 ## 🐛 トラブルシューティング
 
-### ECSタスクが起動しない
+### ECS タスクが起動しない
 
 ```bash
 # CloudWatch Logs で確認
@@ -331,7 +332,7 @@ aws ecs describe-services \
   --region ap-northeast-1
 ```
 
-### ALBのヘルスチェックが失敗
+### ALB のヘルスチェックが失敗
 
 ```bash
 # ターゲットグループの状態確認
@@ -357,23 +358,24 @@ terraform output database_endpoint
 ## 次のステップ
 
 1. **本番環境のデプロイ**
+
    - `infra/terraform/envs/prod/` で同様の手順
    - より強固なセキュリティ設定
 
-2. **CI/CDパイプライン構築**
+2. **CI/CD パイプライン構築**
+
    - GitHub Actions でデプロイ自動化
    - テスト自動実行
 
 3. **監視とアラート設定**
+
    - CloudWatch Dashboard で可視化
-   - Slack通知の設定
+   - Slack 通知の設定
 
 4. **パフォーマンス最適化**
-   - CloudFront CDNの追加
-   - RDSのスケールアップ
+   - CloudFront CDN の追加
+   - RDS のスケールアップ
 
 ---
 
 **質問や問題があれば README.md も参照してください！**
-
-
