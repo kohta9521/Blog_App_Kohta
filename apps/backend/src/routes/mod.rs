@@ -29,7 +29,9 @@ use crate::{handlers, models::ApiDoc};
 /// /api/v1/health                → ヘルスチェック（バージョン付き）
 /// /api/v1/hello                 → 挨拶API
 /// /api/v1/hello/custom          → カスタム挨拶API
-/// /api/v1/posts                 → 記事一覧取得 ← NEW!
+/// /api/v1/locales               → 全言語取得
+/// /api/v1/locales/active        → 有効な言語のみ取得
+/// /api/v1/locales/{code}        → 特定言語取得
 /// /swagger-ui                   → Swagger UI
 /// /api-docs/openapi.json        → OpenAPI仕様
 /// ```
@@ -43,8 +45,10 @@ pub fn create_router() -> Router<PgPool> {
         .route("/api/v1/hello", get(handlers::greeting::hello_rust))
         .route("/api/v1/hello/custom", get(handlers::greeting::custom_hello))
         
-        // API v1 - Posts (記事関連) ← NEW!
-        .route("/api/v1/posts", get(handlers::posts::list_posts))
+        // API v1 - Locales (言語情報) ← NEW!
+        .route("/api/v1/locales", get(handlers::locales::list_locales))
+        .route("/api/v1/locales/active", get(handlers::locales::list_active_locales))
+        .route("/api/v1/locales/{code}", get(handlers::locales::get_locale_by_code))
         
         // Swagger UI
         .merge(SwaggerUi::new("/swagger-ui")

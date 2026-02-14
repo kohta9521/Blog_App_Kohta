@@ -4,10 +4,10 @@ use tracing::info;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 mod database;
-mod domain;
+mod entities;      // 追加: Localeエンティティ
 mod handlers;
 mod models;
-mod repositories;
+mod repositories;  // 追加: LocaleRepository
 mod routes;
 
 use routes::create_router;
@@ -60,6 +60,7 @@ async fn main() -> anyhow::Result<()> {
     info!("🚀 Server running on http://0.0.0.0:{}", port);
     info!("📋 Health check: http://0.0.0.0:{}/health", port);
     info!("👋 Hello endpoint: http://0.0.0.0:{}/api/v1/hello", port);
+    info!("🌐 Locales API: http://0.0.0.0:{}/api/v1/locales", port);
     info!("📚 Swagger UI: http://0.0.0.0:{}/swagger-ui", port);
     info!("📄 OpenAPI JSON: http://0.0.0.0:{}/api-docs/openapi.json", port);
 

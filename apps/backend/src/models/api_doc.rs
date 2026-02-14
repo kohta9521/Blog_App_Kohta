@@ -9,16 +9,23 @@ use utoipa::OpenApi;
         crate::handlers::health::health_check,
         crate::handlers::greeting::hello_rust,
         crate::handlers::greeting::custom_hello,
-        crate::handlers::posts::list_posts
+        crate::handlers::locales::list_locales,
+        crate::handlers::locales::list_active_locales,
+        crate::handlers::locales::get_locale_by_code
     ),
     components(schemas(
-        crate::models::PostListItem,
-        crate::models::PostListResponse
+        crate::models::HealthResponse,
+        crate::models::GreetingResponse,
+        crate::models::GreetingMeta,
+        crate::models::CustomGreetingMeta,
+        crate::models::GreetingQuery,
+        crate::handlers::locales::LocaleResponse,
+        crate::handlers::locales::LocalesListResponse
     )),
     tags(
         (name = "health", description = "ヘルスチェック関連API"),
         (name = "greeting", description = "挨拶関連API"),
-        (name = "posts", description = "記事関連API")
+        (name = "locales", description = "言語情報関連API")
     ),
     info(
         title = "Blog Backend API",

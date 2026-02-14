@@ -86,5 +86,397 @@
     "title": "Kohta's Blog",
     "description": "Tech Blog - Articles about Next.js, Rust, Frontend & Backend Development",
     "keywords": "blog, Next.js, Rust, frontend, backend, technology"
+  },
+  "about": {
+    "title": "ABOUT",
+    "subtitle": "/ What is this blog??",
+    "intro": {
+      "title": "About This Blog",
+      "content": "A tech blog for sharing technical insights and learning records."
+    },
+    "author": {
+      "title": "About The Author",
+      "role": "COO / PDM / Frontend Engineer",
+      "location": "Tokyo, Japan",
+      "education": "Faculty of Law",
+      "description": "With 4 years of experience as a frontend engineer, I balance daily work with university studies. This blog was built to document and share the process of solving technical challenges and learning new concepts.",
+      "viewProfile": "View Full Profile"
+    },
+    "tech": {
+      "title": "Tech Stack",
+      "frontend": {
+        "title": "Frontend",
+        "stack": [
+          "Next.js 16 (App Router)",
+          "TypeScript",
+          "Tailwind CSS",
+          "shadcn/ui"
+        ]
+      },
+      "backend": {
+        "title": "Backend",
+        "stack": [
+          "Rust",
+          "Axum",
+          "SQLx",
+          "PostgreSQL"
+        ]
+      },
+      "infrastructure": {
+        "title": "Infrastructure",
+        "stack": [
+          "AWS (ECS, RDS)",
+          "Terraform",
+          "Docker"
+        ]
+      },
+      "description": "This blog is built from scratch using modern full-stack technologies. The tech choices prioritize performance, safety, and scalability."
+    },
+    "goals": {
+      "title": "Purpose of This Blog",
+      "items": [
+        "Document and share technical learnings",
+        "Master full-stack development through implementation",
+        "Gain practical infrastructure experience",
+        "Contribute to the tech community"
+      ]
+    },
+    "cta": {
+      "title": "Start Reading",
+      "button": "EXPLORE BLOGS"
+    }
+  },
+  "profile": {
+    "title": "PROFILE",
+    "subtitle": "/ Who is Kohta??",
+    "name": "河内 光太",
+    "nameEn": "Kohta Kouchi",
+    "currentRole": "COO / PDM / Frontend Engineer",
+    "bio": {
+      "title": "About Me",
+      "content": "4th year student at Gakushuin University, Faculty of Law. Interested in AI and FinTech, studying copyright law and funds settlement law. Working as a full-stack engineer for multiple companies on a contract basis. Released multiple web services individually, gaining over 5,000 total users. Currently working at Mercari, Inc. as an Engineer / PdM, leveraging both engineering and legal knowledge."
+    },
+    "experience": {
+      "title": "Experience",
+      "items": [
+        {
+          "company": "QueryLift",
+          "role": "COO / Board Member",
+          "period": "Mar 2025 - Present",
+          "description": "Developing LLM-based analytics tools to ensure valuable brands are properly visible in the GEO (Generative Engine Optimization) era. Handling frontend development, PdM, and design"
+        },
+        {
+          "company": "Mercari, Inc. (Merpay)",
+          "role": "PdM (Intern)",
+          "period": "Mar 2025 - Present",
+          "description": "Working as PdM for existing service growth team and new service launch team"
+        },
+        {
+          "company": "MediaAid Inc.",
+          "role": "New SNS Development Division",
+          "period": "Jul 2024 - Present",
+          "description": "Participating in new SNS business project, handling business side including market analysis, competitive analysis, and user interviews"
+        },
+        {
+          "company": "Google Developers Group Tokyo",
+          "role": "Organizer",
+          "period": "Dec 2023 - Present",
+          "description": "Community management and event organizing staff"
+        },
+        {
+          "company": "Simple Inc.",
+          "role": "Development Division (Full-time)",
+          "period": "Sep 2023 - Aug 2024",
+          "description": "Childcare job service development. Service replacement (Vue.js/Laravel → Next.js/Go). Participated from start to release over a year"
+        },
+        {
+          "company": "Simple Inc.",
+          "role": "Engineer (Intern)",
+          "period": "Jan 2023",
+          "description": "Frontend refactoring of core services. Participated from requirements definition and handled partial design"
+        },
+        {
+          "company": "REGAL CORE Inc.",
+          "role": "Intern",
+          "period": "Sep 2022 - Oct 2022",
+          "description": "Corporate site development (Figma/React), database management for in-house services, internal video production"
+        }
+      ]
+    },
+    "education": {
+      "title": "Education",
+      "items": [
+        {
+          "institution": "Gakushuin University",
+          "degree": "Faculty of Law",
+          "period": "4th Year",
+          "focus": "Copyright Law, Funds Settlement Law, AI & Law"
+        },
+        {
+          "institution": "University of People",
+          "degree": "Computer Science",
+          "period": "Enrolled",
+          "focus": "Computer Science Fundamentals"
+        }
+      ]
+    },
+    "skills": {
+      "title": "Tech Stack",
+      "frontend": {
+        "title": "Frontend",
+        "items": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vue.js"]
+      },
+      "backend": {
+        "title": "Backend",
+        "items": ["Rust", "Node.js", "Python", "Go", "GraphQL"]
+      },
+      "infrastructure": {
+        "title": "Infrastructure",
+        "items": ["AWS", "Docker", "Terraform", "Kubernetes", "CI/CD"]
+      },
+      "other": {
+        "title": "Other",
+        "items": ["PostgreSQL", "MongoDB", "Redis", "Git", "Figma"]
+      }
+    },
+    "achievements": {
+      "title": "Achievements",
+      "items": [
+        "Released multiple personal web services (5000+ total users)",
+        "Technical support for multiple companies as full-stack developer",
+        "Unique perspective combining law and engineering",
+        "Management and business development experience at startups"
+      ]
+    },
+    "interests": {
+      "title": "Interests",
+      "items": ["AI/Machine Learning", "FinTech", "Web3", "Copyright & IP Law", "Payment Law"]
+    },
+    "projects": {
+      "title": "Personal Projects & Portfolio",
+      "items": [
+        {
+          "name": "Reginavi",
+          "description": "Gakushuin University festival app. Centralized festival information management to enhance visitor experience",
+          "date": "Oct 2023",
+          "tags": ["Next.js", "TypeScript", "Mobile App"]
+        },
+        {
+          "name": "Enter",
+          "description": "University student-only engineer community. Platform for technical exchange, information sharing, and event hosting",
+          "date": "Sep 2022",
+          "tags": ["Community", "Event Management"]
+        },
+        {
+          "name": "UFES 2024 -Spring Edition-",
+          "description": "Planned and organized engineer event for university students. Provided technical exchange opportunities",
+          "date": "Jan 2024 - Apr 2024",
+          "tags": ["Event", "Community"]
+        },
+        {
+          "name": "Multiple Web Services",
+          "description": "Released multiple personal web services, gaining over 5,000 total users",
+          "date": "2022 - Present",
+          "tags": ["Full-Stack", "Product Development"]
+        }
+      ]
+    },
+    "community": {
+      "title": "Community Activities",
+      "description": "Promoting interaction and knowledge sharing among engineers through technical community management and event planning.",
+      "items": [
+        "Google Developers Group Tokyo Organizer",
+        "Founded Enter - University Student Engineer Community",
+        "UFES (University Engineer Event) Planning & Management"
+      ]
+    },
+    "links": {
+      "title": "Links",
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "twitter": "Twitter",
+      "wantedly": "Wantedly"
+    },
+    "vision": {
+      "title": "Future Vision",
+      "content": "Aiming to engage in business development while leveraging engineering skills and experience, and to create services that transform people's everyday lives with the knowledge I've cultivated. Believing that law and engineering have high versatility when combined, I continue to challenge myself especially in the FinTech domain."
+    }
+  },
+  "contact": {
+    "title": "CONTACT",
+    "subtitle": "/ Get in touch",
+    "intro": {
+      "title": "Contact Me",
+      "description": "Feel free to reach out for job opportunities, technical consultations, event planning, and more. As a student, I'm open to freelance work including web development and event organization."
+    },
+    "form": {
+      "name": {
+        "label": "Name",
+        "placeholder": "John Doe",
+        "required": "Please enter your name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "example@email.com",
+        "required": "Please enter your email address",
+        "invalid": "Please enter a valid email address"
+      },
+      "category": {
+        "label": "Inquiry Type",
+        "placeholder": "Please select",
+        "required": "Please select an inquiry type",
+        "options": {
+          "web_development": "Web Development",
+          "technical_consulting": "Technical Consulting",
+          "event_planning": "Event Planning",
+          "business_collaboration": "Business Collaboration",
+          "speaking": "Speaking Engagement",
+          "interview": "Interview Request",
+          "student_inquiry": "Student Consultation",
+          "other": "Other"
+        }
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Please provide details about your inquiry...",
+        "required": "Please enter your message"
+      },
+      "submit": "Send Message",
+      "submitting": "Sending...",
+      "success": "Thank you for your inquiry!",
+      "error": "Failed to send. Please try again.",
+      "agreement": {
+        "label": "I agree to the Terms of Service and Privacy Policy",
+        "required": "You must agree to the Terms of Service and Privacy Policy",
+        "terms": "Terms of Service",
+        "privacy": "Privacy Policy",
+        "and": "and"
+      }
+    },
+    "info": {
+      "title": "Services Offered",
+      "items": [
+        "Frontend Development (Next.js / React / Vue.js)",
+        "Backend Development (Rust / Node.js / Go)",
+        "Technical Advisory",
+        "Event Planning & Management",
+        "Community Management Support",
+        "Student Technical Mentoring"
+      ]
+    },
+    "response": {
+      "title": "Response Time",
+      "description": "I typically respond within 1-2 business days. For urgent matters, please add [URGENT] to the subject line."
+    },
+    "complete": {
+      "title": "THANK YOU",
+      "subtitle": "/ Message sent successfully",
+      "message": {
+        "title": "Thank You for Your Inquiry",
+        "description": "Your message has been received. I will respond to the email address you provided within 3 business days."
+      },
+      "note": {
+        "title": "Important Notes",
+        "items": [
+          "Please check your spam folder as well",
+          "If you don't receive a response after 3 business days, please contact me again",
+          "For urgent matters, adding [URGENT] to the subject will help expedite the response"
+        ]
+      },
+      "backToHome": "Back to Home"
+    }
+  },
+  "legal": {
+    "terms": {
+      "title": "Terms of Service",
+      "subtitle": "/ 利用規約",
+      "lastUpdated": "Last Updated: February 14, 2026",
+      "sections": [
+        {
+          "title": "Article 1 (Scope of Application)",
+          "content": "These Terms of Service (hereinafter referred to as \"these Terms\") set forth the terms and conditions for the use of this website (hereinafter referred to as \"the Service\") operated by Kohta Kouchi (hereinafter referred to as \"the Operator\"). These Terms apply to all users (hereinafter referred to as \"Users\") of the Service."
+        },
+        {
+          "title": "Article 2 (Content of the Service)",
+          "content": "The Service provides functions such as viewing articles on programming, web development, technical information, etc. as a technical blog, and contacting the Operator through a contact form. The content of the Service may be changed, added, or deleted without notice at the Operator's discretion."
+        },
+        {
+          "title": "Article 3 (Prohibited Acts)",
+          "content": "Users shall not engage in the following acts when using the Service:\n\n1. Acts that violate laws or public order and morals\n2. Acts related to criminal activities\n3. Acts that destroy or interfere with the functions of the servers or networks of the Operator, other Users, or other third parties\n4. Acts that may interfere with the operation of the Operator's Service\n5. Acts of collecting or accumulating personal information about other Users\n6. Unauthorized access or attempts to do so\n7. Acts of impersonating other Users\n8. Acts of directly or indirectly providing benefits to antisocial forces in connection with the Operator's Service\n9. Acts that infringe upon the intellectual property rights, portrait rights, privacy, honor, or other rights or interests of the Operator, other Users, or other third parties\n10. Other acts deemed inappropriate by the Operator"
+        },
+        {
+          "title": "Article 4 (Disclaimer)",
+          "content": "The Operator makes no warranty regarding the completeness, accuracy, reliability, usefulness, etc. of the Service. The Operator shall not be liable for any damages arising from the use of the Service. However, this provision shall not apply if the contract between the Operator and the User regarding the Service constitutes a consumer contract as defined in the Consumer Contract Act."
+        },
+        {
+          "title": "Article 5 (Copyright)",
+          "content": "The copyright of the content (text, images, program code, etc.) posted on the Service belongs to the Operator or a third party with legitimate rights. Users may not reproduce, reprint, modify, publicly transmit, etc. such content beyond the scope of private use without the prior permission of the Operator."
+        },
+        {
+          "title": "Article 6 (Links)",
+          "content": "Links to the Service are generally free, whether for commercial or non-commercial purposes. However, links from sites that violate public order and morals or that may damage the credibility of the Service are declined."
+        },
+        {
+          "title": "Article 7 (Changes to These Terms)",
+          "content": "The Operator may change these Terms at any time without notifying Users if deemed necessary. The revised Terms shall become effective from the time they are posted on the Service."
+        },
+        {
+          "title": "Article 8 (Governing Law and Jurisdiction)",
+          "content": "These Terms shall be governed by and construed in accordance with the laws of Japan. In the event of any dispute arising from the Service, the court having jurisdiction over the location of the Operator shall have exclusive jurisdiction."
+        }
+      ]
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "subtitle": "/ プライバシーポリシー",
+      "lastUpdated": "Last Updated: February 14, 2026",
+      "intro": "Kohta Kouchi (hereinafter referred to as \"the Operator\") establishes this Privacy Policy (hereinafter referred to as \"this Policy\") regarding the handling of users' personal information on this website (hereinafter referred to as \"the Service\").",
+      "sections": [
+        {
+          "title": "Article 1 (Personal Information)",
+          "content": "\"Personal information\" refers to \"personal information\" as defined in the Act on the Protection of Personal Information, and refers to information about living individuals that can identify a specific individual by the name, date of birth, address, telephone number, contact information, and other descriptions contained in such information, as well as data such as appearance, fingerprints, and voice prints, and information that can identify a specific individual from such information alone (personal identification information)."
+        },
+        {
+          "title": "Article 2 (Method of Collecting Personal Information)",
+          "content": "The Operator may ask for personal information such as name and email address when Users use the contact form of the Service. The Service also uses Google Analytics to analyze access, and automatically collects information such as Users' behavioral history using technologies such as cookies."
+        },
+        {
+          "title": "Article 3 (Purpose of Collecting and Using Personal Information)",
+          "content": "The purposes for which the Operator collects and uses personal information are as follows:\n\n1. To respond to inquiries\n2. To analyze and improve the usage status of the Service\n3. To notify changes to the terms and conditions of the Service\n4. For purposes incidental to the above purposes"
+        },
+        {
+          "title": "Article 4 (Change of Purpose of Use)",
+          "content": "The Operator shall change the purpose of use of personal information only when it is reasonably recognized that the purpose is related to the purpose before the change. If the purpose of use is changed, the Operator shall notify Users or publicly announce the changed purpose on this website in a manner prescribed by the Operator."
+        },
+        {
+          "title": "Article 5 (Provision of Personal Information to Third Parties)",
+          "content": "The Operator will not provide personal information to third parties without the prior consent of Users, except in the following cases. However, cases permitted by the Act on the Protection of Personal Information and other laws and regulations are excluded.\n\n1. When it is necessary to protect the life, body, or property of a person and it is difficult to obtain the consent of the person\n2. When it is particularly necessary to improve public health or promote the sound growth of children and it is difficult to obtain the consent of the person\n3. When it is necessary to cooperate with a national or local government agency or a person entrusted by such agency in performing affairs prescribed by laws and regulations, and obtaining the consent of the person may hinder the performance of such affairs\n4. When the following matters have been notified or publicly announced in advance and the Operator has notified the Personal Information Protection Commission:\n   ① The purpose of use includes provision to third parties\n   ② Items of data provided to third parties\n   ③ Means or methods of provision to third parties\n   ④ Stopping the provision of personal information to third parties at the request of the person\n   ⑤ Method of accepting requests from the person"
+        },
+        {
+          "title": "Article 6 (Disclosure of Personal Information)",
+          "content": "When requested by the person to disclose personal information, the Operator shall disclose it to the person without delay. However, if disclosure falls under any of the following, all or part of it may not be disclosed, and if a decision is made not to disclose, the Operator shall notify the person without delay.\n\n1. When there is a risk of harming the life, body, property, or other rights and interests of the person or a third party\n2. When there is a risk of significantly hindering the proper implementation of the Operator's business\n3. When it would violate other laws and regulations"
+        },
+        {
+          "title": "Article 7 (Correction and Deletion of Personal Information)",
+          "content": "Users may request the Operator to correct, add, or delete (hereinafter referred to as \"correction, etc.\") personal information held by the Operator if such information is incorrect, in accordance with the procedures prescribed by the Operator. If the Operator receives a request from a User as described in the preceding paragraph and determines that it is necessary to respond to the request, the Operator shall promptly make the correction, etc. of such personal information."
+        },
+        {
+          "title": "Article 8 (Suspension of Use of Personal Information)",
+          "content": "If the Operator is requested by the person to suspend or delete the use of personal information (hereinafter referred to as \"suspension of use, etc.\") on the grounds that the personal information is being handled beyond the scope of the purpose of use or that it was obtained by fraudulent means, the Operator shall promptly conduct the necessary investigation. Based on the results of the investigation in the preceding paragraph, if it is determined that it is necessary to respond to the request, the Operator shall promptly suspend the use, etc. of such personal information."
+        },
+        {
+          "title": "Article 9 (Use of Cookies and Similar Technologies)",
+          "content": "The Service may use cookies and similar technologies. These technologies help the Operator understand the usage status of the Service and contribute to service improvement. Users who wish to disable cookies can do so by changing their web browser settings. However, disabling cookies may prevent Users from using some functions of the Service."
+        },
+        {
+          "title": "Article 10 (Changes to the Privacy Policy)",
+          "content": "The content of this Policy may be changed without notifying Users, except for matters stipulated separately by laws and regulations or this Policy. Unless otherwise specified by the Operator, the revised Privacy Policy shall become effective from the time it is posted on this website."
+        },
+        {
+          "title": "Article 11 (Contact)",
+          "content": "For inquiries regarding this Policy, please use the contact form of the Service."
+        }
+      ]
+    }
   }
 }
