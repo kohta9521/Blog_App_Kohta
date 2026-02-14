@@ -1,7 +1,68 @@
+import type { Metadata } from "next";
 import type { Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import { PersonStructuredData } from "@/components/seo/StructuredData";
 import Image from "next/image";
 import Link from "next/link";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: Locale }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const dict = await getDictionary(lang);
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kohta-tech-blog.com";
+  
+  const title = lang === "ja" 
+    ? "河内光太のプロフィール | COO・PdM・フロントエンドエンジニア"
+    : "Kohta Kochi's Profile | COO, PdM, Frontend Engineer";
+  
+  const description = lang === "ja"
+    ? "QueryLift COO、メルカリPdM、学習院大学法学部4年生。Rust・Next.js・TypeScriptを使ったフルスタック開発、技術コミュニティ運営、イベント企画を行うエンジニア。個人開発で5000+ユーザー獲得。"
+    : "COO at QueryLift, PdM at Mercari, 4th year law student at Gakushuin University. Full-stack engineer specializing in Rust, Next.js, and TypeScript. Community organizer with 5000+ users across personal projects.";
+
+  const keywords = lang === "ja"
+    ? "河内光太, Kohta Kochi, QueryLift, メルカリ, 学習院大学, COO, PdM, フロントエンドエンジニア, Rust, Next.js, TypeScript, フルスタック開発, GDG Tokyo, Enter, UFES"
+    : "Kohta Kochi, QueryLift, Mercari, Gakushuin University, COO, PdM, Frontend Engineer, Rust, Next.js, TypeScript, Full-Stack Development, GDG Tokyo, Enter, UFES";
+
+  return {
+    title,
+    description,
+    keywords,
+    authors: [{ name: "Kohta Kochi", url: `${siteUrl}/${lang}/profile` }],
+    openGraph: {
+      title,
+      description,
+      url: `${siteUrl}/${lang}/profile`,
+      type: "profile",
+      locale: lang === "ja" ? "ja_JP" : "en_US",
+      images: [{
+        url: `${siteUrl}/logo_icon.png`,
+        width: 1200,
+        height: 630,
+        alt: "Kohta Kochi Profile",
+      }],
+      firstName: "Kohta",
+      lastName: "Kochi",
+      username: "kohtakochi",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`${siteUrl}/logo_icon.png`],
+      creator: "@kohtakochi",
+    },
+    alternates: {
+      canonical: `${siteUrl}/${lang}/profile`,
+      languages: {
+        'ja': `${siteUrl}/ja/profile`,
+        'en': `${siteUrl}/en/profile`,
+      },
+    },
+  };
+}
 
 export default async function ProfilePage({
   params,
@@ -11,13 +72,62 @@ export default async function ProfilePage({
   const { lang } = await params;
   const dict = await getDictionary(lang);
   const profile = dict.profile;
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kohta-tech-blog.com";
 
   if (!profile) {
     return null;
   }
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <>
+      {/* Person構造化データ */}
+      <PersonStructuredData
+        data={{
+          name: "Kohta Kochi (河内光太)",
+          url: `${siteUrl}/${lang}/profile`,
+          image: `${siteUrl}/logo_icon.png`,
+          jobTitle: "COO, Product Manager, Frontend Engineer",
+          description: lang === "ja"
+            ? "QueryLift COO、メルカリPdM、学習院大学法学部4年生。Rust・Next.js・TypeScriptを使ったフルスタック開発、技術コミュニティ運営を行うエンジニア。"
+            : "COO at QueryLift, PdM at Mercari, 4th year law student at Gakushuin University. Full-stack engineer specializing in Rust, Next.js, and TypeScript.",
+          sameAs: [
+            "https://github.com/kohtakochi",
+            "https://www.linkedin.com/in/%E5%85%89%E5%A4%AA-%E6%B2%B3%E5%86%85-89476b2a2/",
+            "https://youtrust.jp/users/eb8e4617b498acc0cf929be4d1f039ba",
+            "https://www.wantedly.com/id/kouta_kochi_f",
+          ],
+          worksFor: [
+            { name: "QueryLift", url: "https://querylift.com" },
+            { name: "Mercari, Inc.", url: "https://about.mercari.com/" },
+            { name: "MediaAid Inc." },
+            { name: "Google Developers Group Tokyo" },
+          ],
+          alumniOf: [
+            { name: "Gakushuin University", url: "https://www.univ.gakushuin.ac.jp/" },
+            { name: "University of People" },
+          ],
+          knowsAbout: [
+            "Rust",
+            "Next.js",
+            "TypeScript",
+            "React",
+            "Vue.js",
+            "Node.js",
+            "Python",
+            "Go",
+            "AWS",
+            "Docker",
+            "Terraform",
+            "Full-Stack Development",
+            "Frontend Development",
+            "Backend Development",
+            "Web Development",
+            "Event Planning",
+            "Community Management",
+          ],
+        }}
+      />
+      <div className="max-w-4xl mx-auto">
       <div className="w-full px-4 max-w-screen-3xl mx-auto py-4 sm:py-6 lg:w-11/12 lg:px-0 lg:py-6">
         {/* Title */}
         <div className="mb-8 lg:mb-12">
@@ -375,5 +485,6 @@ export default async function ProfilePage({
         </div>
       </div>
     </div>
+    </>
   );
 }

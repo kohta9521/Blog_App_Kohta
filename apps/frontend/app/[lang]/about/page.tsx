@@ -1,6 +1,60 @@
+import type { Metadata } from "next";
 import type { Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import Link from "next/link";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: Locale }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const dict = await getDictionary(lang);
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kohta-tech-blog.com";
+  
+  const title = lang === "ja" 
+    ? "このブログについて | 河内光太のテックブログ"
+    : "About This Blog | Kohta Kochi's Tech Blog";
+  
+  const description = lang === "ja"
+    ? "Rust、Next.js、フルスタック開発の技術ブログ。学習院大学法学部の学生エンジニア・河内光太によるWeb開発、イベント企画、技術コミュニティ運営の記録。"
+    : "Tech blog about Rust, Next.js, and full-stack development by Kohta Kochi, a student engineer at Gakushuin University studying law and computer science.";
+
+  return {
+    title,
+    description,
+    keywords: lang === "ja"
+      ? "河内光太, テックブログ, Rust, Next.js, フルスタック, Web開発, 学習院大学, エンジニア, 法学部"
+      : "Kohta Kochi, Tech Blog, Rust, Next.js, Full-Stack, Web Development, Gakushuin University, Engineer",
+    authors: [{ name: "Kohta Kochi", url: `${siteUrl}/${lang}/profile` }],
+    openGraph: {
+      title,
+      description,
+      url: `${siteUrl}/${lang}/about`,
+      type: "profile",
+      locale: lang === "ja" ? "ja_JP" : "en_US",
+      images: [{
+        url: `${siteUrl}/logo_icon.png`,
+        width: 1200,
+        height: 630,
+        alt: title,
+      }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`${siteUrl}/logo_icon.png`],
+    },
+    alternates: {
+      canonical: `${siteUrl}/${lang}/about`,
+      languages: {
+        'ja': `${siteUrl}/ja/about`,
+        'en': `${siteUrl}/en/about`,
+      },
+    },
+  };
+}
 
 export default async function AboutPage({
   params,

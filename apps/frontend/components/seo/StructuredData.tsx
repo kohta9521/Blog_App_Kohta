@@ -45,6 +45,25 @@ export type BreadcrumbItem = {
   item: string;
 };
 
+export type PersonData = {
+  name: string;
+  url: string;
+  image?: string;
+  jobTitle: string;
+  description: string;
+  email?: string;
+  sameAs?: string[]; // SNS links
+  worksFor?: {
+    name: string;
+    url?: string;
+  }[];
+  alumniOf?: {
+    name: string;
+    url?: string;
+  }[];
+  knowsAbout?: string[];
+};
+
 /**
  * Organization構造化データ
  */
@@ -171,43 +190,6 @@ export function BreadcrumbStructuredData({ items }: { items: BreadcrumbItem[] })
 }
 
 /**
- * Person構造化データ（プロフィールページ用）
- */
-export function PersonStructuredData({
-  name,
-  url,
-  image,
-  description,
-  jobTitle,
-  sameAs,
-}: {
-  name: string;
-  url: string;
-  image?: string;
-  description?: string;
-  jobTitle?: string;
-  sameAs?: string[];
-}) {
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    name,
-    url,
-    ...(image && { image }),
-    ...(description && { description }),
-    ...(jobTitle && { jobTitle }),
-    ...(sameAs && { sameAs }),
-  };
-
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-    />
-  );
-}
-
-/**
  * TechArticle構造化データ（技術記事用）
  */
 export function TechArticleStructuredData({ data }: { data: BlogPostData & { proficiencyLevel?: string } }) {
@@ -245,6 +227,46 @@ export function TechArticleStructuredData({ data }: { data: BlogPostData & { pro
     ...(data.keywords && { keywords: data.keywords.join(", ") }),
     ...(data.proficiencyLevel && { proficiencyLevel: data.proficiencyLevel }),
     inLanguage: data.inLanguage,
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+    />
+  );
+}
+
+/**
+ * Person構造化データ
+ * プロフィールページやAboutページで使用
+ */
+export function PersonStructuredData({ data }: { data: PersonData }) {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: data.name,
+    url: data.url,
+    ...(data.image && { image: data.image }),
+    jobTitle: data.jobTitle,
+    description: data.description,
+    ...(data.email && { email: data.email }),
+    ...(data.sameAs && { sameAs: data.sameAs }),
+    ...(data.worksFor && {
+      worksFor: data.worksFor.map((org) => ({
+        "@type": "Organization",
+        name: org.name,
+        ...(org.url && { url: org.url }),
+      })),
+    }),
+    ...(data.alumniOf && {
+      alumniOf: data.alumniOf.map((school) => ({
+        "@type": "EducationalOrganization",
+        name: school.name,
+        ...(school.url && { url: school.url }),
+      })),
+    }),
+    ...(data.knowsAbout && { knowsAbout: data.knowsAbout }),
   };
 
   return (

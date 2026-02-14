@@ -1,6 +1,40 @@
+import type { Metadata } from "next";
 import type { Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import Link from "next/link";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: Locale }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kohta-tech-blog.com";
+  
+  const title = lang === "ja" 
+    ? "プライバシーポリシー | 河内光太のテックブログ"
+    : "Privacy Policy | Kohta Kochi's Tech Blog";
+  
+  const description = lang === "ja"
+    ? "河内光太のテックブログのプライバシーポリシーです。個人情報の取り扱い、収集方法、利用目的、第三者提供などについて説明しています。"
+    : "Privacy Policy for Kohta Kochi's Tech Blog. Explains how personal information is handled, collected, and used.";
+
+  return {
+    title,
+    description,
+    robots: {
+      index: true,
+      follow: true,
+    },
+    alternates: {
+      canonical: `${siteUrl}/${lang}/legal/privacy`,
+      languages: {
+        'ja': `${siteUrl}/ja/legal/privacy`,
+        'en': `${siteUrl}/en/legal/privacy`,
+      },
+    },
+  };
+}
 
 export default async function PrivacyPage({
   params,

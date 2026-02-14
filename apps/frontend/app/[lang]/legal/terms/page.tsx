@@ -1,6 +1,40 @@
+import type { Metadata } from "next";
 import type { Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import Link from "next/link";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: Locale }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://kohta-tech-blog.com";
+  
+  const title = lang === "ja" 
+    ? "利用規約 | 河内光太のテックブログ"
+    : "Terms of Service | Kohta Kochi's Tech Blog";
+  
+  const description = lang === "ja"
+    ? "河内光太のテックブログの利用規約です。本サービスをご利用いただく際の条件、禁止事項、免責事項などを定めています。"
+    : "Terms of Service for Kohta Kochi's Tech Blog. Defines conditions of use, prohibited acts, and disclaimers.";
+
+  return {
+    title,
+    description,
+    robots: {
+      index: true,
+      follow: true,
+    },
+    alternates: {
+      canonical: `${siteUrl}/${lang}/legal/terms`,
+      languages: {
+        'ja': `${siteUrl}/ja/legal/terms`,
+        'en': `${siteUrl}/en/legal/terms`,
+      },
+    },
+  };
+}
 
 export default async function TermsPage({
   params,
