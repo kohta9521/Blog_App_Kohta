@@ -68,29 +68,45 @@ export function ContactForm({ lang, contact }: ContactFormProps) {
     setSubmitStatus("idle");
 
     try {
+      console.log("Submitting form data:", {
+        name: formState.name,
+        email: formState.email,
+        category: formState.category,
+        message: formState.message,
+        lang: lang,
+      });
+
+      const formData = new FormData();
+      formData.append("name", formState.name);
+      formData.append("email", formState.email);
+      formData.append("category", formState.category);
+      formData.append("message", formState.message);
+      formData.append("lang", lang);
+
       const response = await fetch("https://kohta-engineer-portfolio.form.newt.so/v1/RqLXd0DCc", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: formState.name,
-          email: formState.email,
-          category: formState.category,
-          message: formState.message,
-          lang: lang,
-        }),
+        body: formData,
       });
+
+      console.log("Response status:", response.status);
+      console.log("Response ok:", response.ok);
 
       if (response.ok) {
         setSubmitStatus("success");
         // Redirect to complete page
-        window.location.href = `/${lang}/contact/complete`;
+        setTimeout(() => {
+          window.location.href = `/${lang}/contact/complete`;
+        }, 1000);
       } else {
+        const errorText = await response.text();
+        console.error("Server error:", errorText);
         setSubmitStatus("error");
       }
     } catch (error) {
       console.error("Form submission error:", error);
+      if (error instanceof TypeError && error.message.includes("fetch")) {
+        console.error("Network error: Check CORS settings or network connection");
+      }
       setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
